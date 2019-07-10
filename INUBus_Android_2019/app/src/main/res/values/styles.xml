@@ -1,0 +1,54 @@
+<resources>
+
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:actionBarSize">@dimen/actionbar_height</item>
+        <item name="actionBarSize">@dimen/actionbar_height</item>
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+    </style>
+
+    <!-- 다이얼로그 테마-->
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="buttonBarStyle">@style/buttonBarStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/buttonBarButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/buttonBarButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/buttonBarButtonStyle</item>
+
+    </style>
+
+    <style name="buttonBarStyle" >
+        <item name="android:background">@color/colorPrimary</item>
+        <!--<item name="android:height">27.5dp</item>-->
+    </style>
+
+    <style name="buttonBarButtonStyle" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+
+    <!-- 스플래시 화면을 위한 액션바 없는 테마 -->
+    <style name="AppTheme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.PopupAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+
+    <style name="AppTheme.Popup" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>
