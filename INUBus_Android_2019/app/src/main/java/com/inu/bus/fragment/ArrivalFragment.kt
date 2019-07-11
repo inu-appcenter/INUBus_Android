@@ -56,8 +56,8 @@ class ArrivalFragment : Fragment(){
     }
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
     private var mFragmentReadyCount = 0
-    private val mTabIcons = listOf(R.drawable.tabicon_engineer, R.drawable.tabicon_science, R.drawable.tabicon_gate, R.drawable.tabicon_bitzon)
-    private val mTabText = listOf("공대", "자과대", "정문", "지정단")
+    private val mTabIcons = listOf(R.drawable.tabicon_select, R.drawable.tabicon_select, R.drawable.tabicon_select, R.drawable.tabicon_select)
+    private val mTabText = listOf("공대", "자연대", "정문", "통학")
     private val mViewPagerAdapter by lazy { ViewPagerAdapter(mFm, mContext) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

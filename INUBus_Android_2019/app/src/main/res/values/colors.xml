@@ -30,5 +30,5 @@
     <color name="toggle_default_font_gray">#838383</color>
     <color name="text_hint_gray">#6a6a6a</color>
     <color name="warn_red">#de2222</color>
-    <color name="drawer_background_gray">#e1e1e1</color>
+    <color name="drawer_background_gray">#ebebeb</color>
 </resources>

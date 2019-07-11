@@ -30,7 +30,7 @@
             android:orientation="vertical"
             android:layoutAnimation="@anim/layout_anim_fall_down"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:listitem="@layout/recycler_arrival_item_old">
+            tools:listitem="@layout/recycler_arrival_item">
 
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>

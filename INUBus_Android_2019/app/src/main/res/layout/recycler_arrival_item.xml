@@ -16,20 +16,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:onClick="@{(v) -> listener.onClick(data)}"
-        >
+        android:onClick="@{(v) -> listener.onClick(data)}">
 
-        <ImageView
+        <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="19.4dp"
             android:layout_height="18.6dp"
-            android:layout_marginStart="24.9dp"
             android:layout_marginLeft="24.9dp"
-            android:layout_marginTop="19.7dp"
-            android:background="@drawable/ic_checkbox_true"
+            android:layout_marginTop="17.9dp"
+            android:layout_marginBottom="16.8dp"
+            android:background="@drawable/custom_checkbox_favorite"
             android:button="@null"
             android:checked="@={data.favorite}"
             android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:checked="true" />
@@ -38,39 +38,42 @@
             android:id="@+id/recycler_busno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="58.8dp"
             android:layout_marginLeft="58.8dp"
             android:layout_marginTop="14.1dp"
+            android:layout_marginBottom="11.2dp"
             android:fontFamily="@font/source_sans_roman_regula"
             android:text="@{data.no}"
-            android:textColor="#2700f4"
+            android:textColor="@{data.type.color}"
             android:textSize="21sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="780-1" />
+            tools:text="780-1"
+            tools:textColor="@color/간선" />
 
         <!-- 텍스트 배치 기준 뷰 -->
-
         <View
             android:id="@+id/view2"
             android:layout_width="1dp"
             android:layout_height="51.5dp"
-            android:background="@android:color/transparent"
             android:layout_marginEnd="200dp"
             android:layout_marginRight="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/recycler_arrival"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18.8dp"
+            android:layout_marginRight="136.9dp"
+            android:layout_marginBottom="17.4dp"
             android:fontFamily="@font/nanum_square_r"
             android:text="0분 0초"
             android:textColor="#000000"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/view2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="6분 30초" />
 
@@ -78,17 +81,26 @@
             android:id="@+id/recycler_interval"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
             android:layout_marginTop="18.8dp"
+            android:layout_marginRight="35.2dp"
+            android:layout_marginBottom="17.4dp"
             android:fontFamily="@font/nanum_square_r"
             android:text="@{data.intervalString}"
             android:textColor="#707070"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/view2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="10~18분" />
 
-    </android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginBottom="0dp"
+            android:background="#cbcbcb"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

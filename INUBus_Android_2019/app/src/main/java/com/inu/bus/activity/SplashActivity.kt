@@ -19,7 +19,6 @@ class SplashActivity : AppCompatActivity(){
     private var isAnimationEnd = false
     private var mShouldFinish = false
 
-
     // activity_splash.xml 레이아웃 설정
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +31,8 @@ class SplashActivity : AppCompatActivity(){
                 .setDuration(1000)                  // 1000ms 동안
                 .setListener(animationListener)
                 .start()
-    }
 
+    }
 
     // 애니메이션 이벤트 처리 등록
     private var animationListener = object : Animator.AnimatorListener{

@@ -4,22 +4,51 @@
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical" >
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:background="@color/drawer_background_gray">
 
         <TextView
             android:id="@+id/tv_section"
-            android:layout_width="match_parent"
-            android:layout_height="16.5dp"
-            android:background="@color/drawer_background_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="2.2dp"
+            android:layout_marginBottom="1.8dp"
             android:fontFamily="@font/nanum_square_b"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/recycler_margin_left"
-            tools:text="간선, 좌석버스"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="간선, 좌석버스" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.2dp"
+            android:layout_marginRight="138.8dp"
+            android:layout_marginBottom="1.8dp"
+            android:fontFamily="@font/nanum_square_b"
+            android:gravity="center"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="남은시간" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.2dp"
+            android:layout_marginRight="36dp"
+            android:layout_marginBottom="1.8dp"
+            android:fontFamily="@font/nanum_square_b"
+            android:gravity="center"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="배차간격" />
     </android.support.constraint.ConstraintLayout>
 </layout>
