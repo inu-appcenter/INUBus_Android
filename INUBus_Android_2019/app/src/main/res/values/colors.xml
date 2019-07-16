@@ -18,11 +18,11 @@
     <color name="windowBackground">#ffffff</color>
     <color name="navigationBarColor">#FFFFFF</color>
 
-    <color name="간선">#2f60ce</color>
-    <color name="간선급행">#8d14bf</color>
+    <color name="간선">#2700f4</color>
+    <color name="간선급행">#6900b5</color>
     <color name="광역">#de2222</color>
-    <color name="광역급행">@android:color/holo_blue_light</color>
-    <color name="순환">#22c244</color>
+    <color name="광역급행">#006fff</color>
+    <color name="순환">#24c330</color>
 
     <!--<color name="search_hint">#565656</color>-->
     <!--<color name="seperator_bg">#EBEBEB</color>-->

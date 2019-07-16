@@ -27,18 +27,21 @@
         android:layout_marginEnd="55dp"
         android:layout_marginRight="55dp"
         android:background="@drawable/bg_rounded_coner_searchbox"
+        android:drawableLeft="@drawable/ic_search_bar"
+        android:drawablePadding="8.7dp"
         android:hint="버스 또는 정류장 검색"
         android:imeOptions="actionSearch"
         android:inputType="textAutoComplete"
         android:lines="1"
         android:maxLines="1"
-        android:paddingLeft="20dp"
+        android:paddingLeft="11.2dp"
         android:textColor="#cbcbcb"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+         />
 
     <ImageButton
         android:id="@+id/btn_actionbar_info"
