@@ -1,9 +1,14 @@
 package com.inu.bus.activity
 
 import android.databinding.DataBindingUtil
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.view.WindowManager
 import com.inu.bus.R
 import com.inu.bus.databinding.ActivityRouteBinding
 import com.inu.bus.recycler.RecyclerAdapterRoute
@@ -36,6 +41,8 @@ class RouteActivity : AppCompatActivity() {
         mBinding.startTime = String.format("%02d:%02d", routeInfo.start/100, routeInfo.start%100)
         mBinding.endTime = String.format("%02d:%02d", routeInfo.end/100, routeInfo.end%100)
         var fee : Int? = null
+
+        changestatusBarColor()
 
         Singleton.busCost.forEach() { (no, cost) ->
             if(routeNo == no){
@@ -89,6 +96,15 @@ class RouteActivity : AppCompatActivity() {
         mRvRoute.adapter = adapter
     }
 
+    fun changestatusBarColor(){
+        // 롤리팝 버전 이상부터 statusBar를 파란색, 아이콘을 밝은색으로 표시
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                window.statusBarColor = ContextCompat.getColor(applicationContext,R.color.colorPrimary)
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        }
+    }
 
     fun btnCloseClicked(){
         finish()

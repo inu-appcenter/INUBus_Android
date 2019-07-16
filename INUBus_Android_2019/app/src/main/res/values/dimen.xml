@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="actionbar_height">43.5dp</dimen>
+    <dimen name="actionbar_height">64dp</dimen>
 
     <dimen name="searchview_textsize">12.4sp</dimen>
     <dimen name="searchview_height">24.5dp</dimen>
@@ -45,6 +45,8 @@
     <dimen name="info_drawer_width">207.72dp</dimen>
     
     <dimen name="dialog_width">164dp</dimen>
+
+    <dimen name="loading_scale">29dp</dimen>
 
     <dimen name="_0dp">0dp</dimen>
     <dimen name="_21dp">21dp</dimen>

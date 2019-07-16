@@ -44,18 +44,17 @@
 
     <ImageButton
         android:id="@+id/ib_fragment_arrival_tabs_refresh"
-        android:layout_width="49dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="69.5dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_width="44.6dp"
+        android:layout_height="44.6dp"
+        android:layout_marginBottom="86.1dp"
+        android:layout_marginEnd="17.2dp"
+        android:layout_marginRight="17.2dp"
         android:alpha="0.9"
         android:background="@drawable/bg_refresh"
         android:contentDescription="refresh"
         android:elevation="5dp"
-        android:padding="10dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_fab_refresh"
+        android:src="@drawable/click_refresh"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

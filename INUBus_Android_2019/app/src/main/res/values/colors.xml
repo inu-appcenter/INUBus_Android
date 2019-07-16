@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--액션바-->
-    <color name="colorPrimary">#3179bd</color>
+    <color name="colorActionBar">#ffffff</color>
+    <color name="colorPrimary">#0061f4</color>
     <color name="colorPrimaryDim">#235383</color>
     <color name="colorAccent">@color/colorPrimary</color>
 
+    <!--탭 색상-->
+    <color name="tab_select">#006fff</color>
+    <color name="tab_unselect">#707070</color>
+
     <!--노티바 색상 sdk23부터 커스텀가능-->
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorPrimaryDark_v23">@color/colorPrimary</color>
+    <color name="colorPrimaryDark_v23">@color/colorActionBar</color>
 
     <!--앱 배경-->
     <color name="windowBackground">#ffffff</color>
@@ -29,6 +34,6 @@
     <color name="toggle_background_gray">#eeeeee</color>
     <color name="toggle_default_font_gray">#838383</color>
     <color name="text_hint_gray">#6a6a6a</color>
-    <color name="warn_red">#de2222</color>
+    <color name="warn_red">#e61212</color>
     <color name="drawer_background_gray">#ebebeb</color>
 </resources>

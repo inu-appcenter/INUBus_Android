@@ -3,13 +3,17 @@ package com.inu.bus.fragment
 import android.content.Context
 import android.content.Intent
 import android.databinding.Observable
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.LocalBroadcastManager
+import android.support.v4.widget.CircularProgressDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.RotateAnimation
+import android.widget.ImageView
 import com.inu.bus.R
 import com.inu.bus.recycler.RecyclerAdapterArrival
 import com.inu.bus.util.LocalIntent
@@ -26,6 +30,7 @@ class ArrivalFragmentTab : Fragment() {
     private var isShowing = false
     private lateinit var mStrBusStop: String
     private lateinit var mContext : Context
+    private lateinit var mFabRefreshAnimation : RotateAnimation
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
     val mAdapter by lazy { RecyclerAdapterArrival(mStrBusStop) }
 
@@ -58,6 +63,8 @@ class ArrivalFragmentTab : Fragment() {
                 dataRefresh()
             }
         })
+
+        refreshLoading()
         dataRefresh()
     }
     // 하교용 정류장 정보를 다시 받아 어댑터에 적용
@@ -69,6 +76,41 @@ class ArrivalFragmentTab : Fragment() {
             val filtered = checked[0].data
             mAdapter.applyDataSet(filtered)
         }
+    }
+
+    // 당겨서 새로고침 이미지 설정
+    fun refreshLoading(){
+        val mSwipeRefreshLayout = fragment_node_arrival_swipeRefreshLayout
+        mSwipeRefreshLayout.setProgressViewOffset(true,0,130)
+        mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#0061f4"))
+
+        val f = mSwipeRefreshLayout.javaClass.getDeclaredField("mCircleDiameter")
+        f.isAccessible = true
+        f.setInt(mSwipeRefreshLayout,130)
+        val f2 = mSwipeRefreshLayout.javaClass.getDeclaredField("mProgress")
+        f2.isAccessible = true
+        var prog = f2.get(mSwipeRefreshLayout) as CircularProgressDrawable
+        prog.centerRadius = 30f
+        prog.strokeWidth = 9f
+        val f3 = mSwipeRefreshLayout.javaClass.getDeclaredField("mCircleView")
+        f3.isAccessible = true
+        var img = f3.get(mSwipeRefreshLayout) as ImageView
+        img.setBackgroundResource(R.drawable.refresh_loading)
+
+//        val dfields = mSwipeRefreshLayout.javaClass.declaredFields
+//
+//        var temp:String = ""
+//        var temp2:String = ""
+//        var temps:String = ""
+//        for(i in 0 until dfields.size){
+//            //temp = temp + dfields[i].toString() + "\n"
+//            temp = dfields[i].toString()
+//            temp2 = temp.substring(temp.indexOf("widget.SwipeRefreshLayout")+26)
+//            if(temp.contains("final"))
+//                temps = temps + temp2 + "\n"
+//            else
+//                temps = temps + temp + "\n"
+//        }
     }
 
     fun filter(str : String){

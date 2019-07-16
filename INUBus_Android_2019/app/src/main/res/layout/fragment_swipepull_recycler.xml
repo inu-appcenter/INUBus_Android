@@ -11,7 +11,7 @@
     <View
         android:id="@+id/v_fragment_arrival_actionbar_placeholder"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="64dp"
         android:background="@android:color/transparent" />
 
     <android.support.v4.widget.SwipeRefreshLayout

@@ -116,15 +116,15 @@ class MainActivity : AppCompatActivity(){
         activity_main_viewpager.setScrollDurationFactor(4.0)
 
         // SegmentedButton 토글에 따라 아이템 선택
-        activity_main_toggle.setOnPositionChangedListener {
-            activity_main_viewpager.currentItem =
-                    when(it){
-                        // 도착정보
-                        0-> 1
-                        // 목적지 정보
-                        else -> 0
-                    }
-        }
+//        activity_main_toggle.setOnPositionChangedListener {
+//            activity_main_viewpager.currentItem =
+//                    when(it){
+//                        // 도착정보
+//                        0-> 1
+//                        // 목적지 정보
+//                        else -> 0
+//                    }
+//        }
     }
 
     // 재시작되면 서비스 시작

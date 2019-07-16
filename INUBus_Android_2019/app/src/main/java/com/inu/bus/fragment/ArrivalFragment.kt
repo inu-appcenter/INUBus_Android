@@ -97,7 +97,7 @@ class ArrivalFragment : Fragment(){
 
 
         // 새로고침 이미지 회전 애니메이션 설정
-        mFabRefreshAnimation = RotateAnimation(0f, -360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        mFabRefreshAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         mFabRefreshAnimation.duration = 1000
         mFabRefreshAnimation.repeatCount = -1
         mFabRefreshAnimation.interpolator = AccelerateInterpolator()

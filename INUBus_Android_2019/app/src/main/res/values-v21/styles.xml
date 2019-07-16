@@ -13,6 +13,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
 
+
     </style>
 
     <!-- 스플래시 화면을 위한 액션바 없는 테마 완전 하얀테마 -->
