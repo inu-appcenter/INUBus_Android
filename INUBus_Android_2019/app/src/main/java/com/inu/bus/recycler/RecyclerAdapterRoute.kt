@@ -64,12 +64,12 @@ class RecyclerAdapterRoute : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val v: ConstraintLayout
         return when(RouteType.values()[viewType]){
             RouteType.STOP-> StopHolder(RecyclerRouteItemBinding.inflate(LayoutInflater.from(parent.context)))
-            RecyclerAdapterRoute.RouteType.LINE -> {
+            RouteType.LINE -> {
                 v = LayoutInflater.from(parent.context)
                         .inflate(R.layout.recycler_route_line_item, parent, false) as ConstraintLayout
                 LineHolder(v)
             }
-            RecyclerAdapterRoute.RouteType.RETURN -> {
+            RouteType.RETURN -> {
                 v = LayoutInflater.from(parent.context)
                         .inflate(R.layout.recycler_route_return, parent, false) as ConstraintLayout
                 ReturnHolder(v)

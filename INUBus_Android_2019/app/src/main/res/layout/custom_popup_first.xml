@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/popup_root"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
@@ -10,25 +9,22 @@
     tools:background="@android:color/holo_green_light">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="207dp"
-        android:layout_marginBottom="253dp"
+        android:layout_width="243.3dp"
+        android:layout_height="189.6dp"
+        android:layout_marginLeft="58.6dp"
+        android:layout_marginRight="58.1dp"
+        android:layout_marginTop="197.9dp"
+        android:layout_marginBottom="227.5dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 아이콘 높이의 반만큼 marginTopo을 지정 -->
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
+            android:layout_height="match_parent"
             android:background="@drawable/bg_popup_rounded_coner"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -38,85 +34,66 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.498">
 
-
-            <ImageView
-                android:id="@+id/iv_background_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_custom_popup_ok"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <LinearLayout
-                android:id="@+id/ll_custom_popup_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="60dp"
-                android:paddingBottom="38.8dp"
-                android:paddingLeft="43dp"
-                android:paddingRight="41.5dp"
-                android:maxHeight="300dp"
+                android:layout_marginTop="41.1dp"
+                android:layout_marginBottom="36.8dp"
                 app:layout_constraintBottom_toTopOf="@+id/custom_popup_btn_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_custom_popup_message"
+                    android:id="@+id/tv_first_popup_message"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/notosans_medium"
                     android:gravity="center"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textColor="#000000"
-                    tools:text="소중한 의견 감사드립니다!" />
+                    android:text="INU BUS 는\n하교 시, 버스 시간을 정확히 알 수 없는\n인천대학교 학생들을 위한 버스 앱입니다.\n즐거운 하교길 되세요 :) " />
             </LinearLayout>
 
             <!-- 버튼 미사용시 Divider도 같이 없앰  -->
             <View
-                android:id="@+id/custom_popup_btn_divider"
                 android:layout_width="match_parent"
                 android:layout_height="0.4dp"
                 android:background="#cccccc"
                 app:layout_constraintBottom_toTopOf="@+id/btn_custom_popup_ok" />
 
             <Button
-                android:id="@+id/btn_custom_popup_ok"
+                android:id="@+id/btn_first_popup_check"
                 android:layout_width="match_parent"
-                android:layout_height="35.8dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/bg_popup_btn_background_ripple"
+                android:layout_height="34.4dp"
+                android:background="#00FF0000"
                 android:fontFamily="@font/notosans_semibold"
-                android:paddingBottom="11dp"
-                android:paddingTop="8.8dp"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
+                android:textSize="10sp"
+                android:paddingTop="8.3dp"
+                android:paddingBottom="13.1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="확인" />
+                android:text="확인했습니다" />
 
 
         </android.support.constraint.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/iv_custom_popup_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_inquire_round"
-            android:scaleType="fitXY"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_custom_popup_icon"-->
+            <!--android:layout_width="76dp"-->
+            <!--android:layout_height="76dp"-->
+            <!--android:background="@drawable/bg_popup_icon_rounded_coner"-->
+            <!--android:scaleType="center"-->
+            <!--android:focusable="true"-->
+            <!--android:focusableInTouchMode="true"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
         <TextView
-            android:id="@+id/tv_custom_popup_title_on_icon"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"

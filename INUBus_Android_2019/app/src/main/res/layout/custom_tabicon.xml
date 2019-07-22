@@ -24,7 +24,7 @@
         android:background="@android:color/transparent"
         android:button="@null"
         android:clickable="false"
-        android:fontFamily="@font/nanum_square_r"
+        android:fontFamily="@font/notosans_medium"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="5sp"
         android:textColor="@color/tabicon_textcolor"

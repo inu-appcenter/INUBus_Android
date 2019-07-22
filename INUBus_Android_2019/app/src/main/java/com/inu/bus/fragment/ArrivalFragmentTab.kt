@@ -55,6 +55,7 @@ class ArrivalFragmentTab : Fragment() {
         // 프래그먼트 준비 알림 Broadcast 시작
         mBroadcastManager.sendBroadcast(Intent(LocalIntent.NOTIFY_FRAGMENT_READY.value))
         // 프래그먼트를 당기면 데이터 리프레시 Broadcast 시작
+
         fragment_node_arrival_swipeRefreshLayout.setOnRefreshListener {
             mBroadcastManager.sendBroadcast(Intent(LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value))
         }

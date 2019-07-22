@@ -5,9 +5,12 @@ import android.databinding.Observable
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.WindowManager
 import com.inu.bus.R
+import com.inu.bus.custom.FirstPopUp
 import com.inu.bus.custom.IconPopUp
 import com.inu.bus.databinding.ActivityInquireBinding
 import com.inu.bus.model.InquireModel
@@ -32,6 +35,8 @@ class InquireActivity : AppCompatActivity() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_inquire)
         mBinding.data = data
         mBinding.listener = this
+
+        changestatusBarColor()
 
         // 문의하기 내용이 변경될 때마다 호출
         data.addOnPropertyChangedCallback(mChangeCallbackListener)
@@ -73,11 +78,11 @@ class InquireActivity : AppCompatActivity() {
             // 응답이 되면 Popup 메세지 호출
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 val popupView = IconPopUp(this@InquireActivity)
-                        .setBtnVisible(View.GONE)
-                        .setIcon(R.drawable.ic_round_check, false)
+                        .setBtnVisible(View.VISIBLE)
+                        .setBtnText("확인")
                         .setMessageText("소중한 의견 감사드립니다!.")
                         .setDimBlur(blurring_view)
-                        .setShowDuration(2000)
+                        .setShowDuration(10000)
                         .setDismissListener{
                             closeActivity()
                         }
@@ -90,6 +95,27 @@ class InquireActivity : AppCompatActivity() {
         })
     }
 
+    fun startpopup(){
+        val popupView = FirstPopUp(this@InquireActivity)
+                .setDimBlur(blurring_view)
+                .setShowDuration(100000)
+                .setOnConfirmButtonClickListener{
+                    it.dismiss()
+                }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            popupView.setWindow(window)
+        }
+        popupView.show()
+    }
+
+    fun changestatusBarColor(){
+        // 롤리팝 버전 이상부터 statusBar를 파란색, 아이콘을 밝은색으로 표시
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = ContextCompat.getColor(applicationContext,R.color.colorPrimary)
+            window.decorView.systemUiVisibility = 0
+        }
+    }
 
     fun onCloseButtonClick(){
         closeActivity()

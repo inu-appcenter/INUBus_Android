@@ -52,12 +52,12 @@ class ArrivalFragment : Fragment(){
             fragment.mContext = context
             return fragment
         }
-
     }
+
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
     private var mFragmentReadyCount = 0
     private val mTabIcons = listOf(R.drawable.tabicon_select, R.drawable.tabicon_select, R.drawable.tabicon_select, R.drawable.tabicon_select)
-    private val mTabText = listOf("공대", "자연대", "정문", "통학")
+    private val mTabText = listOf("공대", "자연대", "정문","통학")
     private val mViewPagerAdapter by lazy { ViewPagerAdapter(mFm, mContext) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -92,7 +92,7 @@ class ArrivalFragment : Fragment(){
         vp_fragment_arrival_tabs.currentItem = 0
         setTabIcon(fragment_arrival_tablayout.getTabAt(0)!!, true)
 
-        vp_fragment_arrival_tabs.addOnPageChangeListener(mViewPagerPageChangeListener)
+        // vp_fragment_arrival_tabs.addOnPageChangeListener(mViewPagerPageChangeListener)
         fragment_arrival_tablayout.addOnTabSelectedListener(mTabChangeListener)
 
 

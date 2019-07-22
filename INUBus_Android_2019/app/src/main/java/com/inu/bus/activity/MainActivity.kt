@@ -2,6 +2,7 @@ package com.inu.bus.activity
 
 import android.arch.persistence.room.Room
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.app.AppCompatActivity
@@ -11,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import com.inu.bus.MyService
 import com.inu.bus.R
+import com.inu.bus.custom.FirstPopUp
 import com.inu.bus.custom.IconPopUp
 import com.inu.bus.fragment.ArrivalFragment
 import com.inu.bus.fragment.DestinationFragment
@@ -80,10 +82,27 @@ class MainActivity : AppCompatActivity(){
 //        })
     }
 
+    fun startpopup(){
+        val popupView = FirstPopUp(this@MainActivity)
+                .setDimBlur(activity_main_popup_blur)
+                .setShowDuration(60000)
+                .setOnConfirmButtonClickListener{
+                    it.dismiss()
+                }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            popupView.setWindow(window)
+        }
+        popupView.show()
+    }
+
     // 버튼 리스너 설정
     private fun setDrawer(){
         activity_main_popup_blur.blurredView(drawer_layout)
         mWrBtnInfo = WeakReference(btn_actionbar_info)
+
+        btn_actionbar_popup.setOnClickListener{
+            startpopup()
+        }
 
         btn_actionbar_info.setOnClickListener {
             drawer_layout.openDrawer(Gravity.END)
@@ -91,7 +110,7 @@ class MainActivity : AppCompatActivity(){
 
         drawer_btn_ask.setOnClickListener {
             startActivity(Intent(this, InquireActivity::class.java))
-            drawer_layout.closeDrawer(Gravity.END)
+//            drawer_layout.closeDrawer(Gravity.END)
         }
 
         activity_main_drawer.btn_back.setOnClickListener { drawer_layout.closeDrawer(Gravity.END) }
@@ -106,7 +125,7 @@ class MainActivity : AppCompatActivity(){
         val arrivalFragment = ArrivalFragment.newInstance(supportFragmentManager, this)
 
         // 도착, 목적지 Fragment 추가
-        mViewPagerAdapter.addFragment(DestinationFragment.newInstance(supportFragmentManager, this))
+//        mViewPagerAdapter.addFragment(DestinationFragment.newInstance(supportFragmentManager, this))
         mViewPagerAdapter.addFragment(arrivalFragment)
 
         // ViewPager 설정

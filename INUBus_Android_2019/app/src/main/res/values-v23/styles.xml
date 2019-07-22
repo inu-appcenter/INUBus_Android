@@ -2,7 +2,7 @@
 
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
         <!--<item name="android:actionBarStyle">@style/MyActionBar</item>-->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorActionBar</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark_v23</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@android:color/white</item>
@@ -20,12 +20,12 @@
 
     <!-- 스플래시 화면을 위한 액션바 없는 테마 완전 하얀테마 -->
     <style name="AppTheme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@android:color/holo_red_dark</item>
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
 
     </style>
 

@@ -41,7 +41,7 @@
             android:layout_marginLeft="58.8dp"
             android:layout_marginTop="14.1dp"
             android:layout_marginBottom="11.2dp"
-            android:fontFamily="@font/source_sans_roman_regula"
+            android:fontFamily="@font/notosans_regular"
             android:text="@{data.no}"
             android:textColor="@{data.type.color}"
             android:textSize="21sp"
@@ -68,7 +68,7 @@
             android:layout_marginTop="18.8dp"
             android:layout_marginRight="136.9dp"
             android:layout_marginBottom="17.4dp"
-            android:fontFamily="@font/nanum_square_r"
+            android:fontFamily="@font/notosans_regular"
             android:text="0분 0초"
             android:textColor="#000000"
             android:textSize="12sp"
@@ -84,7 +84,7 @@
             android:layout_marginTop="18.8dp"
             android:layout_marginRight="35.2dp"
             android:layout_marginBottom="17.4dp"
-            android:fontFamily="@font/nanum_square_r"
+            android:fontFamily="@font/notosans_regular"
             android:text="@{data.intervalString}"
             android:textColor="#707070"
             android:textSize="12sp"
@@ -96,7 +96,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:background="#cbcbcb"
             app:layout_constraintBottom_toBottomOf="parent" />
 

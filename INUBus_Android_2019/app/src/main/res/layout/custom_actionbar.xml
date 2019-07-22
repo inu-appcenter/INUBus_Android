@@ -9,6 +9,7 @@
     android:focusableInTouchMode="true">
 
     <ImageView
+        android:id="@+id/btn_actionbar_popup"
         android:layout_width="59dp"
         android:layout_height="14dp"
         android:layout_marginStart="23dp"
@@ -37,6 +38,9 @@
         android:paddingLeft="11.2dp"
         android:textColor="#cbcbcb"
         android:textSize="11sp"
+        android:fontFamily="@font/notosans_regular"
+        android:lineSpacingExtra="19sp"
+        android:letterSpacing="-0.01"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +62,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="#cbcbcb"
         app:layout_constraintBottom_toBottomOf="parent" />
 

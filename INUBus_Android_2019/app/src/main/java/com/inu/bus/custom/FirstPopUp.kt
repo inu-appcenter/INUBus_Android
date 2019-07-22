@@ -25,24 +25,15 @@ import com.ms_square.etsyblur.BlurringView
 import kotlinx.android.synthetic.main.custom_popup_container.view.*
 import java.lang.ref.WeakReference
 
-
-/**
- * Created by Minjae Son on 2018-08-13.
- */
-
-class IconPopUp : ConstraintLayout {
+class FirstPopUp : ConstraintLayout {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
     constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int) : super(context, attributeSet, defStyleAttr)
     companion object {
-        var mInstance : WeakReference<IconPopUp>? = null
+        var mInstance : WeakReference<FirstPopUp>? = null
     }
     private val mBtnConfirm: Button
-    private val mVDivider: View
-    private var mContainer: LinearLayout
-    private val mTvMessage: TextView
-    private val mIvIcon: ImageView
     private val mPopupWindow: PopupWindow
     private var mRefDimView: BlurringView? = null
     private var mDpIvSize: Float
@@ -50,52 +41,19 @@ class IconPopUp : ConstraintLayout {
     private var mHandler: Handler
     private var mWindow: Window? = null
     private val mAnimationDuration = 1000L
-    private val mPopRoot: ConstraintLayout
-    private val mTvTitle: TextView
-    private val mIvBackground : ImageView
     private var mDismissCallback : (()->Unit)? = null
 
 
     init {
-        val v = LayoutInflater.from(context).inflate(R.layout.custom_popup_container, this, false)
+        val v = LayoutInflater.from(context).inflate(R.layout.custom_popup_first, this, false)
         addView(v)
-        mBtnConfirm = v.findViewById(R.id.btn_custom_popup_ok)
+        mBtnConfirm = v.findViewById(R.id.btn_first_popup_check)
         mBtnConfirm.setOnClickListener { dismiss() }
-        mVDivider = v.findViewById(R.id.custom_popup_btn_divider)
-        mContainer = v.findViewById(R.id.ll_custom_popup_container)
-        mTvMessage = v.findViewById(R.id.tv_custom_popup_message)
-        mIvIcon = v.findViewById(R.id.iv_custom_popup_icon)
         mPopupWindow = PopupWindow(this, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         mDpIvSize = 76f
         mShowDuration = null
         mHandler = Handler()
-        mPopRoot = popup_root
-        mTvTitle = tv_custom_popup_title_on_icon
-        mIvBackground = iv_background_image
         mInstance = WeakReference(this)
-
-        mContainer.setOnTouchListener { v, event ->
-            true
-        }
-    }
-
-    // 확인버튼 보이는지
-    fun setBtnVisible(visible: Int): IconPopUp {
-        mBtnConfirm.visibility = visible
-        mVDivider.visibility = visible
-        return this
-    }
-
-    // 확인버튼 텍스트
-    fun setBtnText(text: String): IconPopUp {
-        mBtnConfirm.setText(makeSpanText(text), TextView.BufferType.SPANNABLE)
-        return this
-    }
-
-    // 메세지
-    fun setMessageText(text: String): IconPopUp {
-        mTvMessage.setText(makeSpanText(text), TextView.BufferType.SPANNABLE)
-        return this
     }
 
     // 텍스트뷰에 html 스타일 적용
@@ -108,103 +66,8 @@ class IconPopUp : ConstraintLayout {
         }
     }
 
-    // 상단 아이콘 설정
-    fun setIcon(drawable: Drawable, isCircle: Boolean, makeCircleFit: Boolean = false): IconPopUp {
-        val bitmap = getBitmapFromDrawable(drawable)
-
-        mIvIcon.setImageDrawable(
-                if (isCircle) {
-                    mIvIcon.scaleType = ImageView.ScaleType.FIT_XY
-                    val resizeWidth = dp2px(mDpIvSize) / 2
-                    val resized = Bitmap.createScaledBitmap(bitmap, resizeWidth.toInt(), resizeWidth.toInt(), true)
-                    BitmapDrawable(resources, resized)
-                } else {
-                    mIvIcon.scaleType = ImageView.ScaleType.CENTER
-                    if (makeCircleFit) {
-                        val resizeWidth = dp2px(mDpIvSize)
-                        val resized = Bitmap.createScaledBitmap(bitmap, resizeWidth.toInt(), resizeWidth.toInt(), true)
-                        val bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, resized)
-                        bitmapDrawable.isCircular = true
-                        bitmapDrawable
-                    } else {
-                        val resizeWidth = dp2px(mDpIvSize) / Math.sqrt(2.0)
-                        val resized = Bitmap.createScaledBitmap(bitmap, resizeWidth.toInt(), resizeWidth.toInt(), true)
-                        RoundedBitmapDrawableFactory.create(resources, resized)
-                    }
-                }
-        )
-        return this
-    }
-
-    fun setIcon(res: Int, isCircle: Boolean, makeCircleFit: Boolean = false): IconPopUp {
-        val drawable = ContextCompat.getDrawable(context, res)
-        drawable?.let {
-            setIcon(drawable, isCircle, makeCircleFit)
-        }
-        return this
-    }
-
-    // 아이콘 배경색 설정
-    fun setIconBackgroundColor(color: Int): IconPopUp {
-        setIcon( ColorDrawable(color), false, true)
-        return this
-    }
-    // 아이콘 텍스트 설정
-    fun setIconText(text: String): IconPopUp {
-        mTvTitle.setText(makeSpanText(text), TextView.BufferType.SPANNABLE)
-        return this
-    }
-    // 아이콘 텍스트 컬러 설정
-    fun setIconTextColor(color: Int): IconPopUp {
-        mTvTitle.setTextColor(color)
-        return this
-    }
-    // 메세지 배경 설정
-    fun setMessageBackground(res: Int, isRound: Boolean, makeRoundFit: Boolean = false): IconPopUp {
-        val drawable = ContextCompat.getDrawable(context, res)
-        drawable?.let {
-            setImageBackground(drawable, isRound, makeRoundFit)
-        }
-        return this
-    }
-    // 이미지 배경 설정
-    fun setImageBackground(drawable: Drawable, isRound: Boolean, makeRoundFit: Boolean = false): IconPopUp {
-        val bitmap = getBitmapFromDrawable(drawable)
-        val width = dp2px(300f).toInt()
-        val height = (bitmap.height/bitmap.width*width).toInt()
-        val resized = Bitmap.createScaledBitmap(bitmap, width, height, true)
-        val output = Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(output)
-        val color = 0xff424242.toInt()
-        val paint = Paint()
-        val rect =  Rect (0, 0, width, height)
-        val rectF =  RectF(rect)
-        val roundPx = dp2px(25f)
-
-        paint.isAntiAlias = true
-        canvas.drawARGB(0, 0, 0, 0)
-        paint.color = color
-        canvas.drawRoundRect(rectF, roundPx, roundPx, paint)
-
-        paint.xfermode = PorterDuffXfermode (PorterDuff.Mode.SRC_IN)
-        canvas.drawBitmap(resized, rect, rect, paint)
-        mContainer.visibility = View.GONE
-        mIvBackground.background = BitmapDrawable(resources, output)
-        mIvBackground.setOnClickListener { true }
-        return this
-    }
-
-    // 아이콘 dp(사이즈) 설정
-    fun setIconSizeDp(dp: Float): IconPopUp {
-        mDpIvSize = dp
-        val lp = mIvIcon.layoutParams
-        lp.width = dp2px(mDpIvSize).toInt()
-        lp.height = dp2px(mDpIvSize).toInt()
-        return this
-    }
-
     // 확인버튼 콜백
-    fun setOnConfirmButtonClickListener(callback: (IconPopUp) -> Unit): IconPopUp {
+    fun setOnConfirmButtonClickListener(callback: (FirstPopUp) -> Unit): FirstPopUp {
         mBtnConfirm.setOnClickListener {
             callback(this)
         }
@@ -212,14 +75,14 @@ class IconPopUp : ConstraintLayout {
     }
 
     // 블러처리하는 뷰
-    fun setDimBlur(blurView: BlurringView): IconPopUp {
+    fun setDimBlur(blurView: BlurringView): FirstPopUp {
         mRefDimView = blurView
         // blurredView를 미리 바인드하고 호출. 바인드를 나중에하다가 null 상태에서 사라지면 에러남
         return this
     }
 
     // show 애니메이션 시간
-    fun setShowDuration(duration: Long): IconPopUp {
+    fun setShowDuration(duration: Long): FirstPopUp {
         mShowDuration = duration
         return this
     }
@@ -252,21 +115,14 @@ class IconPopUp : ConstraintLayout {
     }
 
     // 팝업 사라질때 호출
-    fun setDismissListener(callback: () -> Unit): IconPopUp {
+    fun setDismissListener(callback: () -> Unit): FirstPopUp {
         mDismissCallback = callback
-        return this
-    }
-    // 팝업 Click시 호출
-    fun setDismissOnBackgroundTouch(enable: Boolean): IconPopUp {
-        if (enable) {
-            mPopRoot.setOnClickListener { dismiss() }
-        }
         return this
     }
 
     fun dismiss() {
         // 팝업이 보여지고 있으면 사라짐
-       if(mPopupWindow.isShowing){
+        if(mPopupWindow.isShowing){
             mPopupWindow.dismiss()
         }
         mDismissCallback?.invoke()

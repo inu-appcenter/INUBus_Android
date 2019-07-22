@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rotate xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fromDegrees="90"
-    android:toDegrees="90">
-    <shape
-        android:shape="line">
-        <stroke
-            android:width="2dp"
-            android:color="#1976D2"/>
-        <size
-            android:width="5dp"
-            android:height="5dp"/>
-    </shape>
-</rotate>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:bottom="0.5dp"
+        android:left="56.6dp"
+        android:right="-2dp"
+        android:top="-2dp">
+        <shape android:shape="rectangle" >
+            <stroke
+                android:width="0.5dp"
+                android:color="#cbcbcb" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="-200dp"
+        android:left="56.6dp"
+        android:right="-200dp"
+        android:top="-200dp">
+        <shape android:shape="rectangle" >
+            <stroke
+                android:width="5dp"
+                android:color="#0066ff" />
+        </shape>
+    </item>
+
+</layer-list>

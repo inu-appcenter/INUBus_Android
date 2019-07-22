@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24.9dp"
             android:layout_marginLeft="24.9dp"
-            android:fontFamily="@font/nanum_square_r"
+            android:fontFamily="@font/notosans_regular"
             android:gravity="bottom"
             android:inputType="textMultiLine"
             android:maxLines="1"
