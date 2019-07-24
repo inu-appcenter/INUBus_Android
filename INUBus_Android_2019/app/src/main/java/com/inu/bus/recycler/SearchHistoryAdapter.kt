@@ -23,8 +23,8 @@ class SearchHistoryAdapter(private val mContext : Context, private val mLayout :
     // mDB의 검색기록을 mLayout에 연결
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val root = convertView ?: LayoutInflater.from(mContext).inflate(mLayout, parent, false)
-        root.tv_autocomplete_item_name.text = mHistoryList[position].name
-        root.tv_autocomplete_item_date.text = millisToDate( mHistoryList[position].date)
+//        root.tv_autocomplete_item_name.text = mHistoryList[position].name
+//        root.tv_autocomplete_item_date.text = millisToDate( mHistoryList[position].date)
         root.btn_autocomplete_item_delete.setOnClickListener {
             mDB.searchHistoryDAO().delete(mHistoryList[position])
             notifyDataSetChanged()

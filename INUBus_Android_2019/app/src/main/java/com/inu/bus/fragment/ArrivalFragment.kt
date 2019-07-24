@@ -174,7 +174,7 @@ class ArrivalFragment : Fragment(){
         }
     }
 
-    // 지정단탭 toggle 숨기기 애니메이션 적용
+    // 지정단탭 actionbar 숨기기 적용
     private val mViewPagerPageChangeListener = object : ViewPager.OnPageChangeListener{
         val mUpperView = MainActivity.mWrMainUpperView.get()!!
         private var mViewX = mUpperView.x

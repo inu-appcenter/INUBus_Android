@@ -16,7 +16,6 @@ import com.inu.bus.databinding.ActivityInquireBinding
 import com.inu.bus.model.InquireModel
 import com.inu.bus.util.Singleton
 import kotlinx.android.synthetic.main.activity_inquire.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -82,7 +81,7 @@ class InquireActivity : AppCompatActivity() {
                         .setBtnText("확인")
                         .setMessageText("소중한 의견 감사드립니다!.")
                         .setDimBlur(blurring_view)
-                        .setShowDuration(10000)
+                        .setShowDuration(60000)
                         .setDismissListener{
                             closeActivity()
                         }

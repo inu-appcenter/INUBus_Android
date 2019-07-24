@@ -203,7 +203,7 @@
                             android:onClick="@{() -> listener.onSendButtonClick(data)}"
                             android:gravity="center"
                             android:text="등록"
-                            android:textColor="@{data.enabled ? @color/colorActionBar : @color/toggle_default_font_gray}"
+                            android:textColor="@{data.enabled ? @color/colorActionBar : @color/colorPrimaryDim}"
                             android:background="?android:attr/selectableItemBackground"
                             android:textSize="13sp"
                             android:fontFamily="@font/notosans_medium"

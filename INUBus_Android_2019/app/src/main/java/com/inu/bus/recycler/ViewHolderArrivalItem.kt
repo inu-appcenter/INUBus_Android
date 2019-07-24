@@ -6,11 +6,13 @@ import android.databinding.ObservableBoolean
 import android.os.Message
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.widget.Toast
 import com.inu.bus.activity.RouteActivity
 import com.inu.bus.custom.HandlerArrivalText
 import com.inu.bus.databinding.RecyclerArrivalItemBinding
 import com.inu.bus.model.BusArrivalInfo
 import java.util.*
+import kotlin.coroutines.coroutineContext
 
 /**
  * Created by Minjae Son on 2018-08-25.
@@ -109,6 +111,11 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding, p
         needTick = false
         mTimer?.cancel()
         currentTask?.cancel()
+    }
+
+    // 바인딩된 아이템 클릭시 intent를 가지고 RouteActivity로 이동
+    fun onFavorite(data : BusArrivalInfo){
+
     }
 
     // 바인딩된 아이템 클릭시 intent를 가지고 RouteActivity로 이동

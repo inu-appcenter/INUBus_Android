@@ -2,19 +2,26 @@ package com.inu.bus.custom
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Handler
+import android.provider.FontsContract
 import android.support.annotation.RequiresApi
 import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.FontResourcesParserCompat
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
-import android.text.Html
-import android.text.Spanned
+import android.text.*
+import android.text.style.CharacterStyle
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.text.style.TextAppearanceSpan
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
@@ -33,6 +40,7 @@ class FirstPopUp : ConstraintLayout {
     companion object {
         var mInstance : WeakReference<FirstPopUp>? = null
     }
+    private val mMessage : TextView
     private val mBtnConfirm: Button
     private val mPopupWindow: PopupWindow
     private var mRefDimView: BlurringView? = null
@@ -47,6 +55,7 @@ class FirstPopUp : ConstraintLayout {
     init {
         val v = LayoutInflater.from(context).inflate(R.layout.custom_popup_first, this, false)
         addView(v)
+        mMessage = v.findViewById(R.id.tv_first_popup_message)
         mBtnConfirm = v.findViewById(R.id.btn_first_popup_check)
         mBtnConfirm.setOnClickListener { dismiss() }
         mPopupWindow = PopupWindow(this, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -64,6 +73,20 @@ class FirstPopUp : ConstraintLayout {
         } else {
             Html.fromHtml(text);
         }
+    }
+
+    // TextView 특정 문자열 폰트 변경
+    fun SpanText(){
+        val inubus = "INU BUS"
+        val start = mMessage.text.indexOf(inubus)
+        val end = start + inubus.length
+        val ssb = SpannableString(mMessage.text)
+//        ssb.setSpan(ForegroundColorSpan(Color.parseColor("#00FF00")),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            ssb.setSpan(TextAppearanceSpan(context,R.style.inubus_jalnan),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        mMessage.setText(ssb)
+
     }
 
     // 확인버튼 콜백
@@ -92,6 +115,7 @@ class FirstPopUp : ConstraintLayout {
         mPopupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
         mPopupWindow.animationStyle = R.style.AppTheme_PopupAnimation
         mPopupWindow.showAtLocation(this, Gravity.CENTER, 0, 0)
+        SpanText()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animateStatusBarColor(500,

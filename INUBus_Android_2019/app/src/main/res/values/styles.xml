@@ -51,4 +51,14 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="inubus_jalnan">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/jalnan</item>
+    </style>
+
+    <style name="pulbic_data">
+        <item name="android:fontFamily">@font/nanum_square_b</item>
+    </style>
+
 </resources>

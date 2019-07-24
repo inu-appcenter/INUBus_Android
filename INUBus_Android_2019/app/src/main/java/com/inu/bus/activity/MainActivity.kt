@@ -1,21 +1,29 @@
 package com.inu.bus.activity
 
 import android.arch.persistence.room.Room
+import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.app.AppCompatActivity
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
+import android.text.style.TextAppearanceSpan
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.inu.bus.MyService
 import com.inu.bus.R
 import com.inu.bus.custom.FirstPopUp
 import com.inu.bus.custom.IconPopUp
 import com.inu.bus.fragment.ArrivalFragment
-import com.inu.bus.fragment.DestinationFragment
 import com.inu.bus.recycler.ViewPagerAdapter
 import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.LocalIntent
@@ -25,6 +33,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_actionbar.*
 import kotlinx.android.synthetic.main.custom_info_drawer.*
 import kotlinx.android.synthetic.main.custom_info_drawer.view.*
+import kotlinx.android.synthetic.main.custom_popup_first.*
 import java.lang.ref.WeakReference
 
 
@@ -65,6 +74,7 @@ class MainActivity : AppCompatActivity(){
         setActionBar()
         setDrawer()
         setMainViewPager()
+        SpanText()
     }
 
     private fun setActionBar(){
@@ -94,6 +104,22 @@ class MainActivity : AppCompatActivity(){
         }
         popupView.show()
     }
+    // TextView 특정 문자열 폰트 변경
+
+    fun SpanText(){
+//        val v = LayoutInflater.from(applicationContext)).inflate()
+        val mMessage = findViewById<TextView>(R.id.tv_drawer_note)
+        val str = "공공데이터"
+        val start = mMessage.text.indexOf(str)
+        val end = start + str.length
+        val ssb = SpannableString(mMessage.text)
+//        ssb.setSpan(ForegroundColorSpan(Color.parseColor("#00FF00")),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        ssb.setSpan(TextAppearanceSpan(applicationContext,R.style.pulbic_data),start,end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        mMessage.setText(ssb)
+    }
+
 
     // 버튼 리스너 설정
     private fun setDrawer(){

@@ -5,6 +5,7 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import com.inu.bus.databinding.RecyclerArrivalHeaderBinding
 import com.inu.bus.databinding.RecyclerArrivalItemBinding
 import com.inu.bus.databinding.RecyclerArrivalSeparatorBinding
@@ -14,6 +15,7 @@ import com.inu.bus.util.ArrivalInfoDiffUtil
 import com.inu.bus.util.Singleton
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.coroutines.coroutineContext
 
 
 /**
@@ -72,12 +74,22 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
             }
         })
 
+
         val grouped  = sorted.groupBy { it.type }
+        mArrivalItems.add(RecyclerArrivalItem("즐겨찾기"))
+
         grouped.forEach { group ->
             // 현재 필요한 섹션 헤더만 추가
             mArrivalItems.add(RecyclerArrivalItem(group.key!!.value))
             group.value.forEach {
                 it.intervalString = "${it.interval}분"
+
+                if(it.no.equals("6")) {
+                    mArrivalItems.add(1,RecyclerArrivalItem(it))
+                }
+                if(it.favorite) {
+                    mArrivalItems.add(1,RecyclerArrivalItem(it))
+                }
                 mArrivalItems.add(RecyclerArrivalItem(it))
             }
         }

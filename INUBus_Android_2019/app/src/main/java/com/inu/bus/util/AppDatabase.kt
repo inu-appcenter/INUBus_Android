@@ -2,14 +2,19 @@ package com.inu.bus.util
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
+import com.inu.bus.model.DBBusFavoriteItem
 import com.inu.bus.model.DBSearchHistoryItem
 import com.inu.bus.util.Singleton.DB_VERSION
 
 /**
  * Created by Minjae Son on 2018-08-10.
  */
-// searchHistoryDAO의 SQL을 RoomDatabase로 처리
-@Database(entities = [DBSearchHistoryItem::class], version = DB_VERSION)
+//// searchHistoryDAO의 SQL을 RoomDatabase로 처리
+//@Database(entities = [DBSearchHistoryItem::class], version = DB_VERSION)
+//abstract class AppDatabase : RoomDatabase() {
+//    abstract fun searchHistoryDAO(): SearchHistoryDAO
+
+@Database(entities = [DBBusFavoriteItem::class], version = DB_VERSION)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun searchHistoryDAO(): SearchHistoryDAO
+    abstract fun searchHistoryDAO(): BusFavoriteDAO
 }
