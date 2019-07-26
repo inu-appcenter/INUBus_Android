@@ -1,20 +1,15 @@
 package com.inu.bus.activity
 
-import android.arch.persistence.room.Room
-import android.content.Context
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.app.AppCompatActivity
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.StyleSpan
 import android.text.style.TextAppearanceSpan
+import android.util.Log
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -24,6 +19,7 @@ import com.inu.bus.R
 import com.inu.bus.custom.FirstPopUp
 import com.inu.bus.custom.IconPopUp
 import com.inu.bus.fragment.ArrivalFragment
+import com.inu.bus.model.DBBusFavoriteItem
 import com.inu.bus.recycler.ViewPagerAdapter
 import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.LocalIntent
@@ -33,7 +29,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_actionbar.*
 import kotlinx.android.synthetic.main.custom_info_drawer.*
 import kotlinx.android.synthetic.main.custom_info_drawer.view.*
-import kotlinx.android.synthetic.main.custom_popup_first.*
 import java.lang.ref.WeakReference
 
 
@@ -44,7 +39,6 @@ import java.lang.ref.WeakReference
 class MainActivity : AppCompatActivity(){
 
     companion object {
-        lateinit var DB : AppDatabase
         // ArrivalFragmentTab에서 각 검색결과를 참조하기 위해
         // TODO Observable로 변경
         lateinit var mWrSearchView : WeakReference<AutoCompleteTextView>
@@ -56,6 +50,9 @@ class MainActivity : AppCompatActivity(){
         lateinit var mWrBtnInfo : WeakReference<ImageButton>
     }
 
+    var mDB : AppDatabase? = null
+    var temp = listOf<DBBusFavoriteItem>()
+
     // 지연 초기화
 //  private val mSearchAdapter : SearchHistoryAdapter by lazy { SearchHistoryAdapter(this, R.layout.search_history_list_item) }
     private val mViewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager, this) }
@@ -66,7 +63,10 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
 
         // room DB 생성
-        DB =  Room.databaseBuilder(this, AppDatabase::class.java, "db").allowMainThreadQueries().build()
+
+        mDB = AppDatabase.getInstance(this)
+        setDB()
+
         // 메모리 누수를 방지하기 위해 WeakReference 사용
         mWrMainUpperView = WeakReference(ll_main_upper_view_wrapper)
         mWrSearchView = WeakReference(actionbar_searchView)
@@ -90,6 +90,50 @@ class MainActivity : AppCompatActivity(){
 //            }
 //            false
 //        })
+    }
+
+
+
+    fun setDB() {
+
+        val r = Runnable{
+            try {
+                temp = mDB?.busfavoriteDAO()?.getAll()!!
+            } catch (e:Exception){
+                Log.d("kBm0598","Error - $e")
+            }
+        }
+        val addThread = Thread(r)
+        addThread.start()
+    }
+
+    fun insertDB(no : String) {
+        val r = Runnable{
+            try {
+                mDB?.busfavoriteDAO()?.insert(DBBusFavoriteItem(no))
+                Log.d("kBm0598","insert success!!")
+            } catch (e:Exception){
+                Log.d("kBm0598","Error - $e")
+            }
+        }
+        val addThread = Thread(r)
+        addThread.start()
+        setDB()
+    }
+
+    fun deleteDB(no : String) {
+        val r = Runnable{
+            try {
+                mDB?.busfavoriteDAO()?.delete(DBBusFavoriteItem(no))
+                Log.d("kBm0598","delete success!!")
+
+            } catch (e:Exception){
+                Log.d("kBm0598","Error - $e")
+            }
+        }
+        val addThread = Thread(r)
+        addThread.start()
+        setDB()
     }
 
     fun startpopup(){
@@ -171,6 +215,7 @@ class MainActivity : AppCompatActivity(){
 //                    }
 //        }
     }
+
 
     // 재시작되면 서비스 시작
     override fun onResume() {

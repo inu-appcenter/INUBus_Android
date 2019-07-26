@@ -3,19 +3,21 @@ package com.inu.bus.recycler
 import android.databinding.ObservableBoolean
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import com.inu.bus.activity.MainActivity
 import com.inu.bus.databinding.RecyclerArrivalHeaderBinding
 import com.inu.bus.databinding.RecyclerArrivalItemBinding
 import com.inu.bus.databinding.RecyclerArrivalSeparatorBinding
 import com.inu.bus.model.BusArrivalInfo
+import com.inu.bus.model.DBBusFavoriteItem
 import com.inu.bus.model.RecyclerArrivalItem
+import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.ArrivalInfoDiffUtil
 import com.inu.bus.util.Singleton
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.coroutines.coroutineContext
 
 
 /**
@@ -29,14 +31,34 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
     private var mFilteredItems = ArrayList<RecyclerArrivalItem>()
     private var mFilteringString = ""
 
+    private lateinit var mDB: AppDatabase
+    private var dataSet = listOf<DBBusFavoriteItem>()
+
+
     init {
         // Header
         mArrivalItems.add(RecyclerArrivalItem())
     }
+
+
     // ItemType에 따라 생성할 뷰홀더 객체 선택
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val type = RecyclerArrivalItem.ItemType.findByOrdinal(viewType)
         val layoutInflater = LayoutInflater.from(parent.context)
+        mDB = AppDatabase.getInstance(parent.context)!!
+        val r = Runnable {
+            try {
+//                Log.d("0598","group Success")
+                dataSet = mDB?.busfavoriteDAO()?.getAll()!!
+
+            } catch (e:Exception){
+                Log.d("05981","Error - $e")
+            }
+        }
+        val thread = Thread(r)
+        thread.start()
+
+
         return when(type){
             RecyclerArrivalItem.ItemType.Header->
                 ViewHolderArrivalHeader(RecyclerArrivalHeaderBinding.inflate(layoutInflater, parent, false))
@@ -48,6 +70,7 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
     }
     // ItemType에 따라 각 뷰 홀더에 데이터 연결
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
         when(mFilteredItems[position].itemType){
             RecyclerArrivalItem.ItemType.Header->{ }
             RecyclerArrivalItem.ItemType.SectionHeader->{
@@ -63,9 +86,11 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
     // 아이템 타입 리턴
     override fun getItemViewType(position: Int): Int = mFilteredItems[position].itemType.ordinal
 
+
+
+    // RecyclerView item position setting
     fun applyDataSet(items: ArrayList<BusArrivalInfo>) {
         mArrivalItems.clear()
-
         // 버스 순 정렬
         val sorted = items.sortedWith(Comparator { o1, o2 ->
             when{
@@ -74,23 +99,27 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
             }
         })
 
-
         val grouped  = sorted.groupBy { it.type }
-        mArrivalItems.add(RecyclerArrivalItem("즐겨찾기"))
+        if(dataSet.isNotEmpty())
+            mArrivalItems.add(RecyclerArrivalItem("즐겨찾기"))
 
         grouped.forEach { group ->
             // 현재 필요한 섹션 헤더만 추가
             mArrivalItems.add(RecyclerArrivalItem(group.key!!.value))
             group.value.forEach {
-                it.intervalString = "${it.interval}분"
 
-                if(it.no.equals("6")) {
-                    mArrivalItems.add(1,RecyclerArrivalItem(it))
+                for(i in 0 until dataSet.size){
+                    if(it.no == dataSet[i].no){
+                        mArrivalItems.add(1,RecyclerArrivalItem(it))
+                    }
                 }
-                if(it.favorite) {
-                    mArrivalItems.add(1,RecyclerArrivalItem(it))
-                }
+
+                it.intervalString = "${it.interval}분"
                 mArrivalItems.add(RecyclerArrivalItem(it))
+//                if(it.favorite) {
+//                    mArrivalItems.add(1,RecyclerArrivalItem(it))
+//                }
+
             }
         }
         mArrivalItems.add(0,RecyclerArrivalItem())

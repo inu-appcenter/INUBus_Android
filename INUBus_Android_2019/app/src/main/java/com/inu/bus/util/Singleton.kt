@@ -34,7 +34,7 @@ object Singleton{
     var arrivalToInfo = ObservableField<ArrayList<ArrivalToNodeInfo>>()
     const val myPackageName = "com.bungabear.inubus"
     const val LOG_TAG = "INU Bus"
-    const val DB_VERSION = 1
+    const val DB_VERSION = 2
 
     // 키보드 숨기기
     fun hideKeyboard(activity: Activity) {

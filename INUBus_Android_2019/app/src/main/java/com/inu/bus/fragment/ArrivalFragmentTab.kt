@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import com.inu.bus.R
+import com.inu.bus.activity.MainActivity
 import com.inu.bus.recycler.RecyclerAdapterArrival
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
@@ -23,9 +24,10 @@ import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
 
 /**
  * Created by Minjae Son on 2018-08-07.
+ * Updated by ByoungMin on 2019-07-27.
  */
 
-class ArrivalFragmentTab : Fragment() {
+class ArrivalFragmentTab : Fragment(){
 
     private var isShowing = false
     private lateinit var mStrBusStop: String
@@ -33,6 +35,8 @@ class ArrivalFragmentTab : Fragment() {
     private lateinit var mFabRefreshAnimation : RotateAnimation
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
     val mAdapter by lazy { RecyclerAdapterArrival(mStrBusStop) }
+
+    var mDB = MainActivity().mDB
 
     companion object {
         fun newInstance(context: Context, stopName: String): ArrivalFragmentTab {
@@ -70,17 +74,36 @@ class ArrivalFragmentTab : Fragment() {
     }
     // 하교용 정류장 정보를 다시 받아 어댑터에 적용
     fun dataRefresh(){
+        Log.d("0598", "dataRefresh")
         fragment_node_arrival_swipeRefreshLayout?.isRefreshing = false
         Singleton.arrivalFromInfo.get()?.let{
             val checked = it.filter{ subIt->  subIt.name == mStrBusStop }
             if(checked.isEmpty()) return
             val filtered = checked[0].data
+
+            (activity as MainActivity).setDB()
+            val dataSet = (activity as MainActivity).temp
+
+//            Log.d("0598", "----------------${filtered.size}")
+            for(i in 0 until filtered.size){
+                for(j in 0 until dataSet.size){
+                    if(filtered[i].no == dataSet[j].no){
+                        filtered[i].favorite = true
+//                        Log.d("0598", "filter ${filtered[i].no}")
+//                        Log.d("0598", "datatset ${dataSet[j].no}")
+                    }
+                }
+            }
+//            Log.d("0598", "----------------${dataSet.size}")
+
             mAdapter.applyDataSet(filtered)
+            mAdapter.notifyDataSetChanged()
         }
     }
 
     // 당겨서 새로고침 이미지 설정
     fun refreshLoading(){
+//        Log.d("0598", "refreshLoading")
         val mSwipeRefreshLayout = fragment_node_arrival_swipeRefreshLayout
         mSwipeRefreshLayout.setProgressViewOffset(true,0,130)
         mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#0061f4"))

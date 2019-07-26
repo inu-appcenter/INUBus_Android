@@ -6,13 +6,19 @@ import android.databinding.ObservableBoolean
 import android.os.Message
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.widget.Toast
+import android.widget.Adapter
+import android.widget.CheckBox
+import com.inu.bus.R
+import com.inu.bus.activity.MainActivity
 import com.inu.bus.activity.RouteActivity
 import com.inu.bus.custom.HandlerArrivalText
 import com.inu.bus.databinding.RecyclerArrivalItemBinding
+import com.inu.bus.fragment.ArrivalFragmentTab
 import com.inu.bus.model.BusArrivalInfo
+import com.inu.bus.model.DBBusFavoriteItem
+import com.inu.bus.util.AppDatabase
+import kotlinx.android.synthetic.main.recycler_arrival_item.view.*
 import java.util.*
-import kotlin.coroutines.coroutineContext
 
 /**
  * Created by Minjae Son on 2018-08-25.
@@ -26,6 +32,8 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding, p
     private var mTimer : Timer? = null
     // 시간마다 수행될 작업
     private var currentTask : TimerTask? = null
+
+    private var mDB:AppDatabase? = null
 
     private fun newTimerTask() : TimerTask {return object : TimerTask() {
         override fun run() {
@@ -44,8 +52,11 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding, p
 
     private val mHandler by lazy { HandlerArrivalText(mBinding.recyclerArrival) }
 
+
+
     // recycler_arrival_item.xml 바인딩
     fun bind(data : BusArrivalInfo){
+
         mBinding.data = data
         mBinding.listener = this
         sendTime(mBinding.data!!)
@@ -113,8 +124,53 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding, p
         currentTask?.cancel()
     }
 
-    // 바인딩된 아이템 클릭시 intent를 가지고 RouteActivity로 이동
-    fun onFavorite(data : BusArrivalInfo){
+    // 즐겨찾기가 체크되면 AppDatabase 로 item 전달
+    fun onChecked(data: BusArrivalInfo){
+        Log.d("kBm0598","OnChecked called!!!")
+        val context = mBinding.root.context
+        mDB = AppDatabase.getInstance(context)
+        var temp = listOf<DBBusFavoriteItem>()
+        val mcheckBox = itemView.findViewById<CheckBox>(R.id.checkBox)
+        val addRunnable : Runnable
+
+        if(mcheckBox.isChecked) {
+            addRunnable = Runnable {
+                // 삽입
+                val newData = DBBusFavoriteItem()
+                newData.no = data.no
+                mDB?.busfavoriteDAO()?.insert(newData)
+                // 조회
+                temp = mDB?.busfavoriteDAO()?.getAll()!!
+                Log.d("kBm0598","insert success!!")
+            }
+            val addThread = Thread(addRunnable)
+            addThread.start()
+//            (context as MainActivity).insertDB(data.no)
+        }
+        else if(!mcheckBox.isChecked) {
+//            addRunnable = Runnable {
+//                temp = mDB?.busfavoriteDAO()?.getAll()!!
+//                var p = -1
+//                // 삭제
+//                for(i in 0 until temp.size){
+//                    if(temp[i].no == data.no) {
+//                        p = i
+//                    }
+//                }
+//                mDB?.busfavoriteDAO()?.delete(temp[p])
+//                // 조회
+//                Log.d("kBm0598","delete success!!")
+
+//            }
+//            val addThread = Thread(addRunnable)
+//            addThread.start()
+            (context as MainActivity).deleteDB(data.no)
+        }
+
+        (context as MainActivity).setDB()
+        val temp2 = context.temp
+        for(i in 0 until temp.size)
+            Log.d("0598","bus number : ${temp[i].no}")
 
     }
 
