@@ -16,10 +16,12 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import com.inu.bus.R
 import com.inu.bus.activity.MainActivity
+import com.inu.bus.model.BusArrivalInfo
 import com.inu.bus.recycler.RecyclerAdapterArrival
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
 import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
+import kotlin.math.log
 
 
 /**
@@ -36,7 +38,8 @@ class ArrivalFragmentTab : Fragment(){
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
     val mAdapter by lazy { RecyclerAdapterArrival(mStrBusStop) }
 
-    var mDB = MainActivity().mDB
+    private var favList = arrayListOf<String?>()
+    private var firstDBload = false
 
     companion object {
         fun newInstance(context: Context, stopName: String): ArrivalFragmentTab {
@@ -68,7 +71,6 @@ class ArrivalFragmentTab : Fragment(){
                 dataRefresh()
             }
         })
-
         refreshLoading()
         dataRefresh()
     }
@@ -81,22 +83,25 @@ class ArrivalFragmentTab : Fragment(){
             if(checked.isEmpty()) return
             val filtered = checked[0].data
 
-            (activity as MainActivity).setDB()
-            val dataSet = (activity as MainActivity).temp
 
-//            Log.d("0598", "----------------${filtered.size}")
-            for(i in 0 until filtered.size){
-                for(j in 0 until dataSet.size){
-                    if(filtered[i].no == dataSet[j].no){
-                        filtered[i].favorite = true
-//                        Log.d("0598", "filter ${filtered[i].no}")
-//                        Log.d("0598", "datatset ${dataSet[j].no}")
+//            Log.d("0598","firstdb ${firstDBload}")
+//            if(!(activity as MainActivity).firstDBload){
+                (activity as MainActivity).setDB()
+//            }
+            val favList = (activity as MainActivity).favList
+            
+
+            filtered.forEach {
+                favList.forEachIndexed { index, favorite ->
+                    if (it.no == favorite) {
+                        Log.d("0598", "favList = ${favorite}")
+                        it.favorite = true
                     }
+//                    else if(it.no != favorite)it.favorite = false
                 }
             }
-//            Log.d("0598", "----------------${dataSet.size}")
 
-            mAdapter.applyDataSet(filtered)
+            mAdapter.applyDataSet(filtered,favList)
             mAdapter.notifyDataSetChanged()
         }
     }

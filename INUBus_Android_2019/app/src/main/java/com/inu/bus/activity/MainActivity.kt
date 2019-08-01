@@ -51,7 +51,9 @@ class MainActivity : AppCompatActivity(){
     }
 
     var mDB : AppDatabase? = null
-    var temp = listOf<DBBusFavoriteItem>()
+    var DBfavorite = listOf<DBBusFavoriteItem>()
+    var favList = arrayListOf<String?>()
+    var firstDBload = false
 
     // 지연 초기화
 //  private val mSearchAdapter : SearchHistoryAdapter by lazy { SearchHistoryAdapter(this, R.layout.search_history_list_item) }
@@ -60,12 +62,10 @@ class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(com.inu.bus.R.layout.activity_main)
 
         // room DB 생성
-
         mDB = AppDatabase.getInstance(this)
-        setDB()
 
         // 메모리 누수를 방지하기 위해 WeakReference 사용
         mWrMainUpperView = WeakReference(ll_main_upper_view_wrapper)
@@ -95,37 +95,45 @@ class MainActivity : AppCompatActivity(){
 
 
     fun setDB() {
-
         val r = Runnable{
             try {
-                temp = mDB?.busfavoriteDAO()?.getAll()!!
+                DBfavorite = mDB?.busfavoriteDAO()?.getAll()!!
             } catch (e:Exception){
                 Log.d("kBm0598","Error - $e")
             }
         }
         val addThread = Thread(r)
         addThread.start()
+
+        DBfavorite.forEach {
+            if(!favList.contains(it.no))
+                favList.add(it.no)
+        }
     }
 
     fun insertDB(no : String) {
+        // favoriteSet.add(DBBusFavoriteItem(no))
+
         val r = Runnable{
             try {
                 mDB?.busfavoriteDAO()?.insert(DBBusFavoriteItem(no))
-                Log.d("kBm0598","insert success!!")
+                Log.d("kBm0598","insert success!! MainActivity")
             } catch (e:Exception){
                 Log.d("kBm0598","Error - $e")
             }
         }
         val addThread = Thread(r)
         addThread.start()
-        setDB()
+
+//        for(i in 0 until favoriteSet.size)
     }
 
     fun deleteDB(no : String) {
+
         val r = Runnable{
             try {
                 mDB?.busfavoriteDAO()?.delete(DBBusFavoriteItem(no))
-                Log.d("kBm0598","delete success!!")
+                Log.d("kBm0598","delete success!! MainActivity")
 
             } catch (e:Exception){
                 Log.d("kBm0598","Error - $e")
@@ -133,7 +141,9 @@ class MainActivity : AppCompatActivity(){
         }
         val addThread = Thread(r)
         addThread.start()
-        setDB()
+
+//        for(i in 0 until favoriteSet.size)
+//            Log.d("kBm0598","${favoriteSet[i].no}")
     }
 
     fun startpopup(){

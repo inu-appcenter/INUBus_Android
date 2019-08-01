@@ -14,17 +14,17 @@ import retrofit2.http.Query
 // baseURL에 엔드 포인트를 추가해 서버 데이터를 GET방식 처리
 interface BusRetrofitService{
 
-    @GET("/arrivalInfoFrom")
+    @GET("/arrivalInfo")
     fun getFromArrivalInfo() : Call<ArrayList<ArrivalFromNodeInfo>>
 
     @GET("/arrivalInfoTo")
     fun getToArrivalInfo() : Call<ArrayList<ArrivalToNodeInfo>>
 
 
-    @GET("/getNodes")
+    @GET("/nodeData")
     fun getNodeRoute() : Call<ArrayList<BusInformation>>
 
-    @GET("/getNodes/{nodenum}")
+    @GET("/nodeData/{nodenum}")
     fun getNodeRoute(@Query("nodenum") no : String) : Call<ArrayList<BusInformation>>
 
 //    @GET("/arrivalinfoSeoul")

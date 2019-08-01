@@ -28,7 +28,6 @@ abstract class AppDatabase : RoomDatabase() {
                 synchronized(AppDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext
                             , AppDatabase::class.java,"inubus.db")
-                            .fallbackToDestructiveMigration()
                             .build()
                 }
             }

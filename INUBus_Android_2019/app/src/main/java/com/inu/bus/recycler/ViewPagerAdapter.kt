@@ -5,6 +5,7 @@ import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.view.PagerAdapter
 
 /**
  * Created by Minjae Son on 2018-08-07.
@@ -24,6 +25,7 @@ class ViewPagerAdapter(mFm: FragmentManager, mContext: Context) : FragmentStateP
 
     // Fragment 개수 설정
     override fun getCount(): Int = fragments.size
+
 
     // Fragment 추가
     fun addFragment(fragment : Fragment){

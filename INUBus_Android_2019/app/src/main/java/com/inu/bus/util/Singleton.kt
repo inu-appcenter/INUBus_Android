@@ -61,7 +61,7 @@ enum class LocalIntent(val value : String) : CharSequence by value {
     FIRST_DATA_REQUEST("$myPackageName.FIRST_DATA_REQUEST"),
     FIRST_DATA_RESPONSE("$myPackageName.FIRST_DATA_RESPONSE"),
     ARRIVAL_DATA_REFRESH_REQUEST("$myPackageName.ARRIVAL_DATA_REFRESH_REQUEST"),
-    ARRIVAL_DATA_REFRESHED("$myPackageName.ARRIVAL_DATA_REFRESHED"),
+    FAVORITE_CLICK("$myPackageName.FAVORITE_CLICK"),
     SERVICE_EXIT("$myPackageName.SERVICE_EXIT"),
     NOTIFY_FRAGMENT_READY("$myPackageName.NOTIFY_FRAGMENT_READY");
 

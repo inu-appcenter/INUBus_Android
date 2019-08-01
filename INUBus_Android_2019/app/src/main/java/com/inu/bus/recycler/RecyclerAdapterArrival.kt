@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.inu.bus.activity.MainActivity
 import com.inu.bus.databinding.RecyclerArrivalHeaderBinding
 import com.inu.bus.databinding.RecyclerArrivalItemBinding
 import com.inu.bus.databinding.RecyclerArrivalSeparatorBinding
@@ -15,9 +14,6 @@ import com.inu.bus.model.DBBusFavoriteItem
 import com.inu.bus.model.RecyclerArrivalItem
 import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.ArrivalInfoDiffUtil
-import com.inu.bus.util.Singleton
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 /**
@@ -27,13 +23,13 @@ import kotlin.collections.ArrayList
 class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     var isShowing = ObservableBoolean(false)
-    private val mArrivalItems = ArrayList<RecyclerArrivalItem>()
+    val mArrivalItems = ArrayList<RecyclerArrivalItem>()
     private var mFilteredItems = ArrayList<RecyclerArrivalItem>()
     private var mFilteringString = ""
 
     private lateinit var mDB: AppDatabase
-    private var dataSet = listOf<DBBusFavoriteItem>()
-
+    private var dataSet = arrayListOf<DBBusFavoriteItem>()
+    var tempList = arrayListOf<BusArrivalInfo>()
 
     init {
         // Header
@@ -45,11 +41,12 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val type = RecyclerArrivalItem.ItemType.findByOrdinal(viewType)
         val layoutInflater = LayoutInflater.from(parent.context)
+
         mDB = AppDatabase.getInstance(parent.context)!!
         val r = Runnable {
             try {
 //                Log.d("0598","group Success")
-                dataSet = mDB?.busfavoriteDAO()?.getAll()!!
+                dataSet = mDB?.busfavoriteDAO()?.getAll()!! as ArrayList
 
             } catch (e:Exception){
                 Log.d("05981","Error - $e")
@@ -65,7 +62,7 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
             RecyclerArrivalItem.ItemType.SectionHeader->
                 ViewHolderArrivalSection(RecyclerArrivalSeparatorBinding.inflate(layoutInflater, parent, false))
             RecyclerArrivalItem.ItemType.ArrivalInfo->
-                ViewHolderArrivalItem(RecyclerArrivalItemBinding.inflate(layoutInflater, parent, false), isShowing)
+                ViewHolderArrivalItem(RecyclerArrivalItemBinding.inflate(layoutInflater, parent, false), isShowing,this)
         }
     }
     // ItemType에 따라 각 뷰 홀더에 데이터 연결
@@ -77,7 +74,7 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
                 (holder as ViewHolderArrivalSection).bind(mFilteredItems[position].sectionHeader!!)
             }
             RecyclerArrivalItem.ItemType.ArrivalInfo->{
-                (holder as ViewHolderArrivalItem).bind(mFilteredItems[position].arrivalInfo!!)
+                (holder as ViewHolderArrivalItem).bind(mFilteredItems[position].arrivalInfo!!,this)
             }
         }
     }
@@ -89,8 +86,9 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
 
 
     // RecyclerView item position setting
-    fun applyDataSet(items: ArrayList<BusArrivalInfo>) {
+    fun applyDataSet(items: ArrayList<BusArrivalInfo>,favList : ArrayList<String?>) {
         mArrivalItems.clear()
+        tempList = items
         // 버스 순 정렬
         val sorted = items.sortedWith(Comparator { o1, o2 ->
             when{
@@ -99,62 +97,84 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
             }
         })
 
+        dataSet.sortedWith(kotlin.Comparator { o1, o2 ->
+            o2.no.compareTo(o1.no)
+        })
+
         val grouped  = sorted.groupBy { it.type }
-        if(dataSet.isNotEmpty())
+        var count = 1
+        if(favList.isNotEmpty()) {
             mArrivalItems.add(RecyclerArrivalItem("즐겨찾기"))
+            favList.sortedWith(Comparator {o1, o2 ->
+                o2!!.compareTo(o1!!)
+            })
+        }
 
         grouped.forEach { group ->
             // 현재 필요한 섹션 헤더만 추가
             mArrivalItems.add(RecyclerArrivalItem(group.key!!.value))
             group.value.forEach {
 
-                for(i in 0 until dataSet.size){
-                    if(it.no == dataSet[i].no){
-                        mArrivalItems.add(1,RecyclerArrivalItem(it))
+
+                for(i in 0 until favList.size){
+                    if (it.no == favList[i]) {
+                        mArrivalItems.add(count, RecyclerArrivalItem(it))
+                        count++
                     }
                 }
 
                 it.intervalString = "${it.interval}분"
                 mArrivalItems.add(RecyclerArrivalItem(it))
-//                if(it.favorite) {
-//                    mArrivalItems.add(1,RecyclerArrivalItem(it))
-//                }
 
             }
         }
         mArrivalItems.add(0,RecyclerArrivalItem())
+
         filter()
     }
 
     fun filter(str : String = mFilteringString) {
-        mFilteringString = str
-        val filtered =
+
+        var filtered :ArrayList<RecyclerArrivalItem>
+
+        filtered =
                 // 검색 취소
                 if(str == ""){
                     mArrivalItems
                 }
                 else {
-                    // str이 포함되어 있는 아이템을 검색
                     ArrayList(
-
                             mArrivalItems.filter { item ->
                                 if (item.itemType == RecyclerArrivalItem.ItemType.ArrivalInfo){
-                                    !Singleton.busInfo.get()!![item.arrivalInfo!!.no]
-                                    ?.nodeList
-                                            ?.find{
-                                                it.contains(str)
-                                            }.isNullOrEmpty()
+                                    item.arrivalInfo!!.no.contains(str)
+//                                    !Singleton.busInfo.get()!![item.arrivalInfo!!.no]
+//                                            ?.nodeList
+//                                            ?.find{
+//                                                Log.d("0598","it -> ${it}")
+//                                                it.contains(str)
+//                                            }.isNullOrEmpty()
                                 }
-                                else false
+                                else true
                             }
                     )
                 }
+
         // 도착 정보를 비교해서 업데이트
+        Log.d("0598","filter on")
         val diffUtil = ArrivalInfoDiffUtil(mFilteredItems, filtered)
         val result = DiffUtil.calculateDiff(diffUtil)
         mFilteredItems.clear()
         mFilteredItems.addAll(filtered)
         result.dispatchUpdatesTo(this)
+    }
+
+
+
+
+    fun onCheck(data:BusArrivalInfo){
+
+
+
     }
 
     // 아이템이 화면에 보일때만 Ticker가 작동하도록 설정

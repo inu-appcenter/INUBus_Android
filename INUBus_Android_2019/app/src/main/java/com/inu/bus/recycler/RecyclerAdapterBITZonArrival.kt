@@ -34,7 +34,7 @@ class RecyclerAdapterBITZonArrival(val mStrBusStop : String) : RecyclerView.Adap
             RecyclerArrivalItem.ItemType.SectionHeader->
                 ViewHolderArrivalBitZonSection(RecyclerArrivalBitzonSeparatorBinding.inflate(layoutInflater, parent, false))
             RecyclerArrivalItem.ItemType.ArrivalInfo->
-                ViewHolderArrivalItem(RecyclerArrivalItemBinding.inflate(layoutInflater, parent, false), isShowing)
+                ViewHolderArrivalItem(RecyclerArrivalItemBinding.inflate(layoutInflater, parent, false), isShowing,RecyclerAdapterArrival("tmp"))
         }
     }
     // ItemType에 따라 각 뷰 홀더에 데이터 연결
@@ -46,7 +46,7 @@ class RecyclerAdapterBITZonArrival(val mStrBusStop : String) : RecyclerView.Adap
             }
             RecyclerArrivalItem.ItemType.ArrivalInfo->{
                 val customInfo = mArrivalItems[position].arrivalInfo!!
-                (holder as ViewHolderArrivalItem).bind(mArrivalItems[position].arrivalInfo!!)
+//                (holder as ViewHolderArrivalItem).bind(mArrivalItems[position].arrivalInfo!!,)
             }
         }
     }

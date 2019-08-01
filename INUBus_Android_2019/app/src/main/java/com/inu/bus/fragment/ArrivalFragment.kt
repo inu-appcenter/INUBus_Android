@@ -69,6 +69,7 @@ class ArrivalFragment : Fragment(){
         // intent 수신
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.NOTIFY_FRAGMENT_READY.value))
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value))
+        mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.FAVORITE_CLICK.value))
 
         // tab setting
         mTabIcons.forEachIndexed { index, it ->
@@ -92,15 +93,16 @@ class ArrivalFragment : Fragment(){
         vp_fragment_arrival_tabs.currentItem = 0
         setTabIcon(fragment_arrival_tablayout.getTabAt(0)!!, true)
 
-        // vp_fragment_arrival_tabs.addOnPageChangeListener(mViewPagerPageChangeListener)
+        vp_fragment_arrival_tabs.addOnPageChangeListener(mViewPagerPageChangeListener)
         fragment_arrival_tablayout.addOnTabSelectedListener(mTabChangeListener)
 
 
         // 새로고침 이미지 회전 애니메이션 설정
         mFabRefreshAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         mFabRefreshAnimation.duration = 1000
-        mFabRefreshAnimation.repeatCount = -1
+        mFabRefreshAnimation.repeatCount = 1
         mFabRefreshAnimation.interpolator = AccelerateInterpolator()
+
 
         mFabRefresh = ib_fragment_arrival_tabs_refresh
         mFabRefresh.setOnClickListener {
@@ -110,7 +112,7 @@ class ArrivalFragment : Fragment(){
         //
         Singleton.arrivalToInfo.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                fabRefreshAnimation(false)
+                fabRefreshAnimation(true)
             }
         })
 
@@ -180,7 +182,9 @@ class ArrivalFragment : Fragment(){
         private var mViewX = mUpperView.x
         private var mPosition = 0
         private var mState = 0
+
         private val mDisplayWidth by lazy { resources.let { TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it.configuration.screenWidthDp.toFloat(), it.displayMetrics) }}
+
 
         override fun onPageScrollStateChanged(state: Int) {
 //            Log.d("ViewPager state", state.toString())
@@ -188,11 +192,11 @@ class ArrivalFragment : Fragment(){
         }
 
         override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-            when (position) {
-                2 -> mUpperView.x = mViewX - positionOffsetPixels
-                3 -> mUpperView.x = mDisplayWidth
-                else -> mUpperView.x = mViewX
-            }
+//            when (position) {
+//                2 -> mUpperView.x = mViewX - positionOffsetPixels
+//                3 -> mUpperView.x = mDisplayWidth
+//                else -> mUpperView.x = mViewX
+//            }
 //            Log.d("ViewPager Scrolled", "$position, $positionOffset, $positionOffsetPixels $mViewX ${mUpperView.x}")
         }
 

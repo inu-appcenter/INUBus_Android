@@ -35,6 +35,7 @@ class MyService : Service(){
         // 프로세스 안의 데이터 통신을 위한 LocalIntent를 필터링
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.FIRST_DATA_REQUEST.value))
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value))
+        mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.FAVORITE_CLICK.value))
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.SERVICE_EXIT.value))
     }
 
@@ -156,6 +157,12 @@ class MyService : Service(){
                 }
                 // 도착 데이터를 다시 요청
                 LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value -> {
+                    Log.d("test", "Service received ARRIVAL_DATA_REFRESH_REQUEST")
+//                    requestArrivalInfo{ mBroadcastManager.sendBroadcast(Intent(LocalIntent.ARRIVAL_DATA_REFRESHED.value)) }
+                    requestArrivalInfo()
+                }
+
+                LocalIntent.FAVORITE_CLICK.value -> {
                     Log.d("test", "Service received ARRIVAL_DATA_REFRESH_REQUEST")
 //                    requestArrivalInfo{ mBroadcastManager.sendBroadcast(Intent(LocalIntent.ARRIVAL_DATA_REFRESHED.value)) }
                     requestArrivalInfo()

@@ -133,39 +133,119 @@
         android:id="@+id/teaminfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41.2dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/drawer_btn_ask"
+        android:orientation="vertical"
+        android:layout_marginTop="34.2dp"
+        android:layout_marginLeft="47.3dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/drawer_btn_ask">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/notosans_regular"
-            android:lineSpacingExtra="10sp"
-            android:text="Android\n\niOS\n\n\nServer\n\n디자이너 (Android)\n디자이너 (iOS)"
-            android:textColor="#000000"
-            android:textSize="11sp" />
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_semibold"
+                android:text="Android"
+                android:textColor="#000000"
+                android:textSize="11sp" />
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="95.2dp"
+                android:fontFamily="@font/notosans_regular"
+                android:lineSpacingExtra="8sp"
+                android:text="김병민\n정고운"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="46.2dp"
-            android:fontFamily="@font/notosans_regular"
-            android:lineSpacingExtra="10sp"
-            android:text="김병민\n정고운\n임현규\n이준상\n조용문\n유현주\n임헌준\n한지연\n서연재"
-            android:textColor="#000000"
-            android:textSize="11sp" />
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_semibold"
+                android:text="iOS"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="119.2dp"
+                android:fontFamily="@font/notosans_regular"
+                android:lineSpacingExtra="8sp"
+                android:text="조용문\n이준상\n임현규"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_semibold"
+                android:text="Server"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="104.0dp"
+                android:fontFamily="@font/notosans_regular"
+                android:lineSpacingExtra="8sp"
+                android:text="임헌준\n유현주"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_semibold"
+                android:text="Designer"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90.2dp"
+                android:fontFamily="@font/notosans_regular"
+                android:lineSpacingExtra="8sp"
+                android:text="서연재\n한지연"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+        </LinearLayout>
     </LinearLayout>
+
 
 
     <TextView
         android:id="@+id/note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21.5dp"
+        android:layout_marginTop="34.5dp"
         android:fontFamily="@font/notosans_regular"
         android:gravity="left"
         android:lineSpacingExtra="6sp"
