@@ -24,19 +24,21 @@
             name="listener"
             type="com.inu.bus.activity.RouteActivity"/>
     </data>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <android.support.constraint.ConstraintLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="68.5dp"
+            android:layout_marginTop="-3dp"
             android:background="@color/colorPrimary"
             android:gravity="center_vertical"
-            android:layout_marginTop="-3dp">
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/btn_activity_route_close"
@@ -55,9 +57,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-                <!--android:padding="0dp"-->
-                <!--android:textColor="@android:color/white"-->
-                <!--android:textSize="20sp"-->
+            <!--android:padding="0dp"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="20sp"-->
 
             <TextView
                 android:id="@+id/route_busno"
@@ -80,8 +82,8 @@
                 android:id="@+id/linearLayout3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="31dp"
                 android:layout_marginTop="7dp"
+                android:layout_marginRight="31dp"
                 android:layout_marginBottom="21dp"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -115,8 +117,8 @@
                 android:id="@+id/linearLayout4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="31dp"
                 android:layout_marginTop="7dp"
+                android:layout_marginRight="31dp"
                 android:layout_marginBottom="21dp"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -150,8 +152,8 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="21dp"
                 android:layout_marginTop="7dp"
+                android:layout_marginRight="21dp"
                 android:layout_marginBottom="21dp"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -176,19 +178,44 @@
                     android:text="@{fee}"
                     android:textColor="#ffffff"
                     android:textSize="12sp"
-                    tools:text="9999"/>
+                    tools:text="9999" />
 
             </LinearLayout>
+
         </android.support.constraint.ConstraintLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_route_activity_recycler"
+        <RelativeLayout
+            android:id="@+id/relative1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:listitem="@layout/recycler_route_item">
+            android:gravity="center"
+            android:layout_toRightOf="@id/btn_route_refresh">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_route_activity_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/recycler_route_item">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <ImageButton
+                android:id="@+id/btn_route_refresh"
+                android:layout_width="44.6dp"
+                android:layout_height="44.6dp"
+                android:alpha="1.0"
+                android:layout_marginBottom="86.1dp"
+                android:layout_marginRight="17.2dp"
+                android:background="@drawable/bg_refresh"
+                android:contentDescription="refresh"
+                android:elevation="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/click_refresh"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
     </LinearLayout>
 </layout>

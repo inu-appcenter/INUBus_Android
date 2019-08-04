@@ -109,6 +109,10 @@ class MainActivity : AppCompatActivity(){
             if(!favList.contains(it.no))
                 favList.add(it.no)
         }
+
+        if(!favList.isEmpty()){
+            firstDBload = true
+        }
     }
 
     fun insertDB(no : String) {

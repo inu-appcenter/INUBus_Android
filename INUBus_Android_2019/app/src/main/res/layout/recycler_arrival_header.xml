@@ -4,7 +4,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
+        android:layout_height="50.8dp"
         android:gravity="center_vertical"
         android:background="#fafafa">
 
@@ -12,7 +12,8 @@
             android:id="@+id/recycler_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24.9dp"
+            android:layout_marginTop="19.5dp"
+            android:layout_marginBottom="20.3dp"
             android:layout_marginLeft="24.9dp"
             android:fontFamily="@font/notosans_regular"
             android:gravity="bottom"
@@ -20,7 +21,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:text="* 계산한 값으로, 정확하지 않습니다."
-            android:textColor="@color/warn_red"
+            android:textColor="#363636"
             android:textSize="8sp"
             app:autoSizeMaxTextSize="10sp"
             app:autoSizeMinTextSize="4sp"

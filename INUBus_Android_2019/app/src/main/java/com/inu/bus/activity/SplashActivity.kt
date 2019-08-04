@@ -4,6 +4,8 @@ import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import com.inu.bus.MyService
 import com.inu.bus.R
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -28,10 +30,12 @@ class SplashActivity : AppCompatActivity(){
         activity_splash_layout
                 .animate()
                 .alpha(1f)                    // 서서히 선명하게
-                .setDuration(1000)                  // 1000ms 동안
+                .setDuration(2700)                  // 1000ms 동안
                 .setListener(animationListener)
                 .start()
 
+        val gifimage = GlideDrawableImageViewTarget(iv_splash_bus)
+        Glide.with(this).load(R.drawable.gif_splash_bus).into(gifimage)
     }
 
     // 애니메이션 이벤트 처리 등록

@@ -2,17 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="90.2dp"
-    android:layout_height="80dp"
+    android:layout_height="48dp"
     android:gravity="center"
     android:orientation="vertical">
 
     <CheckBox
         android:id="@+id/iv_tabicon"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="41dp"
         android:layout_marginRight="41dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="3dp"
         android:button="@null"
         android:clickable="false"
         tools:background="@drawable/circle_select" />
@@ -21,6 +22,7 @@
         android:id="@+id/tv_tabicon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
         android:background="@android:color/transparent"
         android:button="@null"
         android:clickable="false"

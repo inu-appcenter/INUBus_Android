@@ -102,158 +102,219 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/drawer_btn_ask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25.2dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosans_semibold"
-            android:text="문의사항"
-            android:textColor="#707070"
-            android:textSize="15sp" />
-
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginLeft="13.9dp"
-            android:background="@drawable/ic_inquire"
-            android:scaleType="fitXY"
-            android:text="icon" />
-    </LinearLayout>
-
-
-    <LinearLayout
         android:id="@+id/teaminfo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="34.2dp"
         android:layout_marginLeft="47.3dp"
+        android:layout_marginTop="59.4dp"
+        android:layout_marginRight="45.4dp"
+        android:orientation="vertical"
+
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/drawer_btn_ask">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="fill_horizontal"
             android:orientation="horizontal">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosans_semibold"
-                android:text="Android"
-                android:textColor="#000000"
-                android:textSize="11sp" />
+                android:layout_weight="1">
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Android"
+                    android:textSize="11sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_semibold"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="95.2dp"
-                android:fontFamily="@font/notosans_regular"
-                android:lineSpacingExtra="8sp"
-                android:text="김병민\n정고운"
-                android:textColor="#000000"
-                android:textSize="11sp" />
+                android:layout_weight="1"
+                android:gravity="end">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="김병민\n정고운"
+                    android:textSize="11sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="5sp"
+                    android:fontFamily="@font/notosans_regular"/>
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosans_semibold"
-                android:text="iOS"
-                android:textColor="#000000"
-                android:textSize="11sp" />
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="119.2dp"
-                android:fontFamily="@font/notosans_regular"
-                android:lineSpacingExtra="8sp"
-                android:text="조용문\n이준상\n임현규"
-                android:textColor="#000000"
-                android:textSize="11sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="iOS"
+                        android:textSize="11sp"
+                        android:textColor="#000000"
+                        android:fontFamily="@font/notosans_semibold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="조용문\n이준상\n임현규"
+                        android:textSize="11sp"
+                        android:textColor="#000000"
+                        android:lineSpacingExtra="5sp"
+                        android:fontFamily="@font/notosans_regular"/>
+                </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosans_semibold"
-                android:text="Server"
-                android:textColor="#000000"
-                android:textSize="11sp" />
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Server"
+                    android:textSize="11sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_semibold"/>
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="104.0dp"
-                android:fontFamily="@font/notosans_regular"
-                android:lineSpacingExtra="8sp"
-                android:text="임헌준\n유현주"
-                android:textColor="#000000"
-                android:textSize="11sp" />
+                android:layout_weight="1"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="임현준\n유현주"
+                    android:textSize="11sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="5sp"
+                    android:fontFamily="@font/notosans_regular"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosans_semibold"
-                android:text="Designer"
-                android:textColor="#000000"
-                android:textSize="11sp" />
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Designer"
+                    android:textSize="11sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_semibold"/>
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90.2dp"
-                android:fontFamily="@font/notosans_regular"
-                android:lineSpacingExtra="8sp"
-                android:text="서연재\n한지연"
-                android:textColor="#000000"
-                android:textSize="11sp" />
+                android:layout_weight="1"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="서연재\n한지연"
+                    android:textSize="11sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="5sp"
+                    android:fontFamily="@font/notosans_regular"/>
+            </LinearLayout>
         </LinearLayout>
+
+
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="91dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="42.9dp"
+        android:layout_marginTop="46.9dp"
+        android:background="@drawable/bg_inquire_button"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teaminfo">
+
+        <LinearLayout
+            android:id="@+id/drawer_btn_ask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/ic_inquire" />
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6.1dp"
+            android:layout_marginRight="10.9dp"
+            android:layout_marginTop="6.9dp"
+            android:layout_marginBottom="7.1dp"
+            android:fontFamily="@font/notosans_medium"
+            android:text="문의하기"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+            <!--<Button-->
+                <!--android:id="@+id/drawer_btn_ask"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:drawableLeft="@drawable/ic_inquire"-->
+                <!--android:drawablePadding="0dp"-->
+                <!--android:text="문의하기"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:fontFamily="@font/notosans_medium"/>-->
+        </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/note"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34.5dp"
-        android:fontFamily="@font/notosans_regular"
-        android:gravity="left"
-        android:lineSpacingExtra="6sp"
-        android:text="이 데이터는 계산한 수치 값으로\n정확하지 않을 수 있습니다"
-        android:textColor="#ff4907"
-        android:textSize="9sp"
-        app:layout_constraintLeft_toLeftOf="@id/teaminfo"
-        app:layout_constraintTop_toBottomOf="@id/teaminfo" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_drawer_note"
@@ -266,8 +327,8 @@
         android:text="이 앱은 공공데이터를 이용한 앱입니다\nThis application uses public data"
         android:fontFamily="@font/nanum_square_r"
         android:layout_marginBottom="15.5dp"
-        android:layout_marginLeft="69dp"
-        android:layout_marginRight="54.9dp"
+        android:layout_marginLeft="63dp"
+        android:layout_marginRight="60.9dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

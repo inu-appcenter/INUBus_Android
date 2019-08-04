@@ -20,27 +20,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView4"
+    <ImageView
+        android:id="@+id/iv_splash_bus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="147.7dp"
-        android:layout_marginRight="144.2dp"
-        android:layout_marginTop="288.5dp"
-        android:layout_marginBottom="288.2dp"
-        android:drawableTop="@drawable/ic_splash_bus"
-        android:drawablePadding="12.2dp"
-        android:fontFamily="@font/notosans_extrabold"
         android:gravity="center"
-        android:text="가는 중 ..."
-        android:textAllCaps="true"
-        android:textColor="#ffffff"
-        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView4"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="147.7dp"-->
+        <!--android:layout_marginRight="144.2dp"-->
+        <!--android:layout_marginTop="288.5dp"-->
+        <!--android:layout_marginBottom="288.2dp"-->
+        <!--android:drawableTop="@drawable/ic_splash_bus"-->
+        <!--android:drawablePadding="12.2dp"-->
+        <!--android:fontFamily="@font/notosans_extrabold"-->
+        <!--android:gravity="center"-->
+        <!--android:text="가는 중 ..."-->
+        <!--android:textAllCaps="true"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="15sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageView
         android:layout_width="wrap_content"

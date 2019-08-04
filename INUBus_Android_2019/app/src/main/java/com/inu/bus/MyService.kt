@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.os.IBinder
 import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
+import com.inu.bus.activity.MainActivity
 import com.inu.bus.model.ArrivalFromNodeInfo
 import com.inu.bus.model.ArrivalToNodeInfo
 import com.inu.bus.model.BusInformation
@@ -163,8 +164,6 @@ class MyService : Service(){
                 }
 
                 LocalIntent.FAVORITE_CLICK.value -> {
-                    Log.d("test", "Service received ARRIVAL_DATA_REFRESH_REQUEST")
-//                    requestArrivalInfo{ mBroadcastManager.sendBroadcast(Intent(LocalIntent.ARRIVAL_DATA_REFRESHED.value)) }
                     requestArrivalInfo()
                 }
             }

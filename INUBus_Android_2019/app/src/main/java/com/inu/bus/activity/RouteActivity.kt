@@ -53,17 +53,16 @@ class RouteActivity : AppCompatActivity() {
         // 노선 정보 설정
         val routeList = routeInfo.nodeList
         val turnNode = routeInfo.turnNode
-        val adapter = RecyclerAdapterRoute()
+        val adapter = RecyclerAdapterRoute(mRvRoute)
 
         // 회차지가 없는경우
         if(turnNode == ""){
             routeList.forEachIndexed { index, s ->
                 when {
                     index != routeList.lastIndex -> {
-                        adapter.addStop(s, Direction.RIGHT,RouteType.STOP)
-                        adapter.addLine()
+                        adapter.addStop(s, Direction.NONE,RouteType.STOP)
                     }
-                    else ->   adapter.addStop(s, Direction.RIGHT,RouteType.STOP)
+                    else ->   adapter.addStop(s, Direction.NONE,RouteType.STOP)
                 }
             }
         }
@@ -72,21 +71,24 @@ class RouteActivity : AppCompatActivity() {
             // TODO 시작 끝 구분 없어짐
             val turnNodePosition = routeList.indexOf(turnNode)
             routeList.forEachIndexed { index, s ->
+
                 // 시작
                 when {
-                    index < turnNodePosition -> {
-                        adapter.addStop(s, Direction.RIGHT,RouteType.STOP)
-                        adapter.addLine()
+                    index == 0 ->{
+                        adapter.addStop(s, Direction.START,RouteType.STOP)
                     }
                     // 회차지
                     turnNodePosition - index == 0 -> {
-                        adapter.addStop(s, Direction.RIGHT,RouteType.STOP)
+                        adapter.addStop(s, Direction.NONE,RouteType.STOP)
                         adapter.addReturn()
-                        adapter.addStop(s, Direction.LEFT,RouteType.STOP)
-                        adapter.addLine()
+                        adapter.addStop(s, Direction.NONE,RouteType.STOP)
                     }
                     // 끝
-                    else -> adapter.addStop(s, Direction.LEFT,RouteType.STOP)
+                    index == routeList.size -1 -> {
+                        adapter.addStop(s, Direction.END,RouteType.STOP)
+                        adapter.addLine()
+                    }
+                    else -> adapter.addStop(s, Direction.NONE,RouteType.STOP)
                 }
             }
         }

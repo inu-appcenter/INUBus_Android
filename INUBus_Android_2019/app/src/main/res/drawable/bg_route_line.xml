@@ -3,7 +3,7 @@
 
     <item
         android:bottom="0.5dp"
-        android:left="56.6dp"
+        android:left="-2dp"
         android:right="-2dp"
         android:top="-2dp">
         <shape android:shape="rectangle" >
@@ -13,16 +13,16 @@
         </shape>
     </item>
 
-    <item
-        android:bottom="-200dp"
-        android:left="56.6dp"
-        android:right="-200dp"
-        android:top="-200dp">
-        <shape android:shape="rectangle" >
-            <stroke
-                android:width="5dp"
-                android:color="#0066ff" />
-        </shape>
-    </item>
+    <!--<item-->
+        <!--android:bottom="-200dp"-->
+        <!--android:left="56.6dp"-->
+        <!--android:right="-200dp"-->
+        <!--android:top="-200dp">-->
+        <!--<shape android:shape="rectangle" >-->
+            <!--<stroke-->
+                <!--android:width="5dp"-->
+                <!--android:color="#0066ff" />-->
+        <!--</shape>-->
+    <!--</item>-->
 
 </layer-list>

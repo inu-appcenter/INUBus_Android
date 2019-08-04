@@ -87,6 +87,9 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
 
     // RecyclerView item position setting
     fun applyDataSet(items: ArrayList<BusArrivalInfo>,favList : ArrayList<String?>) {
+
+        var favfirst = false
+
         mArrivalItems.clear()
         tempList = items
         // 버스 순 정렬

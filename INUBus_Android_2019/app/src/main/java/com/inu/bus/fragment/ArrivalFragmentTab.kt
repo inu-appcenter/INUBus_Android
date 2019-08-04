@@ -16,12 +16,10 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import com.inu.bus.R
 import com.inu.bus.activity.MainActivity
-import com.inu.bus.model.BusArrivalInfo
 import com.inu.bus.recycler.RecyclerAdapterArrival
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
 import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
-import kotlin.math.log
 
 
 /**
@@ -84,15 +82,13 @@ class ArrivalFragmentTab : Fragment(){
             val filtered = checked[0].data
 
 
-//            Log.d("0598","firstdb ${firstDBload}")
-//            if(!(activity as MainActivity).firstDBload){
+            Log.d("0598","firstdb ${firstDBload}")
+            if(!(activity as MainActivity).firstDBload){
                 (activity as MainActivity).setDB()
-//            }
-            val favList = (activity as MainActivity).favList
-            
+            }
 
             filtered.forEach {
-                favList.forEachIndexed { index, favorite ->
+                (activity as MainActivity).favList.forEachIndexed { index, favorite ->
                     if (it.no == favorite) {
                         Log.d("0598", "favList = ${favorite}")
                         it.favorite = true
@@ -101,7 +97,7 @@ class ArrivalFragmentTab : Fragment(){
                 }
             }
 
-            mAdapter.applyDataSet(filtered,favList)
+            mAdapter.applyDataSet(filtered,(activity as MainActivity).favList)
             mAdapter.notifyDataSetChanged()
         }
     }

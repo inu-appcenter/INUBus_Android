@@ -19,6 +19,7 @@ import com.inu.bus.util.Singleton.DB_VERSION
 @Database(entities = [DBBusFavoriteItem::class], version = DB_VERSION)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun busfavoriteDAO(): BusFavoriteDAO
+//    abstract fun searchhistoryDAO() : SearchHistoryDAO
 
     companion object {
         private var INSTANCE: AppDatabase? = null

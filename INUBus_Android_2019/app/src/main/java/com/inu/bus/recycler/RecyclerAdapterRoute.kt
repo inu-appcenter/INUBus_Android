@@ -8,18 +8,21 @@ import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.RelativeLayout
 import com.inu.bus.R
+import com.inu.bus.databinding.ActivityRouteBinding
 import com.inu.bus.databinding.RecyclerRouteItemBinding
 import java.util.*
 
-class RecyclerAdapterRoute : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class RouteType{
         STOP, LINE, RETURN
     }
 
     enum class Direction{
-        NONE, LEFT, RIGHT
+        NONE, START, END
     }
 
     private val mDataSet = ArrayList<CustomItem>()
@@ -66,7 +69,7 @@ class RecyclerAdapterRoute : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             RouteType.STOP-> StopHolder(RecyclerRouteItemBinding.inflate(LayoutInflater.from(parent.context)))
             RouteType.LINE -> {
                 v = LayoutInflater.from(parent.context)
-                        .inflate(R.layout.recycler_route_line_item, parent, false) as ConstraintLayout
+                        .inflate(R.layout.recycler_route_end, parent, false) as ConstraintLayout
                 LineHolder(v)
             }
             RouteType.RETURN -> {
@@ -76,13 +79,19 @@ class RecyclerAdapterRoute : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
         }
     }
-
-
+    
     // RouteType이 STOP이면 뷰홀더에 정류장 데이터 바인드
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = mDataSet[position]
         if (item.type == RouteType.STOP) {
             (holder as StopHolder).bind(item)
+        }
+        else if (item.type == RouteType.LINE) {
+            val btnScrollup = (holder as LineHolder).itemView.findViewById<ImageButton>(R.id.btn_route_end)
+            val llm = mRvRoute.layoutManager
+            btnScrollup.setOnClickListener {
+                llm.smoothScrollToPosition(mRvRoute,null,0)
+            }
         }
     }
 

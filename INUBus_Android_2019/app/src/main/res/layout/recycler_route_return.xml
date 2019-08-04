@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="56dp"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="61dp"
     android:background="@drawable/bg_route_line">
 
-    <LinearLayout
-        android:layout_width="83dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="17dp"
-        android:layout_marginLeft="26dp"
-        android:background="@drawable/bg_route_rounded_coner"
-        android:gravity="center"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/iv_route_return"
-            android:layout_width="9.6dp"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginLeft="12dp"
+        <View
+            android:layout_width="5dp"
+            android:layout_height="61dp"
+            android:layout_marginLeft="60.5dp"
+            android:background="#0066ff" />
 
-            android:src="@drawable/ic_route_return2" />
+        <LinearLayout
+            android:layout_width="83dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="17dp"
+            android:background="@drawable/bg_route_rounded_coner"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="8.7dp"
-            android:layout_marginRight="13dp"
-            android:fontFamily="@font/notosans_semibold"
-            android:text="회차지"
-            android:textColor="#707070"
-            android:textSize="13sp"
-            android:lineSpacingExtra="3sp"/>
+            <ImageView
+                android:id="@+id/iv_route_return"
+                android:layout_width="10.8dp"
+                android:layout_height="12.2dp"
+                android:layout_marginLeft="12.1dp"
+                android:layout_marginTop="7.5dp"
+                android:layout_marginBottom="7dp"
+                android:src="@drawable/ic_route_return" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/notosans_semibold"
+                android:gravity="center"
+                android:lineSpacingExtra="3sp"
+                android:text="회차지"
+                android:textColor="#707070"
+                android:textSize="13sp" />
 
-
+        </LinearLayout>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

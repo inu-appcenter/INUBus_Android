@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="@dimen/actionbar_height"
     android:background="@color/colorActionBar"
     android:focusable="true"
     android:focusableInTouchMode="true">
@@ -12,53 +12,69 @@
         android:id="@+id/btn_actionbar_popup"
         android:layout_width="59dp"
         android:layout_height="14dp"
-        android:layout_marginStart="23dp"
         android:layout_marginLeft="23dp"
+        android:layout_marginBottom="18dp"
         android:src="@drawable/actionbar_title"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <AutoCompleteTextView
-        android:id="@+id/actionbar_searchView"
+    <LinearLayout
         android:layout_width="205dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="100dp"
+        android:layout_height="28dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginEnd="55dp"
         android:layout_marginRight="55dp"
+        android:layout_marginBottom="11dp"
         android:background="@drawable/bg_rounded_coner_searchbox"
-        android:drawableLeft="@drawable/ic_search_bar"
-        android:drawablePadding="8.7dp"
-        android:hint="버스 또는 정류장 검색"
-        android:imeOptions="actionSearch"
-        android:inputType="textAutoComplete"
-        android:lines="1"
-        android:maxLines="1"
-        android:paddingLeft="11.2dp"
-        android:textColor="#cbcbcb"
-        android:textSize="11sp"
-        android:fontFamily="@font/notosans_regular"
-        android:lineSpacingExtra="19sp"
-        android:letterSpacing="-0.01"
+        android:gravity="center"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/actionbar_searchView"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_regular"
+            android:background="#fafafa"
+            android:hint="버스 또는 정류장 검색"
+            android:imeOptions="actionSearch"
+            android:inputType="textAutoComplete"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="19sp"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="#cbcbcb"
+            android:textSize="11sp" />
+        <LinearLayout
+            android:layout_width="16.7dp"
+            android:layout_height="17.3dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:background="@drawable/ic_search_bar"
+            >
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <ImageButton
         android:id="@+id/btn_actionbar_info"
         android:layout_width="25dp"
         android:layout_height="27dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginBottom="11dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/actionbar_information"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:layout_width="match_parent"

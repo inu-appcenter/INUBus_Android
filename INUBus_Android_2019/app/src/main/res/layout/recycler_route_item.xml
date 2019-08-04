@@ -48,50 +48,72 @@
             android:layout_marginBottom="23dp"
             android:layout_weight="1"
             android:fontFamily="@font/notosans_semibold"
-            android:text="@{item.direction == Direction.LEFT ? item.stopName : ``}"
+            android:text="@{item.stopName}"
             android:textColor="#0061f4"
             android:textSize="13sp"
-            android:visibility="@{item.direction == Direction.LEFT? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@id/route_line_middle"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/route_circle"
             app:layout_constraintLeft_toRightOf="@id/route_circle"
-            app:layout_constraintTop_toTopOf="@id/route_line_middle"
+            app:layout_constraintTop_toTopOf="@id/route_circle"
             tools:text="인천대입구" />
 
         <View
             android:id="@+id/route_line_middle"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@drawable/bg_route_line" />
+            android:background="@drawable/bg_route_line"/>
+
+
+        <View
+            android:id="@+id/route_line_start"
+            android:layout_width="5dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="60.5dp"
+            android:background="#0066ff"
+            android:visibility="@{item.direction == Direction.START? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <View
+            android:id="@+id/route_line_end"
+            android:layout_width="5dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="60.5dp"
+            android:background="#0066ff"
+            android:visibility="@{item.direction == Direction.END? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
         <ImageView
             android:id="@+id/route_circle"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="55dp"
+            android:layout_marginLeft="55dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_route_circle_new"
-            android:layout_marginLeft="50.8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/recycler_route_tv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="21dp"
-            android:layout_marginBottom="23dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/notosans_semibold"
-            android:text="@{item.direction == Direction.RIGHT ? item.stopName : ``}"
-            android:textColor="#0061f4"
-            android:textSize="13sp"
-            android:visibility="@{item.direction == Direction.RIGHT? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@+id/route_line_middle"
-            app:layout_constraintLeft_toRightOf="@id/route_circle"
-            app:layout_constraintTop_toTopOf="@+id/route_line_middle"
-            tools:text="인천대입구" />
+        <!--<TextView-->
+            <!--android:id="@+id/recycler_route_tv_right"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginTop="21dp"-->
+            <!--android:layout_marginBottom="23dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:fontFamily="@font/notosans_semibold"-->
+            <!--android:text="@{item.direction == Direction.RIGHT ? item.stopName : ``}"-->
+            <!--android:textColor="#0061f4"-->
+            <!--android:textSize="13sp"-->
+            <!--android:visibility="@{item.direction == Direction.RIGHT? View.VISIBLE : View.GONE}"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/route_circle"-->
+            <!--app:layout_constraintLeft_toRightOf="@id/route_circle"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/route_circle"-->
+            <!--tools:text="인천대입구" />-->
 
         <!--<TextView-->
             <!--android:layout_width="wrap_content"-->
