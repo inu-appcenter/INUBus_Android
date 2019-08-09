@@ -1,15 +1,20 @@
 package com.inu.bus.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.TextWatcher
 import android.text.style.TextAppearanceSpan
 import android.util.Log
 import android.view.Gravity
+import android.view.WindowManager
 import android.widget.AutoCompleteTextView
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -19,10 +24,13 @@ import com.inu.bus.R
 import com.inu.bus.custom.FirstPopUp
 import com.inu.bus.custom.IconPopUp
 import com.inu.bus.fragment.ArrivalFragment
+import com.inu.bus.fragment.SearchHistoryFragment
 import com.inu.bus.model.DBBusFavoriteItem
+import com.inu.bus.model.DBSearchHistoryItem
 import com.inu.bus.recycler.ViewPagerAdapter
 import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.LocalIntent
+import com.inu.bus.util.Singleton
 import com.ms_square.etsyblur.BlurSupport
 import com.ms_square.etsyblur.BlurringView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,7 +64,6 @@ class MainActivity : AppCompatActivity(){
     var firstDBload = false
 
     // 지연 초기화
-//  private val mSearchAdapter : SearchHistoryAdapter by lazy { SearchHistoryAdapter(this, R.layout.search_history_list_item) }
     private val mViewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager, this) }
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(this) }
 
@@ -71,20 +78,32 @@ class MainActivity : AppCompatActivity(){
         mWrMainUpperView = WeakReference(ll_main_upper_view_wrapper)
         mWrSearchView = WeakReference(actionbar_searchView)
         mWrBlurringView2 = WeakReference(activity_main_popup_blur)
+        mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
+        changestatusBarColor()
         setActionBar()
         setDrawer()
         setMainViewPager()
         SpanText()
     }
 
+    private val mSearchTextWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if(s.isNullOrEmpty())
+                activity_main_viewpager.currentItem = 1
+            else
+                activity_main_viewpager.currentItem = 0
+        }
+    }
+
     private fun setActionBar(){
         // 젤리빈 호환
-        supportActionBar?.hide()
-
+//        supportActionBar?.hide()
 //        actionbar_searchView.setAdapter(mSearchAdapter)
 //        actionbar_searchView.setOnEditorActionListener( TextView.OnEditorActionListener { v, actionId, _ ->
 //            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                DB.searchHistoryDAO().insert(DBSearchHistoryItem(name = v.text.toString()))
+//                mDB?.searchhistoryDAO()?.insert(DBSearchHistoryItem(name = v.text.toString()))
 //                mSearchAdapter.refreshHistory()
 //                return@OnEditorActionListener true
 //            }
@@ -104,66 +123,64 @@ class MainActivity : AppCompatActivity(){
         }
         val addThread = Thread(r)
         addThread.start()
-
         DBfavorite.forEach {
             if(!favList.contains(it.no))
                 favList.add(it.no)
         }
-
         if(!favList.isEmpty()){
             firstDBload = true
         }
     }
 
     fun insertDB(no : String) {
-        // favoriteSet.add(DBBusFavoriteItem(no))
-
         val r = Runnable{
             try {
                 mDB?.busfavoriteDAO()?.insert(DBBusFavoriteItem(no))
-                Log.d("kBm0598","insert success!! MainActivity")
             } catch (e:Exception){
                 Log.d("kBm0598","Error - $e")
             }
         }
         val addThread = Thread(r)
         addThread.start()
-
-//        for(i in 0 until favoriteSet.size)
     }
 
     fun deleteDB(no : String) {
-
         val r = Runnable{
             try {
                 mDB?.busfavoriteDAO()?.delete(DBBusFavoriteItem(no))
-                Log.d("kBm0598","delete success!! MainActivity")
-
             } catch (e:Exception){
                 Log.d("kBm0598","Error - $e")
             }
         }
         val addThread = Thread(r)
         addThread.start()
-
-//        for(i in 0 until favoriteSet.size)
-//            Log.d("kBm0598","${favoriteSet[i].no}")
     }
 
-    fun startpopup(){
-        val popupView = FirstPopUp(this@MainActivity)
-                .setDimBlur(activity_main_popup_blur)
-                .setShowDuration(60000)
-                .setOnConfirmButtonClickListener{
-                    it.dismiss()
-                }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            popupView.setWindow(window)
+    fun startpopup(btnclick : Boolean){
+        val pref = getSharedPreferences("isFirst", Context.MODE_PRIVATE)
+        val first = pref.getBoolean("isFirst",false)
+        if(!first || btnclick){
+            val editor = pref.edit()
+            editor.putBoolean("isFirst",true)
+            editor.commit()
+
+            val popupView = FirstPopUp(this)
+                    .setDimBlur(activity_main_popup_blur)
+                    .setShowDuration(60000)
+                    .setOnConfirmButtonClickListener{
+                        it.dismiss()
+                    }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                popupView.setWindow(window)
+            }
+            popupView.show()
+        } else {
+          Log.d("test","not first")
         }
-        popupView.show()
-    }
-    // TextView 특정 문자열 폰트 변경
 
+    }
+
+    // TextView 특정 문자열 폰트 변경
     fun SpanText(){
 //        val v = LayoutInflater.from(applicationContext)).inflate()
         val mMessage = findViewById<TextView>(R.id.tv_drawer_note)
@@ -175,7 +192,7 @@ class MainActivity : AppCompatActivity(){
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         ssb.setSpan(TextAppearanceSpan(applicationContext,R.style.pulbic_data),start,end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-        mMessage.setText(ssb)
+        mMessage.text = ssb
     }
 
 
@@ -185,10 +202,26 @@ class MainActivity : AppCompatActivity(){
         mWrBtnInfo = WeakReference(btn_actionbar_info)
 
         btn_actionbar_popup.setOnClickListener{
-            startpopup()
+            startpopup(true)
+        }
+
+        btn_actionbar_search.setOnClickListener {
+
+            (activity_main_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
+                if(it is SearchHistoryFragment){
+                    var newSHitem = DBSearchHistoryItem()
+                    newSHitem.name = actionbar_searchView.text.toString()
+                    it.mAdapter.insertHistory(this,newSHitem)
+                }
+            }
+            activity_main_viewpager.currentItem = 1
+
+            Log.d("1234","searchhistory insert")
+            Singleton.hideKeyboard(this)
         }
 
         btn_actionbar_info.setOnClickListener {
+            Singleton.hideKeyboard(this)
             drawer_layout.openDrawer(Gravity.END)
         }
 
@@ -209,7 +242,7 @@ class MainActivity : AppCompatActivity(){
         val arrivalFragment = ArrivalFragment.newInstance(supportFragmentManager, this)
 
         // 도착, 목적지 Fragment 추가
-//        mViewPagerAdapter.addFragment(DestinationFragment.newInstance(supportFragmentManager, this))
+        mViewPagerAdapter.addFragment(SearchHistoryFragment.newInstance(supportFragmentManager,this))
         mViewPagerAdapter.addFragment(arrivalFragment)
 
         // ViewPager 설정
@@ -231,6 +264,14 @@ class MainActivity : AppCompatActivity(){
     }
 
 
+    fun changestatusBarColor(){
+        // 롤리팝 버전 이상부터 statusBar를 하얀색, 아이콘을 검은색으로 표시
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = ContextCompat.getColor(applicationContext,R.color.colorActionBar)
+//            window.decorView.systemUiVisibility = 1
+        }
+    }
     // 재시작되면 서비스 시작
     override fun onResume() {
         super.onResume()

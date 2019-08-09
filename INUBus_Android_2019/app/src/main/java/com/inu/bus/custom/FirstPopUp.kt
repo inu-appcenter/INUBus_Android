@@ -119,8 +119,8 @@ class FirstPopUp : ConstraintLayout {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animateStatusBarColor(500,
-                    ContextCompat.getColor(this.context, R.color.colorPrimary),
-                    ContextCompat.getColor(this.context, R.color.colorPrimaryDim))
+                    ContextCompat.getColor(this.context, R.color.colorActionBar),
+                    ContextCompat.getColor(this.context, R.color.colorAccent))
         }
 
         mRefDimView?.alpha = 0f
@@ -153,8 +153,8 @@ class FirstPopUp : ConstraintLayout {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animateStatusBarColor(500,
-                    ContextCompat.getColor(this.context, R.color.colorPrimaryDim),
-                    ContextCompat.getColor(this.context, R.color.colorPrimary))
+                    ContextCompat.getColor(this.context, R.color.colorAccent),
+                    ContextCompat.getColor(this.context, R.color.colorActionBar))
         }
         // 블러처리 뷰 서서히 사라짐
         mRefDimView
@@ -172,6 +172,8 @@ class FirstPopUp : ConstraintLayout {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 //        window.statusBarColor = ContextCompat.getColor(window.context, R.color.colorPrimaryDim)
+        window.statusBarColor = ContextCompat.getColor(window.context,R.color.colorActionBar)
+//        window.decorView.systemUiVisibility = 1
     }
 
     // 상단바 색상 변화 애니메이션
@@ -247,7 +249,7 @@ class FirstPopUp : ConstraintLayout {
         override fun onAnimationEnd(animation: Animator?) {
             mRefDimView?.visibility = View.GONE
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mWindow?.statusBarColor = ContextCompat.getColor(mWindow?.context!!, R.color.colorPrimary)
+                mWindow?.statusBarColor = ContextCompat.getColor(mWindow?.context!!, R.color.colorActionBar)
             }
             mInstance = null
         }

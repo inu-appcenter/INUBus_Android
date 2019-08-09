@@ -20,10 +20,10 @@ class ViewPagerAdapter(mFm: FragmentManager, mContext: Context) : FragmentStateP
 //        super.restoreState(state, loader)
     }
 
-    // Fragment 추가
+    // 해당 Fragment
     override fun getItem(position: Int): Fragment = fragments[position]
 
-    // Fragment 개수 설정
+    // Fragment 개수
     override fun getCount(): Int = fragments.size
 
 

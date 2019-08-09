@@ -29,6 +29,7 @@ import com.inu.bus.recycler.ViewPagerAdapter
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
 import com.inu.bus.util.Singleton.LOG_TAG
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_tabicon.view.*
 import kotlinx.android.synthetic.main.fragment_arrival_tabs.*
 
@@ -70,6 +71,7 @@ class ArrivalFragment : Fragment(){
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.NOTIFY_FRAGMENT_READY.value))
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value))
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.FAVORITE_CLICK.value))
+//        mBroadcastManager.sendBroadcast(Intent(LocalIntent.FAVORITE_CLICK.value))
 
         // tab setting
         mTabIcons.forEachIndexed { index, it ->
@@ -115,16 +117,7 @@ class ArrivalFragment : Fragment(){
                 fabRefreshAnimation(true)
             }
         })
-
-//        val popupView = IconPopUp(mContext)
-//                .setBtnText("확인하였습니다")
-//                .setIcon(R.drawable.ic_logo, false)
-//                .setMessageText("This is <font color='red'>red</font>. This is <font color='blue'>blue</font>.")
-//                .setDimBlur(MainActivity.mWrBlurringView2.get()!!)
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            popupView.setWindow(activity!!.window)
-//        }
-//        popupView.show()
+        (activity as MainActivity).startpopup(false)
     }
 
     // 탭 아이콘 선택 여부 변경하는 함수 아이콘, 타이틀은 checkbox 형태로 만들어 true/false를 주면 색이 변하도록 xml로 설정
@@ -148,6 +141,14 @@ class ArrivalFragment : Fragment(){
                     }
                 }
                 LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value -> fabRefreshAnimation(true)
+//                LocalIntent.FAVORITE_CLICK.value ->{
+//                    (vp_fragment_arrival_tabs.adapter as ViewPagerAdapter).fragments.forEach {
+//                        if(it is ArrivalFragmentTab){
+//                            it.dataRefresh()
+//                            Log.d("1234","datarefresh!!")
+//                        }
+//                    }
+//                }
             }
         }
     }

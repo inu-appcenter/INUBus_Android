@@ -59,6 +59,7 @@ class ArrivalFragmentTab : Fragment(){
         rv_fragment_node_arrival_recycler.adapter = mAdapter
         // 프래그먼트 준비 알림 Broadcast 시작
         mBroadcastManager.sendBroadcast(Intent(LocalIntent.NOTIFY_FRAGMENT_READY.value))
+//        mBroadcastManager.sendBroadcast(Intent(LocalIntent.FAVORITE_CLICK.value))
         // 프래그먼트를 당기면 데이터 리프레시 Broadcast 시작
 
         fragment_node_arrival_swipeRefreshLayout.setOnRefreshListener {
@@ -89,11 +90,8 @@ class ArrivalFragmentTab : Fragment(){
 
             filtered.forEach {
                 (activity as MainActivity).favList.forEachIndexed { index, favorite ->
-                    if (it.no == favorite) {
-                        Log.d("0598", "favList = ${favorite}")
+                    if (it.no == favorite)
                         it.favorite = true
-                    }
-//                    else if(it.no != favorite)it.favorite = false
                 }
             }
 
@@ -139,7 +137,7 @@ class ArrivalFragmentTab : Fragment(){
     }
 
     fun filter(str : String){
-        mAdapter.filter(str)
+        mAdapter.filter(str,(activity as MainActivity).favList.size)
     }
 
     // TimeTicker 생명주기에 맞춰 활성, 비활성.

@@ -17,5 +17,4 @@ data class DBSearchHistoryItem(
         var date : Long = System.currentTimeMillis()
 )  {
     // id 0은 무시 -> id가 1부터 시작
-    @Ignore constructor() : this(0)
 }

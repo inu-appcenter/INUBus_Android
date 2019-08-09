@@ -4,7 +4,7 @@
     <color name="colorActionBar">#ffffff</color>
     <color name="colorPrimary">#0061f4</color>
     <color name="colorPrimaryDim">#235383</color>
-    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="colorAccent">#cccccc</color>
 
     <!--탭 색상-->
     <color name="tab_select">#006fff</color>

@@ -23,7 +23,9 @@ import java.util.*
  * Created by Minjae Son on 2018-08-25.
  */
 
-class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding, private val isShowing : ObservableBoolean,private val mAdapter: RecyclerAdapterArrival) : RecyclerView.ViewHolder(mBinding.root) {
+class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
+                            private val isShowing : ObservableBoolean,
+                            private val mAdapter: RecyclerAdapterArrival) : RecyclerView.ViewHolder(mBinding.root) {
 
     // Ticker 필요여부
     private var needTick = false
@@ -31,9 +33,6 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding, p
     private var mTimer : Timer? = null
     // 시간마다 수행될 작업
     private var currentTask : TimerTask? = null
-
-    private var mDB:AppDatabase? = null
-
 
     private fun newTimerTask() : TimerTask {return object : TimerTask() {
         override fun run() {
@@ -55,9 +54,7 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding, p
 
 
     // recycler_arrival_item.xml 바인딩
-    fun bind(data : BusArrivalInfo,mAdapter : RecyclerAdapterArrival){
-
-
+    fun bind(data : BusArrivalInfo){
 
         mBinding.btnFavorite.isChecked = data.favorite
         mBinding.data = data
@@ -139,22 +136,19 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding, p
         if(btnFavorite.isChecked){
             data.favorite = true
             (context as MainActivity).favList.add(data.no)
-
             context.insertDB(data.no)
         }
         else if(!btnFavorite.isChecked){
             data.favorite = false
             (context as MainActivity).favList.remove(data.no)
-            mAdapter.applyDataSet(tempList,context.favList)
-
             context.deleteDB(data.no)
         }
 
         val mBroadcastManager = LocalBroadcastManager.getInstance(context)
         mBroadcastManager.sendBroadcast(Intent(LocalIntent.FAVORITE_CLICK.value))
 
-        mAdapter.applyDataSet(tempList,(context as MainActivity).favList)
-        mAdapter.notifyDataSetChanged()
+//        mAdapter.applyDataSet(tempList,(context as MainActivity).favList)
+//        mAdapter.notifyDataSetChanged()
     }
 
 

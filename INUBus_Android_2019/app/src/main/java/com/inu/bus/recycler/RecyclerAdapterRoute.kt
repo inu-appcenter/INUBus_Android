@@ -19,21 +19,19 @@ class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<R
 
     enum class RouteType{
         STOP, LINE, RETURN
+    //  정류소  스크롤  회차지
     }
 
+    // direction
     enum class Direction{
         NONE, START, END
+    //  양 쪽   위쪽   아래쪽    파란선 invisible
     }
 
     private val mDataSet = ArrayList<CustomItem>()
 
     override fun getItemViewType(position: Int) : Int = mDataSet[position].type.ordinal
 
-    // direction : 1이면 오른쪽, 2면 왼쪽 표시
-    // state :
-    //      0 : 정류소
-    //      1 : 중간 라인
-    //      2 : 회차지
     inner class CustomItem(val stopName: String, val direction: Direction, val type: RouteType) {
         constructor( type : RouteType) : this("", Direction.NONE, type)
     }
@@ -62,7 +60,8 @@ class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<R
     fun addLine(){
         mDataSet.add(CustomItem(RouteType.LINE))
     }
-    // RouteType별 뷰홀더 객체 생성
+
+    // RouteType별 xml 뷰홀더 객체 생성
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v: ConstraintLayout
         return when(RouteType.values()[viewType]){
@@ -80,7 +79,8 @@ class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<R
         }
     }
     
-    // RouteType이 STOP이면 뷰홀더에 정류장 데이터 바인드
+    // STOP은 recycler_arrival_item / TextView 데이터베인딩
+    // LINE은 recycler_arrival_end  / ImageButton 클릭리스너 추가
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = mDataSet[position]
         if (item.type == RouteType.STOP) {
