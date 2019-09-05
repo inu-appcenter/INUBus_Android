@@ -20,7 +20,6 @@ interface BusRetrofitService{
     @GET("/arrivalInfoTo")
     fun getToArrivalInfo() : Call<ArrayList<ArrivalToNodeInfo>>
 
-
     @GET("/nodeData")
     fun getNodeRoute() : Call<ArrayList<BusInformation>>
 

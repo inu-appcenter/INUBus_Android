@@ -60,35 +60,39 @@ class RouteActivity : AppCompatActivity() {
             routeList.forEachIndexed { index, s ->
                 when {
                     index != routeList.lastIndex -> {
-                        adapter.addStop(s, Direction.NONE,RouteType.STOP)
+                        adapter.addStop(s.nodeName, Direction.NONE,RouteType.STOP)
                     }
-                    else ->   adapter.addStop(s, Direction.NONE,RouteType.STOP)
+                    else ->   adapter.addStop(s.nodeName, Direction.NONE,RouteType.STOP)
                 }
             }
         }
         // 회차지가 있으면 동일한 String을 찾아가며 추가
         else {
             // TODO 시작 끝 구분 없어짐
-            val turnNodePosition = routeList.indexOf(turnNode)
+            var nameList = arrayListOf<String>()
+            for(i in 0 until routeList.size){
+                nameList.add(routeList.get(i).nodeName)
+            }
+            val turnNodePosition = nameList.indexOf(turnNode)
             routeList.forEachIndexed { index, s ->
 
                 // 시작
                 when {
                     index == 0 ->{
-                        adapter.addStop(s, Direction.START,RouteType.STOP)
+                        adapter.addStop(s.nodeName, Direction.START,RouteType.STOP)
                     }
                     // 회차지
                     turnNodePosition - index == 0 -> {
-                        adapter.addStop(s, Direction.NONE,RouteType.STOP)
+                        adapter.addStop(s.nodeName, Direction.NONE,RouteType.STOP)
                         adapter.addReturn()
-                        adapter.addStop(s, Direction.NONE,RouteType.STOP)
+                        adapter.addStop(s.nodeName, Direction.NONE,RouteType.STOP)
                     }
                     // 끝
                     index == routeList.size -1 -> {
-                        adapter.addStop(s, Direction.END,RouteType.STOP)
+                        adapter.addStop(s.nodeName, Direction.END,RouteType.STOP)
                         adapter.addLine()
                     }
-                    else -> adapter.addStop(s, Direction.NONE,RouteType.STOP)
+                    else -> adapter.addStop(s.nodeName, Direction.NONE,RouteType.STOP)
                 }
             }
         }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.Observable
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.util.TypedValue
 import android.widget.TextView
 import com.google.android.flexbox.FlexboxLayout
@@ -43,7 +44,7 @@ class DestinationRecyclerViewHolder(private val binding : RecyclerDestinationIte
     private fun load(title : String){
 
         val filtered = mAllBusInfo.filter {
-            it.nodeList.any { subIt -> subIt.contains(title) }
+            it.nodeList.any { subIt -> subIt.equals(title) }
         }
 
         // 정렬

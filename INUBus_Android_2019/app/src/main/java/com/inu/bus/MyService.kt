@@ -83,6 +83,7 @@ class MyService : Service(){
             // Response가 들어오면 BusInformation 객체를 파싱
             override fun onResponse(call: Call<ArrayList<BusInformation>>, response: Response<ArrayList<BusInformation>>) {
                 val newMap = mutableMapOf<String, BusInformation>()
+
                 // 버스 번호 Map
                 response.body()!!.forEach {
                     newMap[it.no] = it

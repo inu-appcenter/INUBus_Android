@@ -26,7 +26,7 @@ data class BusInformation (
         val type : BusType,
 
         @SerializedName("nodelist")
-        val nodeList : ArrayList<String>,
+        val nodeList : ArrayList<BusRoutenode>,
 
         @SerializedName("turnnode")
         val turnNode : String
