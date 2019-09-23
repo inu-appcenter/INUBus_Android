@@ -68,7 +68,7 @@ class BITZonFragment : Fragment(){
                     notEmptyDataSet.add(arrivalData)
                 }
             }
-            mAdapter.applyDataSet(it)
+            mAdapter.applyDataSet()
         }
     }
     // ViewPager에서 현재 페이지가 보이고 있는지 오는 콜백.

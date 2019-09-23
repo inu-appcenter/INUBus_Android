@@ -26,7 +26,6 @@ import com.inu.bus.custom.IconPopUp
 import com.inu.bus.fragment.ArrivalFragment
 import com.inu.bus.fragment.SearchHistoryFragment
 import com.inu.bus.model.DBBusFavoriteItem
-import com.inu.bus.model.DBSearchHistoryItem
 import com.inu.bus.recycler.ViewPagerAdapter
 import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.LocalIntent
@@ -34,9 +33,12 @@ import com.inu.bus.util.Singleton
 import com.ms_square.etsyblur.BlurSupport
 import com.ms_square.etsyblur.BlurringView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.activity_main_viewpager
+import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.custom_actionbar.*
 import kotlinx.android.synthetic.main.custom_info_drawer.*
 import kotlinx.android.synthetic.main.custom_info_drawer.view.*
+import kotlinx.android.synthetic.main.custom_searchbar.*
 import java.lang.ref.WeakReference
 
 
@@ -205,20 +207,27 @@ class MainActivity : AppCompatActivity(){
             startpopup(true)
         }
 
-        btn_actionbar_search.setOnClickListener {
-
-            (activity_main_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
-                if(it is SearchHistoryFragment){
-                    var newSHitem = DBSearchHistoryItem()
-                    newSHitem.name = actionbar_searchView.text.toString()
-                    it.mAdapter.insertHistory(this,newSHitem)
-                }
-            }
-            activity_main_viewpager.currentItem = 1
-
-            Log.d("1234","searchhistory insert")
-            Singleton.hideKeyboard(this)
+        ll_start_search.setOnClickListener {
+            callSearchBar()
         }
+
+        tv_start_search.setOnClickListener {
+            callSearchBar()
+        }
+//        btn_actionbar_search.setOnClickListener {
+//
+//            (activity_main_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
+//                if(it is SearchHistoryFragment){
+//                    var newSHitem = DBSearchHistoryItem()
+//                    newSHitem.name = actionbar_searchView.text.toString()
+//                    it.mAdapter.insertHistory(this,newSHitem)
+//                }
+//            }
+//            activity_main_viewpager.currentItem = 1
+//
+//            Log.d("1234","searchhistory insert")
+//            Singleton.hideKeyboard(this)
+//        }
 
         btn_actionbar_info.setOnClickListener {
             Singleton.hideKeyboard(this)
@@ -235,6 +244,10 @@ class MainActivity : AppCompatActivity(){
         val pInfo = this.packageManager.getPackageInfo(packageName, 0)
         tv_drawer_version.text = pInfo.versionName
         BlurSupport.addTo(drawer_layout)
+    }
+
+    fun callSearchBar(){
+        startActivity(Intent(this, SearchActivity::class.java))
     }
 
     // ViewPagerAdapter 설정

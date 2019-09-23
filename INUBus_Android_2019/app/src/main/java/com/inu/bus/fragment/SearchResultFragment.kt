@@ -14,22 +14,23 @@ import com.inu.bus.databinding.RecyclerDestinationItemBinding
 import com.inu.bus.recycler.DestinationRecyclerViewHolder
 import com.inu.bus.recycler.RecyclerAdapterDestination
 import com.inu.bus.recycler.SearchHistoryAdapter
+import com.inu.bus.recycler.SearchResultAdapter
 import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
 
 /**
  * Created by ByoungMean on 2019-09-19.
  */
 
-class SearchHistoryFragment : Fragment() {
+class SearchResultFragment : Fragment() {
 
     private lateinit var mFm: FragmentManager
     private lateinit var mContext : Context
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
-    lateinit var mAdapter : SearchHistoryAdapter
+    lateinit var mAdapter : SearchResultAdapter
 
     companion object {
-        fun newInstance(fm : FragmentManager, context : Context) : SearchHistoryFragment{
-            val fragment = SearchHistoryFragment()
+        fun newInstance(fm : FragmentManager, context : Context) : SearchResultFragment{
+            val fragment = SearchResultFragment()
             fragment.mFm = fm
             fragment.mContext = context
             return fragment
@@ -48,8 +49,7 @@ class SearchHistoryFragment : Fragment() {
         // 레이아웃 설정
         rv_fragment_node_arrival_recycler.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
         // 리사이클러뷰와 어댑터 연결
-        mAdapter = SearchHistoryAdapter()
+        mAdapter = SearchResultAdapter()
         rv_fragment_node_arrival_recycler.adapter = mAdapter
-        mAdapter.refreshHistory(mContext)
     }
 }

@@ -87,7 +87,7 @@ class ArrivalFragment : Fragment(){
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "engineer"))
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "science"))
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "frontgate"))
-        mViewPagerAdapter.addFragment(BITZonFragment.newInstance(mContext))
+        mViewPagerAdapter.addFragment(SchoolBusFragment.newInstance(mContext,"SchoolBus"))
         // ViewPager 설정
         vp_fragment_arrival_tabs.offscreenPageLimit = 4
         vp_fragment_arrival_tabs.adapter = mViewPagerAdapter

@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/ll_start_search"
         android:layout_width="205dp"
         android:layout_height="28dp"
         android:layout_marginLeft="100dp"
@@ -25,13 +26,13 @@
         android:layout_marginBottom="11dp"
         android:background="@drawable/bg_rounded_coner_searchbox"
         android:gravity="center"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
-        <AutoCompleteTextView
-            android:id="@+id/actionbar_searchView"
+        <TextView
+            android:id="@+id/tv_start_search"
             android:layout_width="145dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosans_regular"
@@ -44,7 +45,9 @@
             android:lines="1"
             android:maxLines="1"
             android:textColor="#cbcbcb"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            />
+
         <LinearLayout
             android:layout_width="16.7dp"
             android:layout_height="17.3dp"
@@ -52,9 +55,7 @@
             android:gravity="center"
             android:background="@drawable/ic_search_bar"
             >
-
-            <ImageButton
-                android:id="@+id/btn_actionbar_search"
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?android:attr/selectableItemBackground"/>

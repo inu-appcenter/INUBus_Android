@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/actionbar_height"
+    android:background="@color/colorActionBar"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/btn_search_back"
+        android:layout_width="11.6dp"
+        android:layout_height="23.3dp"
+        android:src="@drawable/ic_search_back"
+        android:layout_marginBottom="10.1dp"
+        android:layout_marginLeft="22.5dp"
+        app:layout_constraintBottom_toTopOf="@id/search_bar_line"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginRight="55dp"
+        android:layout_marginBottom="8.5dp"
+        android:background="@drawable/bg_rounded_coner_searchbox"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/search_bar_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/actionbar_searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="#fafafa"
+            android:fontFamily="@font/notosans_regular"
+            android:hint="버스 또는 정류장 검색"
+            android:imeOptions="actionSearch"
+            android:inputType="textAutoComplete"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="19sp"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="#333333"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="19dp"
+        android:layout_height="19.7dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="12.8dp"
+        android:background="@drawable/ic_action_search_bar"
+        app:layout_constraintBottom_toTopOf="@+id/search_bar_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <ImageButton
+            android:id="@+id/btn_actionbar_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"/>
+
+    </LinearLayout>
+
+
+
+
+    <ImageView
+        android:id="@+id/search_bar_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#cbcbcb"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

@@ -215,7 +215,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="임현준\n유현주"
+                    android:text="임헌준\n유현주"
                     android:textSize="11sp"
                     android:textColor="#000000"
                     android:lineSpacingExtra="5sp"

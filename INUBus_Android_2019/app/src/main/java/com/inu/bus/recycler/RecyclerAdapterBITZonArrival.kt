@@ -3,6 +3,7 @@ package com.inu.bus.recycler
 import android.databinding.ObservableBoolean
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.inu.bus.databinding.RecyclerArrivalBitzonSeparatorBinding
@@ -22,7 +23,13 @@ import kotlin.collections.ArrayList
 class RecyclerAdapterBITZonArrival(val mStrBusStop : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     var isShowing = ObservableBoolean(false)
-    private val mArrivalItems = ArrayList<RecyclerArrivalItem>()
+//    private val mArrivalItems = ArrayList<RecyclerArrivalItem>()
+    private val mArrivalItems = arrayListOf<RecyclerArrivalItem>(
+        RecyclerArrivalItem(),
+        RecyclerArrivalItem("즐겨찾기"),
+        RecyclerArrivalItem("통학버스"),
+        RecyclerArrivalItem()
+    )
 
     // ItemType에 따라 생성할 뷰홀더 객체 선택
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -55,52 +62,27 @@ class RecyclerAdapterBITZonArrival(val mStrBusStop : String) : RecyclerView.Adap
     // 아이템 타입 리턴
     override fun getItemViewType(position: Int): Int = mArrivalItems[position].itemType.ordinal
 
-    fun applyDataSet(items: ArrayList<ArrivalToNodeInfo>) {
+    fun applyDataSet() {
         val newDataSet = ArrayList<RecyclerArrivalItem>()
 
         // 도착정보가 없으면 리스트 비움
-        if(items.isEmpty()){
-            mArrivalItems.clear()
-            notifyDataSetChanged()
-            return
+//        if(items.isEmpty()){
+//            mArrivalItems.clear()
+//            notifyDataSetChanged()
+//            return
+//        }
+
+        newDataSet.add(RecyclerArrivalItem())
+        mArrivalItems.add(RecyclerArrivalItem("test",false))
+        for(i in 0 until newDataSet.size){
+            Log.d("test1","${newDataSet}")
         }
 
-        // 정렬
-        val sorted = items.sortedWith(
-                Comparator { o1, o2 ->
-                    o1.id.ordinal - o2.id.ordinal
-                }
-        )
-
-        sorted.forEachIndexed { index, it ->
-            if(it.id == ArrivalToNodeInfo.ID.ICB164000395){
-                if(index != 0){
-                    newDataSet.add(0, RecyclerArrivalItem("지식정보단지", true))
-                }
-                newDataSet.add(RecyclerArrivalItem("인천대입구"))
-            }
-            it.data.sortWith(kotlin.Comparator { o1, o2 ->
-                when{
-                    (o1.type != o2.type) -> o1.type!!.ordinal - o2.type!!.ordinal
-                    else -> o1.no.compareTo(o2.no)
-                }
-            })
-
-            it.data.forEach { item ->
-                // 출구 정보를 보여주기위해 배차간격 텍스트를 재활용
-                if(it.id.exitName != ""){
-                    item.intervalString = it.id.exitName
-                }
-                else {
-                    item.intervalString = "${item.interval}분"
-                }
-                newDataSet.add(RecyclerArrivalItem(item)) }
-        }
         // 데이터 목록 업데이트
         val diffUtil = ArrivalInfoDiffUtil(mArrivalItems, newDataSet)
         val result = DiffUtil.calculateDiff(diffUtil)
-        mArrivalItems.clear()
-        mArrivalItems.addAll(newDataSet)
+//        mArrivalItems.clear()
+//        mArrivalItems.addAll(newDataSet)
         result.dispatchUpdatesTo(this)
     }
 

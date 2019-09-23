@@ -33,18 +33,18 @@ data class BusInformation (
 ){
     enum class BusType(val value: String, val color: Int) {
         @SerializedName("간선")
-        BLUE("간선", Color.parseColor("#2f60ce")),
+        BLUE("간선", Color.parseColor("#006fff")),
 
         @SerializedName("간선급행")
-        BRT("간선급행", Color.parseColor("#8d14bf")),
+        PURPLE("간선급행", Color.parseColor("#6900b5")),
 
         @SerializedName("광역")
-        RED("광역", Color.parseColor("#de2222")),
+        RED("광역", Color.parseColor("#ff4907")),
 
         @SerializedName("광역급행")
         RED_EXPRESS("광역급행", Color.parseColor("#33b5e5")),
 
         @SerializedName("순환")
-        YELLOW("순환", Color.parseColor("#22c244"));
+        GREEN("순환", Color.parseColor("#24c330"));
     }
 }

@@ -3,10 +3,14 @@ package com.inu.bus.recycler
 import android.content.Intent
 import android.databinding.Observable
 import android.databinding.ObservableBoolean
+import android.graphics.Rect
+
 import android.os.Message
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.TouchDelegate
+import android.view.View
 import android.widget.CheckBox
 import com.inu.bus.R
 import com.inu.bus.activity.MainActivity
@@ -14,8 +18,6 @@ import com.inu.bus.activity.RouteActivity
 import com.inu.bus.custom.HandlerArrivalText
 import com.inu.bus.databinding.RecyclerArrivalItemBinding
 import com.inu.bus.model.BusArrivalInfo
-import com.inu.bus.model.DBBusFavoriteItem
-import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.LocalIntent
 import java.util.*
 
@@ -56,7 +58,24 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
     // recycler_arrival_item.xml 바인딩
     fun bind(data : BusArrivalInfo){
 
+        val btnFav = itemView.findViewById<CheckBox>(R.id.btn_favorite)
+        btnFav.touchDelegate = TouchDelegate(Rect(0,0,20,20),btnFav)
+
         mBinding.btnFavorite.isChecked = data.favorite
+
+//        val parent = mBinding.btnFavorite.parent as View
+//        parent.post {
+//            val rect = Rect()
+//            parent.getHitRect(rect)
+//            rect.top -= 100
+//            rect.bottom += 100
+//            rect.left -= 100
+//            rect.right += 100
+//
+//            parent.touchDelegate = TouchDelegate(rect,mBinding.btnFavorite)
+//        }
+
+
         mBinding.data = data
         mBinding.listener = this
         sendTime(mBinding.data!!)
