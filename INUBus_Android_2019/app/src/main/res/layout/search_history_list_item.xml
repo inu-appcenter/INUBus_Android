@@ -10,7 +10,7 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/btn_search_select"
+        android:id="@+id/btn_history_select"
         android:layout_width="match_parent"
         android:layout_height="77dp"
         android:background="#fafafa">

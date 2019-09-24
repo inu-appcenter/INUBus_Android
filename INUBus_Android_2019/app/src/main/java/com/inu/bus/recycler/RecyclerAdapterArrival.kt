@@ -1,7 +1,6 @@
 package com.inu.bus.recycler
 
 import android.databinding.ObservableBoolean
-import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import com.inu.bus.model.BusArrivalInfo
 import com.inu.bus.model.DBBusFavoriteItem
 import com.inu.bus.model.RecyclerArrivalItem
 import com.inu.bus.util.AppDatabase
-import com.inu.bus.util.ArrivalInfoDiffUtil
 
 
 /**
@@ -170,14 +168,6 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
         notifyDataSetChanged()
     }
 
-
-
-
-    fun onCheck(data:BusArrivalInfo){
-
-
-
-    }
 
     // 아이템이 화면에 보일때만 Ticker가 작동하도록 설정
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {

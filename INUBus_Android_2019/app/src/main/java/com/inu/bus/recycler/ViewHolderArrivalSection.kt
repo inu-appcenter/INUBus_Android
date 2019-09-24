@@ -11,6 +11,7 @@ class ViewHolderArrivalSection(private val mBinding : RecyclerArrivalSeparatorBi
     // recycler_arrival_separator.xml 바인딩
     fun bind(sectionText: String){
         mBinding.tvSection.text = sectionText
+
     }
 
 }

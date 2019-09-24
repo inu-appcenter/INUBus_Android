@@ -152,24 +152,4 @@ class SchoolBusFragment : Fragment(){
 
     // TimeTicker 생명주기에 맞춰 활성, 비활성.
 
-    // ViewPager에서 현재 페이지가 보이고 있는지 오는 콜백.
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-//        Log.d(LOG_TAG, "isVisibleToUser $mStrBusStop, $isVisibleToUser")
-        mAdapter.isShowing.set(isVisibleToUser)
-        isShowing = isVisibleToUser
-    }
-
-    // 생명주기에 맞춤
-    override fun onPause() {
-        super.onPause()
-        mAdapter.isShowing.set(false)
-    }
-
-    // 재시작되면서 현재 보이는 탭만 Ticker를 실행하도록.
-    override fun onResume() {
-        super.onResume()
-        mAdapter.isShowing.set(isShowing)
-    }
-
 }

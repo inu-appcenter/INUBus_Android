@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.WindowManager
 import com.inu.bus.R
 import com.inu.bus.databinding.ActivityRouteBinding
@@ -71,11 +72,11 @@ class RouteActivity : AppCompatActivity() {
             // TODO 시작 끝 구분 없어짐
             var nameList = arrayListOf<String>()
             for(i in 0 until routeList.size){
-                nameList.add(routeList.get(i).nodeName)
+                nameList.add(routeList[i].nodeName)
             }
             val turnNodePosition = nameList.indexOf(turnNode)
             routeList.forEachIndexed { index, s ->
-
+                Log.d("route","index : ${index} node : ${s.nodeName}")
                 // 시작
                 when {
                     index == 0 ->{

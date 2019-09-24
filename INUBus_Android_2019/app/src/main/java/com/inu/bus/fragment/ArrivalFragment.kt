@@ -82,12 +82,12 @@ class ArrivalFragment : Fragment(){
             fragment_arrival_tablayout.getTabAt(index)!!.customView = v
         }
         // 검색창 Text가 변경되면 mSearchTextWatcher 호출
-        MainActivity.mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
+//        MainActivity.mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
         // ViewPagerAdapter에 프레그먼트 추가
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "engineer"))
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "science"))
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "frontgate"))
-        mViewPagerAdapter.addFragment(SchoolBusFragment.newInstance(mContext,"SchoolBus"))
+//        mViewPagerAdapter.addFragment(SchoolBusFragment.newInstance(mContext,"SchoolBus"))
         // ViewPager 설정
         vp_fragment_arrival_tabs.offscreenPageLimit = 4
         vp_fragment_arrival_tabs.adapter = mViewPagerAdapter

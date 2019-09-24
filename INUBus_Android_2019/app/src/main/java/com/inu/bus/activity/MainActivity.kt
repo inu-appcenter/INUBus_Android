@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(){
     companion object {
         // ArrivalFragmentTab에서 각 검색결과를 참조하기 위해
         // TODO Observable로 변경
-        lateinit var mWrSearchView : WeakReference<AutoCompleteTextView>
+//        lateinit var mWrSearchView : WeakReference<AutoCompleteTextView>
         // Drawer BlurView를 공유하면 dim alpha가 적용이 안되서 팝업용 BlurView를 별도로 설정
         lateinit var mWrBlurringView2 : WeakReference<BlurringView>
         // ArrivalViewPager에서 지정단탭일시 액션바를 바꾸기 위해
@@ -78,9 +78,9 @@ class MainActivity : AppCompatActivity(){
 
         // 메모리 누수를 방지하기 위해 WeakReference 사용
         mWrMainUpperView = WeakReference(ll_main_upper_view_wrapper)
-        mWrSearchView = WeakReference(actionbar_searchView)
+//        mWrSearchView = WeakReference(actionbar_searchView)
         mWrBlurringView2 = WeakReference(activity_main_popup_blur)
-        mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
+//        mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
         changestatusBarColor()
         setActionBar()
         setDrawer()
@@ -301,7 +301,7 @@ class MainActivity : AppCompatActivity(){
     override fun onBackPressed() {
         when {
             // 검색창이 비어있지 않으면 비움
-            actionbar_searchView.text.toString() != "" -> actionbar_searchView.text.clear()
+//            actionbar_searchView.text.toString() != "" -> actionbar_searchView.text.clear()
 
             // information 열려있으면 닫음
             drawer_layout.isDrawerOpen(Gravity.END) -> drawer_layout.closeDrawer(Gravity.END)

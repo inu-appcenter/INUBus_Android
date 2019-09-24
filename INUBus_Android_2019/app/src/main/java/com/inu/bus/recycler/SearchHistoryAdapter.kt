@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import com.inu.bus.R
 import com.inu.bus.activity.MainActivity
+import com.inu.bus.activity.SearchActivity
 import com.inu.bus.databinding.SearchHistoryListItemBinding
 import com.inu.bus.model.DBSearchHistoryItem
 import com.inu.bus.recycler.SearchHistoryAdapter.SearchHistoryViewHolder
@@ -47,12 +48,12 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
         fun bind(data : DBSearchHistoryItem, position : Int){
             mDB = AppDatabase.getInstance(mContext)!!
-            val mBtnfinder = itemView.findViewById<ConstraintLayout>(R.id.btn_search_select)
+            val mBtnfinder = itemView.findViewById<ConstraintLayout>(R.id.btn_history_select)
             val mBtndelete = itemView.findViewById<ImageButton>(R.id.btn_autocomplete_item_delete)
 
             mBinding.item =  data
             mBtnfinder.setOnClickListener {
-                MainActivity.mWrSearchView.get()?.setText(data.name)
+                SearchActivity.mWrSearchView.get()?.setText(data.name)
             }
 
             mBtndelete.setOnClickListener {
