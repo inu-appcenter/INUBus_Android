@@ -13,8 +13,8 @@ class RecyclerArrivalItem(
 ){
     // 생성자
     constructor() : this(ItemType.Header)
-    constructor(sectionHeader : String, needButton : Boolean = false)
-            : this(ItemType.SectionHeader, sectionHeader, needButton = needButton)
+    constructor(sectionHeader : String)
+            : this(ItemType.SectionHeader, sectionHeader)
     constructor(arrivalInfo: BusArrivalInfo) : this(ItemType.ArrivalInfo, arrivalInfo = arrivalInfo)
 
     // RecyclerView's Multiple Type Enum

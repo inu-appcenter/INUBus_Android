@@ -19,6 +19,7 @@ import com.inu.bus.custom.HandlerArrivalText
 import com.inu.bus.databinding.RecyclerArrivalItemBinding
 import com.inu.bus.model.BusArrivalInfo
 import com.inu.bus.util.LocalIntent
+import com.inu.bus.util.Singleton
 import java.util.*
 
 /**
@@ -27,7 +28,7 @@ import java.util.*
 
 class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
                             private val isShowing : ObservableBoolean,
-                            private val mAdapter: RecyclerAdapterArrival) : RecyclerView.ViewHolder(mBinding.root) {
+                            private val schoolTab : Boolean) : RecyclerView.ViewHolder(mBinding.root) {
 
     // Ticker 필요여부
     private var needTick = false
@@ -124,8 +125,25 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
             str += "${remain%60}초"
         }
 
+        // arrivalitem textview
         val msg = Message()
-        msg.obj = str
+        if(schoolTab){
+            Singleton.SchoolBusRoute.forEach() { (route, nodelist) ->
+                if(route == data.no){
+//                     = cost
+                }
+            }
+////            Singleton.SchoolBusRoute.forEach() { (routeID, Routenode) ->
+////                if(data.no == routeID){
+////                    fee = cost
+////                }
+////            }
+////            fee = fee?: Singleton.busCost["else"]
+////            mBinding.fee = "${fee}원"
+            val location = data.start.toString()
+            msg.obj = location
+        }
+        else { msg.obj = str }
         mHandler.sendMessage(msg)
     }
     // Ticker 작동
@@ -147,9 +165,6 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
     fun onCheck(data: BusArrivalInfo){
 
         val btnFavorite = itemView.findViewById<CheckBox>(R.id.btn_favorite)
-        
-        val tempList = mAdapter.tempList
-
         val context = mBinding.root.context
 
         if(btnFavorite.isChecked){
@@ -174,10 +189,11 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
 
     // 바인딩된 아이템 클릭시 intent를 가지고 RouteActivity로 이동
     fun onClick(data : BusArrivalInfo){
-        Log.d("test", "OnClick called")
+
         val context = mBinding.root.context
         val intent = Intent(context, RouteActivity::class.java)
         intent.putExtra("routeNo", data.no)
         context.startActivity(intent)
+        Log.d("test", "$data")
     }
 }

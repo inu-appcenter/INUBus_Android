@@ -12,9 +12,11 @@ import com.inu.bus.activity.MainActivity
 import com.inu.bus.model.ArrivalFromNodeInfo
 import com.inu.bus.model.ArrivalToNodeInfo
 import com.inu.bus.model.BusInformation
+import com.inu.bus.model.SchoolBusGPS
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
 import com.inu.bus.util.Singleton.LOG_TAG
+import com.inu.bus.util.Singleton.busInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -121,6 +123,21 @@ class MyService : Service(){
                 Singleton.arrivalToInfo.set(response.body())
 //                if(callback != null)
 //                    callback()
+            }
+        })
+
+        Singleton.retrofit.getSBgps().enqueue(object : Callback<ArrayList<SchoolBusGPS>>{
+            override fun onFailure(call: Call<ArrayList<SchoolBusGPS>>, t: Throwable) {
+                //TODO 에러 표시
+                Log.e(LOG_TAG, "requestSBgps", t)
+            }
+
+            // Response가 들어오면 BusInformation 객체를 파싱
+            override fun onResponse(call: Call<ArrayList<SchoolBusGPS>>, response: Response<ArrayList<SchoolBusGPS>>) {
+                Singleton.SBgps.set(response.body())
+
+                if(callback != null)
+                    callback()
             }
         })
     }

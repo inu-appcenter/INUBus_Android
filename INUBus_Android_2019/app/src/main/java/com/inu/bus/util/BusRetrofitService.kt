@@ -3,6 +3,7 @@ package com.inu.bus.util
 import com.inu.bus.model.ArrivalFromNodeInfo
 import com.inu.bus.model.ArrivalToNodeInfo
 import com.inu.bus.model.BusInformation
+import com.inu.bus.model.SchoolBusGPS
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -25,6 +26,9 @@ interface BusRetrofitService{
 
     @GET("/nodeData/{nodenum}")
     fun getNodeRoute(@Query("nodenum") no : String) : Call<ArrayList<BusInformation>>
+
+    @GET("/gps")
+    fun getSBgps() : Call<ArrayList<SchoolBusGPS>>
 
 //    @GET("/arrivalinfoSeoul")
 //    fun getSeoulArrivalInfo()

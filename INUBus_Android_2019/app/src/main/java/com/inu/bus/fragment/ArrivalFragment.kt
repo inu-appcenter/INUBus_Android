@@ -29,7 +29,6 @@ import com.inu.bus.recycler.ViewPagerAdapter
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
 import com.inu.bus.util.Singleton.LOG_TAG
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_tabicon.view.*
 import kotlinx.android.synthetic.main.fragment_arrival_tabs.*
 
@@ -87,7 +86,7 @@ class ArrivalFragment : Fragment(){
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "engineer"))
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "science"))
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "frontgate"))
-//        mViewPagerAdapter.addFragment(SchoolBusFragment.newInstance(mContext,"SchoolBus"))
+        mViewPagerAdapter.addFragment(BITZonFragment.newInstance(mContext))
         // ViewPager 설정
         vp_fragment_arrival_tabs.offscreenPageLimit = 4
         vp_fragment_arrival_tabs.adapter = mViewPagerAdapter

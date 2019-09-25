@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.WindowManager
 import com.inu.bus.R
 import com.inu.bus.databinding.ActivityRouteBinding
+import com.inu.bus.model.BusInformation
 import com.inu.bus.recycler.RecyclerAdapterRoute
 import com.inu.bus.recycler.RecyclerAdapterRoute.Direction
 import com.inu.bus.recycler.RecyclerAdapterRoute.RouteType
@@ -36,6 +37,8 @@ class RouteActivity : AppCompatActivity() {
         // 상단 정보 설정
         val routeNo = intent.getStringExtra("routeNo")
         val routeInfo = Singleton.busInfo.get()!![routeNo]!!
+        Log.d("info","$routeInfo")
+
         mBinding.no = routeNo
         mBinding.startTime = String.format("%02d:%02d", routeInfo.start/100, routeInfo.start%100)
         mBinding.endTime = String.format("%02d:%02d", routeInfo.end/100, routeInfo.end%100)

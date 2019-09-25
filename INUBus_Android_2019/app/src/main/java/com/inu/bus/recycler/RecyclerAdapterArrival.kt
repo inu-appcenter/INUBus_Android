@@ -1,5 +1,4 @@
 package com.inu.bus.recycler
-
 import android.databinding.ObservableBoolean
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -27,7 +26,7 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
 
     private lateinit var mDB : AppDatabase
     private var dataset = arrayListOf<DBBusFavoriteItem>()
-    var tempList = arrayListOf<BusArrivalInfo>()
+
     init {
         // Header
         mArrivalItems.add(RecyclerArrivalItem())
@@ -59,7 +58,7 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
             RecyclerArrivalItem.ItemType.SectionHeader->
                 ViewHolderArrivalSection(RecyclerArrivalSeparatorBinding.inflate(layoutInflater, parent, false))
             RecyclerArrivalItem.ItemType.ArrivalInfo->
-                ViewHolderArrivalItem(RecyclerArrivalItemBinding.inflate(layoutInflater, parent, false), isShowing,this)
+                ViewHolderArrivalItem(RecyclerArrivalItemBinding.inflate(layoutInflater, parent, false), isShowing,false)
         }
     }
     // ItemType에 따라 각 뷰 홀더에 데이터 연결
@@ -86,7 +85,6 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
     fun applyDataSet(items: ArrayList<BusArrivalInfo>,favList : ArrayList<String?>) {
 
         mArrivalItems.clear()
-        tempList=items
         // 버스 순 정렬
         val sorted = items.sortedWith(Comparator { o1, o2 ->
             when{

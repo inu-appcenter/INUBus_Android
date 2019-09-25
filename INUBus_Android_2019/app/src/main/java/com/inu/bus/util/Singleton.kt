@@ -4,9 +4,7 @@ import android.app.Activity
 import android.databinding.ObservableField
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.inu.bus.model.ArrivalFromNodeInfo
-import com.inu.bus.model.ArrivalToNodeInfo
-import com.inu.bus.model.BusInformation
+import com.inu.bus.model.*
 import com.inu.bus.server
 import com.inu.bus.util.Singleton.myPackageName
 import retrofit2.Retrofit
@@ -32,6 +30,7 @@ object Singleton{
     val busInfo  = ObservableField(mutableMapOf<String, BusInformation>())
     var arrivalFromInfo = ObservableField<ArrayList<ArrivalFromNodeInfo>>()
     var arrivalToInfo = ObservableField<ArrayList<ArrivalToNodeInfo>>()
+    var SBgps = ObservableField<ArrayList<SchoolBusGPS>>()
     const val myPackageName = "com.bungabear.inubus"
     const val LOG_TAG = "INU Bus"
     const val DB_VERSION = 1
@@ -55,6 +54,43 @@ object Singleton{
             Pair("92", 950),
             Pair("else", 1250)
     )
+
+    val SchoolBusRoute= mutableMapOf(
+            Pair("송내",arrayListOf(
+                    BusRoutenode(1,"송내남부역CU"),
+                    BusRoutenode(3,"미추홀캠퍼스"),
+                    BusRoutenode(5,"송도캠퍼스")
+            )),
+            Pair("수원", arrayListOf(
+                    BusRoutenode(1,"수원역"),
+                    BusRoutenode(3,"상록수역"),
+                    BusRoutenode(5,"안산 중앙역"),
+                    BusRoutenode(7,"안산역"),
+                    BusRoutenode(9,"함현중학교정"),
+                    BusRoutenode(11,"미추홀캠퍼스"),
+                    BusRoutenode(13,"송도캠퍼스")
+            )),
+            Pair("일산", arrayListOf(
+                    BusRoutenode(1,"마두역"),
+                    BusRoutenode(3,"대화역"),
+                    BusRoutenode(5,"예가아파트"),
+                    BusRoutenode(7,"김포IC"),
+                    BusRoutenode(9,"미추홀캠퍼스"),
+                    BusRoutenode(11,"송도캠퍼스")
+            )),
+            Pair("청라", arrayListOf(
+                    BusRoutenode(1,"검암역"),
+                    BusRoutenode(3,"가정역"),
+                    BusRoutenode(5,"미추홀캠퍼스"),
+                    BusRoutenode(7,"송도캠퍼스")
+            )),
+            Pair("광명", arrayListOf(
+                    BusRoutenode(1,"석수역"),
+                    BusRoutenode(3,"미추홀캠퍼스"),
+                    BusRoutenode(5,"송도캠퍼스")
+            ))
+    )
+
 }
 // 상태에 따른 Intent값 설정
 enum class LocalIntent(val value : String) : CharSequence by value {
