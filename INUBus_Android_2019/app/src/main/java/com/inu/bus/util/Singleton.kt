@@ -62,30 +62,30 @@ object Singleton{
                     BusRoutenode(5,"송도캠퍼스")
             )),
             Pair("수원", arrayListOf(
-                    BusRoutenode(1,"수원역"),
-                    BusRoutenode(3,"상록수역"),
+                    BusRoutenode(1,"수원역 4번출구"),
+                    BusRoutenode(3,"상록수역 1번출구"),
                     BusRoutenode(5,"안산 중앙역"),
-                    BusRoutenode(7,"안산역"),
-                    BusRoutenode(9,"함현중학교정"),
+                    BusRoutenode(7,"안산역 제1승차장"),
+                    BusRoutenode(9,"함현중학교 정문"),
                     BusRoutenode(11,"미추홀캠퍼스"),
                     BusRoutenode(13,"송도캠퍼스")
             )),
             Pair("일산", arrayListOf(
-                    BusRoutenode(1,"마두역"),
-                    BusRoutenode(3,"대화역"),
-                    BusRoutenode(5,"예가아파트"),
+                    BusRoutenode(1,"마두역 5번출구"),
+                    BusRoutenode(3,"대화역 4번출"),
+                    BusRoutenode(5,"장기동 예가아파트"),
                     BusRoutenode(7,"김포IC"),
                     BusRoutenode(9,"미추홀캠퍼스"),
                     BusRoutenode(11,"송도캠퍼스")
             )),
             Pair("청라", arrayListOf(
-                    BusRoutenode(1,"검암역"),
-                    BusRoutenode(3,"가정역"),
+                    BusRoutenode(1,"검암역 1번출"),
+                    BusRoutenode(3,"가정역 4번출"),
                     BusRoutenode(5,"미추홀캠퍼스"),
                     BusRoutenode(7,"송도캠퍼스")
             )),
             Pair("광명", arrayListOf(
-                    BusRoutenode(1,"석수역"),
+                    BusRoutenode(1,"석수역 1번출구"),
                     BusRoutenode(3,"미추홀캠퍼스"),
                     BusRoutenode(5,"송도캠퍼스")
             ))

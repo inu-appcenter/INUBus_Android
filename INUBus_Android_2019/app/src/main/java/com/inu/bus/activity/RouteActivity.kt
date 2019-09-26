@@ -11,6 +11,7 @@ import android.view.WindowManager
 import com.inu.bus.R
 import com.inu.bus.databinding.ActivityRouteBinding
 import com.inu.bus.model.BusInformation
+import com.inu.bus.model.BusRoutenode
 import com.inu.bus.recycler.RecyclerAdapterRoute
 import com.inu.bus.recycler.RecyclerAdapterRoute.Direction
 import com.inu.bus.recycler.RecyclerAdapterRoute.RouteType
@@ -35,9 +36,23 @@ class RouteActivity : AppCompatActivity() {
         mRvRoute = mBinding.rvRouteActivityRecycler
 
         // 상단 정보 설정
-        val routeNo = intent.getStringExtra("routeNo")
-        val routeInfo = Singleton.busInfo.get()!![routeNo]!!
-        Log.d("info","$routeInfo")
+        var routeNo = intent.getStringExtra("routeNo")
+        Log.d("route","intent -> $routeNo")
+        val routeInfo : BusInformation
+        if(routeNo.substring(0,1)=="R")
+        {
+            routeNo = routeNo.substring(1,3)
+            var tempArray = ArrayList<BusRoutenode>()
+            Singleton.SchoolBusRoute.forEach() { (id, list) ->
+                if(id == routeNo) {
+                    tempArray = list
+                }
+            }
+            routeInfo = BusInformation(routeNo,"",1,1,BusInformation.BusType.BLUE,tempArray,"1")
+        }
+        else routeInfo = Singleton.busInfo.get()!![routeNo]!!
+        Log.d("route","intent routeInfo -> $routeInfo")
+
 
         mBinding.no = routeNo
         mBinding.startTime = String.format("%02d:%02d", routeInfo.start/100, routeInfo.start%100)

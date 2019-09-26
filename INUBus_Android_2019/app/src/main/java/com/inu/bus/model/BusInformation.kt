@@ -45,6 +45,9 @@ data class BusInformation (
         RED_EXPRESS("광역급행", Color.parseColor("#33b5e5")),
 
         @SerializedName("순환")
-        GREEN("순환", Color.parseColor("#24c330"));
+        GREEN("순환", Color.parseColor("#24c330")),
+
+        @SerializedName("통학")
+        TONG("통학", Color.parseColor("#0800f4"));
     }
 }

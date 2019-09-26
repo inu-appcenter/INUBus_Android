@@ -71,7 +71,7 @@ class BITZonFragment : Fragment(){
                     val witch = it.location
                     Log.d("gps","routeid -> ${it.busTime.routeID}")
                     notEmptyDataSet.add(RecyclerArrivalItem(BusArrivalInfo(
-                            "${it.busTime.routeID}",-1,witch,-1,9999,"${it.busTime.startTime}",BusInformation.BusType.BLUE)
+                            "${it.busTime.routeID}",-1,witch,-1,9999,"${it.busTime.startTime}",BusInformation.BusType.TONG)
                     ))
                 }
             }

@@ -1,5 +1,6 @@
 package com.inu.bus.recycler
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -9,14 +10,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.inu.bus.R
+import com.inu.bus.activity.MainActivity
 import com.inu.bus.activity.RouteActivity
+import com.inu.bus.activity.SearchActivity
 import com.inu.bus.databinding.SearchResultListItemBinding
-import com.inu.bus.model.BusInformation
-import com.inu.bus.model.BusRoutenode
-import com.inu.bus.model.RecyclerArrivalItem
-import com.inu.bus.model.SearchResultNode
+import com.inu.bus.fragment.SearchHistoryFragment
+import com.inu.bus.model.*
 import com.inu.bus.recycler.SearchResultAdapter.SearchResultViewHolder
+import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.Singleton
+import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchResultAdapter() : RecyclerView.Adapter<SearchResultViewHolder>() {
 
@@ -47,8 +50,13 @@ class SearchResultAdapter() : RecyclerView.Adapter<SearchResultViewHolder>() {
             mBinding.item = data
 
             val mBtnGoroute = itemView.findViewById<ConstraintLayout>(R.id.btn_search_select)
+            val context = mBinding.root.context
 
             mBtnGoroute.setOnClickListener {
+                var newSHitem = DBSearchHistoryItem()
+                newSHitem.name = data.title
+                (context as SearchActivity).insertHistory(newSHitem)
+
                 val context = mBinding.root.context
                 val intent = Intent(context, RouteActivity::class.java)
                 intent.putExtra("routeNo", data.title)
@@ -60,28 +68,6 @@ class SearchResultAdapter() : RecyclerView.Adapter<SearchResultViewHolder>() {
     fun filter(str : String) {
 
         var filtered = arrayListOf<SearchResultNode>()
-
-//        filtered =
-//                // 검색 취소
-//                if(str == ""){
-//                    mFilteredList
-//                }
-//                else {
-//                    ArrayList(
-//                            mSearchList.filter { item ->
-//                                item.no.contains(str)
-////                                    !Singleton.busInfo.get()!![item.arrivalInfo!!.no]
-////                                            ?.nodeList
-////                                            ?.find{
-////                                                Log.d("0598","it -> ${it}")
-////                                                it.contains(str)
-////                                            }.isNullOrEmpty()
-//
-//                            }
-//
-//                    )
-//                }
-
 
         mSearchList.forEach {
             if(it.no.contains(str))

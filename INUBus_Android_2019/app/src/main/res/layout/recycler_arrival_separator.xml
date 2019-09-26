@@ -23,18 +23,30 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="간선, 좌석버스" />
 
+        <View
+            android:id="@+id/view3"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="200dp"
+            android:layout_marginRight="200dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
         <TextView
             android:id="@+id/tv_item_subject1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2.2dp"
-            android:layout_marginRight="138.8dp"
             android:layout_marginBottom="1.8dp"
+            android:layout_marginLeft="0dp"
             android:fontFamily="@font/notosans_regular"
             android:gravity="center"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/view3"
             app:layout_constraintTop_toTopOf="parent"
             android:text="남은시간" />
 
@@ -43,14 +55,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2.2dp"
-            android:layout_marginRight="36dp"
             android:layout_marginBottom="1.8dp"
+            android:layout_marginLeft="130dp"
             android:fontFamily="@font/notosans_regular"
             android:gravity="center"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/view3"
             android:text="배차간격" />
     </android.support.constraint.ConstraintLayout>
 </layout>

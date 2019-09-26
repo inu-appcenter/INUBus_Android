@@ -3,6 +3,7 @@ package com.inu.bus.recycler
 import android.content.Intent
 import android.databinding.Observable
 import android.databinding.ObservableBoolean
+import android.graphics.Color
 import android.graphics.Rect
 
 import android.os.Message
@@ -10,7 +11,6 @@ import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.TouchDelegate
-import android.view.View
 import android.widget.CheckBox
 import com.inu.bus.R
 import com.inu.bus.activity.MainActivity
@@ -18,6 +18,7 @@ import com.inu.bus.activity.RouteActivity
 import com.inu.bus.custom.HandlerArrivalText
 import com.inu.bus.databinding.RecyclerArrivalItemBinding
 import com.inu.bus.model.BusArrivalInfo
+import com.inu.bus.model.BusRoutenode
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
 import java.util.*
@@ -76,6 +77,9 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
 //            parent.touchDelegate = TouchDelegate(rect,mBinding.btnFavorite)
 //        }
 
+        if(schoolTab){
+            mBinding.recyclerBusno.textSize = 14.0f
+        }
 
         mBinding.data = data
         mBinding.listener = this
@@ -128,9 +132,11 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
         // arrivalitem textview
         val msg = Message()
         if(schoolTab){
-            Singleton.SchoolBusRoute.forEach() { (route, nodelist) ->
-                if(route == data.no){
-//                     = cost
+
+            var tempArray = ArrayList<BusRoutenode>()
+            Singleton.SchoolBusRoute.forEach { (id, list) ->
+                if(id == data.no.substring(0,2)) {
+                    tempArray = list
                 }
             }
 ////            Singleton.SchoolBusRoute.forEach() { (routeID, Routenode) ->
@@ -140,7 +146,11 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
 ////            }
 ////            fee = fee?: Singleton.busCost["else"]
 ////            mBinding.fee = "${fee}원"
-            val location = data.start.toString()
+            var location = "대기 중"
+            tempArray.forEach{
+                if(it.nodeNo == data.start)
+                    location = it.nodeName
+            }
             msg.obj = location
         }
         else { msg.obj = str }
@@ -192,8 +202,11 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
 
         val context = mBinding.root.context
         val intent = Intent(context, RouteActivity::class.java)
-        intent.putExtra("routeNo", data.no)
+        val str : String = if(schoolTab) "R" + data.no
+        else data.no
+
+        intent.putExtra("routeNo", str)
         context.startActivity(intent)
-        Log.d("test", "$data")
+        Log.d("route", "$data")
     }
 }

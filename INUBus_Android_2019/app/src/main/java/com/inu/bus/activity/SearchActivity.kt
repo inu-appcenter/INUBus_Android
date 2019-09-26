@@ -27,7 +27,6 @@ class SearchActivity : AppCompatActivity() {
 
     private val mViewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager, this) }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -41,17 +40,9 @@ class SearchActivity : AppCompatActivity() {
         }
 
         btn_actionbar_search.setOnClickListener {
-            //
-            (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
-                if(it is SearchHistoryFragment){
-                    var newSHitem = DBSearchHistoryItem()
-                    newSHitem.name = actionbar_searchView.text.toString()
-                    it.mAdapter.insertHistory(this,newSHitem)
-                }
-            }
-//
-//            Log.d("1234","searchhistory insert")
-//            Singleton.hideKeyboard(this)
+            var newSHitem = DBSearchHistoryItem()
+            newSHitem.name = actionbar_searchView.text.toString()
+            insertHistory(newSHitem)
         }
 
         setMainViewPager()
@@ -85,6 +76,14 @@ class SearchActivity : AppCompatActivity() {
                         it.mAdapter.filter(s.toString())
                     }
                 }
+            }
+        }
+    }
+
+    fun insertHistory(newSHitem : DBSearchHistoryItem){
+        (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
+            if(it is SearchHistoryFragment){
+                it.mAdapter.insertHistory(this,newSHitem)
             }
         }
     }
