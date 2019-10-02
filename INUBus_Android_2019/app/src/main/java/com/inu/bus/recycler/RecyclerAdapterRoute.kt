@@ -4,16 +4,22 @@ package com.inu.bus.recycler
  * Created by Bunga on 2018-01-29.
  */
 
+import android.app.Activity
+import android.content.Context
 import android.support.constraint.ConstraintLayout
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.RelativeLayout
+import android.widget.Toast
 import com.inu.bus.R
+import com.inu.bus.activity.RouteActivity
 import com.inu.bus.databinding.ActivityRouteBinding
 import com.inu.bus.databinding.RecyclerRouteItemBinding
 import java.util.*
+import kotlin.coroutines.coroutineContext
 
 class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -88,9 +94,11 @@ class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<R
         }
         else if (item.type == RouteType.LINE) {
             val btnScrollup = (holder as LineHolder).itemView.findViewById<ImageButton>(R.id.btn_route_end)
+            val nestedSV = btnScrollup.rootView.findViewById<NestedScrollView>(R.id.nsv_route)
             val llm = mRvRoute.layoutManager
             btnScrollup.setOnClickListener {
-                llm.smoothScrollToPosition(mRvRoute,null,0)
+                nestedSV.scrollTo(0,0)
+//                llm.smoothScrollToPosition(mRvRoute,null,0)
             }
         }
     }
