@@ -8,15 +8,10 @@ import android.content.IntentFilter
 import android.os.IBinder
 import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
-import com.inu.bus.activity.MainActivity
-import com.inu.bus.model.ArrivalFromNodeInfo
-import com.inu.bus.model.ArrivalToNodeInfo
-import com.inu.bus.model.BusInformation
-import com.inu.bus.model.SchoolBusGPS
+import com.inu.bus.model.*
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
 import com.inu.bus.util.Singleton.LOG_TAG
-import com.inu.bus.util.Singleton.busInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -86,10 +81,17 @@ class MyService : Service(){
             override fun onResponse(call: Call<ArrayList<BusInformation>>, response: Response<ArrayList<BusInformation>>) {
                 val newMap = mutableMapOf<String, BusInformation>()
 
+                newMap["송내"] = (BusInformation("송내","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
+                newMap["수원"] = (BusInformation("수원-안산-시흥","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
+                newMap["일산"] = (BusInformation("일산-김포","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
+                newMap["청라"] = (BusInformation("청라","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
+                newMap["광명"] = (BusInformation("광명","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
+
                 // 버스 번호 Map
                 response.body()!!.forEach {
                     newMap[it.no] = it
                 }
+                newMap
 
                 Singleton.busInfo.set(newMap)
             }

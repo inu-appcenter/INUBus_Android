@@ -20,14 +20,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="28dp"
+        android:layout_marginTop="7dp"
         android:layout_marginLeft="52dp"
         android:layout_marginRight="55dp"
-        android:layout_marginBottom="8.5dp"
+
         android:background="@drawable/bg_rounded_coner_searchbox"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/search_bar_line"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
 
         <AutoCompleteTextView
             android:id="@+id/actionbar_searchView"
@@ -45,7 +47,8 @@
             android:lines="1"
             android:maxLines="1"
             android:textColor="#333333"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:layout_gravity="center" />
 
 
     </LinearLayout>

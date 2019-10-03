@@ -48,6 +48,6 @@ data class BusInformation (
         GREEN("순환", Color.parseColor("#24c330")),
 
         @SerializedName("통학")
-        TONG("통학", Color.parseColor("#0800f4"));
+        TONG("통학버스", Color.parseColor("#0800f4"));
     }
 }

@@ -28,8 +28,6 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
     var mHistoryList = arrayListOf<DBSearchHistoryItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHistoryViewHolder {
-        refreshHistory(parent.context)
-//        notifyDataSetChanged()
 
         val binding = SearchHistoryListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchHistoryViewHolder(binding,parent.context)

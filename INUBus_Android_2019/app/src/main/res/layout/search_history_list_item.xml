@@ -16,19 +16,36 @@
         android:background="#fafafa">
 
         <TextView
-            android:id="@+id/tv_autocomplete_item_name"
+            android:id="@+id/tv_history_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="35dp"
             android:fontFamily="@font/notosans_regular"
-            android:textColor="#838383"
             android:textSize="17sp"
             android:text="@{item.name}"
+            android:textColor="@{item.color}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="풍림아이원 2단지" />
 
+        <TextView
+            android:id="@+id/tv_history_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginBottom="19dp"
+            android:fontFamily="@font/notosans_regular"
+            android:textSize="11sp"
+            android:text="@{item.typenumber}"
+            android:textColor="#707070"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="직행버스" />
 
         <TextView
             android:id="@+id/tv_autocomplete_item_date"

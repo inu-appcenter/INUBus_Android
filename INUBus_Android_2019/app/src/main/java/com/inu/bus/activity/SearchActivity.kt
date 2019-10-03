@@ -1,5 +1,6 @@
 package com.inu.bus.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -12,6 +13,7 @@ import com.inu.bus.fragment.SearchResultFragment
 import com.inu.bus.model.DBSearchHistoryItem
 import com.inu.bus.recycler.SearchResultAdapter
 import com.inu.bus.recycler.ViewPagerAdapter
+import com.inu.bus.util.AppDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.custom_searchbar.*
@@ -20,19 +22,18 @@ import java.lang.ref.WeakReference
 class SearchActivity : AppCompatActivity() {
 
     companion object {
-        // ArrivalFragmentTab에서 각 검색결과를 참조하기 위해
         lateinit var mWrSearchView : WeakReference<AutoCompleteTextView>
-        // Drawer BlurView를 공유하면 dim alpha가 적용이 안되서 팝업용 BlurView를 별도로 설정
     }
 
     private val mViewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager, this) }
+    var mHistoryList = arrayListOf<DBSearchHistoryItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
         mWrSearchView = WeakReference(actionbar_searchView)
-        mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
+//        mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
 
         btn_search_back.setOnClickListener {
             if(activity_search_viewpager.currentItem == 1) activity_search_viewpager.currentItem = 0
@@ -40,11 +41,14 @@ class SearchActivity : AppCompatActivity() {
         }
 
         btn_actionbar_search.setOnClickListener {
-            var newSHitem = DBSearchHistoryItem()
-            newSHitem.name = actionbar_searchView.text.toString()
-            insertHistory(newSHitem)
+            activity_search_viewpager.currentItem = 1
+            (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
+                if(it is SearchResultFragment){
+                    it.mAdapter.filter(actionbar_searchView.text.toString())
+                }
+            }
         }
-
+        getHistory(this)
         setMainViewPager()
     }
 
@@ -80,10 +84,33 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+
+    fun getHistory(context : Context){
+        val mDB = AppDatabase.getInstance(context)!!
+        val r = Runnable {
+            try {
+                mHistoryList = mDB.searchhistoryDAO()?.getAll() as ArrayList
+            } catch (e:Exception){
+
+            }
+        }
+        val thread = Thread(r)
+        thread.start()
+    }
+
     fun insertHistory(newSHitem : DBSearchHistoryItem){
-        (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
-            if(it is SearchHistoryFragment){
-                it.mAdapter.insertHistory(this,newSHitem)
+        var overlap = false
+
+        // overlap test
+        mHistoryList.forEach {
+            if(it.name == newSHitem.name) overlap = true
+        }
+        if(!overlap){
+            (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
+                if(it is SearchHistoryFragment){
+                    it.mAdapter.insertHistory(this,newSHitem)
+                    getHistory(this)
+                }
             }
         }
     }
