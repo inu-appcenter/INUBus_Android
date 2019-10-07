@@ -13,7 +13,8 @@ import com.inu.bus.util.Singleton
 
 // 문의 내용을 담을 객체
 data class InquireModel(
-        val device : String =  "${Build.MODEL} : ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})",
+//        val device : String =  "${Build.MODEL} : ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})",
+        val device : String =  "${Build.MODEL}",
         val service : String = Singleton.myPackageName) : BaseObservable(){
 
     @Bindable

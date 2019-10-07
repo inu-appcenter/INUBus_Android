@@ -1,7 +1,6 @@
 package com.inu.bus.activity
 
 import android.databinding.DataBindingUtil
-import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -9,11 +8,7 @@ import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.View
 import android.view.WindowManager
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.Toast
 import com.inu.bus.R
 import com.inu.bus.databinding.ActivityRouteBinding
 import com.inu.bus.model.BusInformation
@@ -36,7 +31,6 @@ class RouteActivity : AppCompatActivity() {
     private lateinit var mRvRoute : RecyclerView
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_route)
@@ -47,11 +41,11 @@ class RouteActivity : AppCompatActivity() {
         var routeNo = intent.getStringExtra("routeNo")
         Log.d("route","intent -> $routeNo")
         val routeInfo : BusInformation
+        val lastNo = routeNo
 
         // 통학버스 일때
         if(routeNo.substring(0,1)=="R")
         {
-            ll_route_up.visibility = View.GONE
             routeNo = routeNo.substring(1,3)
             Log.d("route","intent -> $routeNo")
             var tempArray = ArrayList<BusRoutenode>()
@@ -62,21 +56,7 @@ class RouteActivity : AppCompatActivity() {
             }
             routeInfo = BusInformation(routeNo,"",1,1,BusInformation.BusType.BLUE,tempArray,"1")
 
-            Singleton.SBgps.get()?.let{
-                it.forEach { gpsData->
-                    if(gpsData.busTime.routeID.substring(0,2) == routeNo){
-                        val location = gpsData.location
-                        if(location != 0){
-                            ic_route_bus.visibility = View.VISIBLE
-                            val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                                    RelativeLayout.LayoutParams.WRAP_CONTENT)
 
-                            lp.setMargins(px(54F),px(20F) + (location-1) * px(30.5F),0,0)
-                            ic_route_bus.layoutParams = lp
-                        }
-                    }
-                }
-            }
         }
         else routeInfo = Singleton.busInfo.get()!![routeNo]!!
         Log.d("route","intent routeInfo -> $routeInfo")
@@ -103,14 +83,30 @@ class RouteActivity : AppCompatActivity() {
         val adapter = RecyclerAdapterRoute(mRvRoute)
         ViewCompat.setNestedScrollingEnabled(rv_route_activity_recycler, false);
 
+        Singleton.SBgps.get()?.let{
+            it.forEach { gpsData->
+                if(gpsData.busTime.routeID.substring(0,2) == routeNo){
+
+                    val location = gpsData.location
+                    if(location != 0){
+                        adapter.location = 1
+//                        adapter.getItem(location).
+//                            ic_route_bus.visibility = View.VISIBLE
+//                            val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+//                                    RelativeLayout.LayoutParams.WRAP_CONTENT)
+//
+//                            lp.setMargins(px(54F),px(20F) + (location-1) * px(30.5F),0,0)
+//                            ic_route_bus.layoutParams = lp
+                    }
+                }
+            }
+        }
+
 //        btn_route_refresh.setOnClickListener {
 //            Toast.makeText(this,"~~4567~",Toast.LENGTH_SHORT).show()
 //        }
 
-        btn_route_up.setOnClickListener {
-            nsv_route.fling(0)
-            nsv_route.smoothScrollTo(0,0)
-        }
+
 
         // 회차지가 없는경우
         if(turnNode == ""){
@@ -147,7 +143,7 @@ class RouteActivity : AppCompatActivity() {
                     // 끝
                     index == routeList.size -1 -> {
                         adapter.addStop(s.nodeName, Direction.END,RouteType.STOP)
-//                        adapter.addLine()
+                        if(lastNo.substring(0,1)!="R") adapter.addLine()
                     }
                     else -> adapter.addStop(s.nodeName, Direction.NONE,RouteType.STOP)
                 }

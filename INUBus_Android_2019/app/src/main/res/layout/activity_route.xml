@@ -185,67 +185,31 @@
 
 
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nsv_route"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <!--<android.support.v4.widget.NestedScroldlView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent">-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_route_activity_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/recycler_route_item">
+            </android.support.v7.widget.RecyclerView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+            <!--<ImageView-->
+                <!--android:id="@+id/ic_route_bus"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="54dp"-->
+                <!--android:layout_marginTop="111dp"-->
+                <!--android:visibility="gone"-->
+                <!--android:background="@drawable/ic_route_buslocation">-->
+            <!--</ImageView>-->
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rv_route_activity_recycler"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                            tools:listitem="@layout/recycler_route_item">
-                        </android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
 
-                        <ImageView
-                            android:id="@+id/ic_route_bus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="54dp"
-                            android:layout_marginTop="111dp"
-                            android:visibility="gone"
-                            android:background="@drawable/ic_route_buslocation">
-                        </ImageView>
-
-                    </RelativeLayout>
-
-
-                    <android.support.constraint.ConstraintLayout
-                        android:id="@+id/ll_route_up"
-                        android:layout_width="match_parent"
-                        android:layout_height="146dp">
-
-                        <ImageButton
-                            android:id="@+id/btn_route_up"
-                            android:layout_width="50dp"
-                            android:layout_height="49.6dp"
-                            android:layout_marginTop="46dp"
-                            android:layout_marginLeft="149dp"
-                            android:layout_marginRight="161dp"
-                            android:layout_marginBottom="50.4dp"
-                            android:background="@drawable/ic_route_end"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:focusableInTouchMode="true"/>
-
-                    </android.support.constraint.ConstraintLayout>
-                </LinearLayout>
 
             <!--</android.support.v4.widget.NestedScrollView>-->
 
@@ -262,8 +226,6 @@
                 <!--android:scaleType="fitXY"-->
                 <!--android:src="@drawable/click_refresh"-->
                 <!--android:layout_alignParentRight="true" />-->
-
-        </android.support.v4.widget.NestedScrollView>
 
     </LinearLayout>
 </layout>

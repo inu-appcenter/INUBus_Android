@@ -19,7 +19,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -101,35 +101,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/recycler_route_tv_right"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginTop="21dp"-->
-            <!--android:layout_marginBottom="23dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:fontFamily="@font/notosans_semibold"-->
-            <!--android:text="@{item.direction == Direction.RIGHT ? item.stopName : ``}"-->
-            <!--android:textColor="#0061f4"-->
-            <!--android:textSize="13sp"-->
-            <!--android:visibility="@{item.direction == Direction.RIGHT? View.VISIBLE : View.GONE}"-->
-            <!--app:layout_constraintBottom_toBottomOf="@+id/route_circle"-->
-            <!--app:layout_constraintLeft_toRightOf="@id/route_circle"-->
-            <!--app:layout_constraintTop_toTopOf="@+id/route_circle"-->
-            <!--tools:text="인천대입구" />-->
+        <ImageView
+            android:id="@+id/ic_route_bus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="54dp"
+            android:layout_marginTop="41.3dp"
+            android:background="@drawable/ic_route_buslocation"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="13dp"-->
-            <!--android:layout_marginTop="27.8dp"-->
-            <!--android:textSize="12sp"-->
-            <!--android:fontFamily="@font/notosans_regular"-->
-            <!--app:layout_constraintStart_toEndOf="@+id/route_circle"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--android:text="00:00~00:00"-->
-            <!--tools:text="00:00~00:00" />-->
 
    </android.support.constraint.ConstraintLayout>
 </layout>

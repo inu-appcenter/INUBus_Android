@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
 
 /**
  * Created by Minjae Son on 2018-08-07.
- * Updated by ByoungMin on 2019-07-27.
+ * Updated by ByoungMean on 2019-07-27.
  */
 
 class ArrivalFragmentTab : Fragment(){

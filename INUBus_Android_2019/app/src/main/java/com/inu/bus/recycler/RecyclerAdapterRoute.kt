@@ -4,24 +4,19 @@ package com.inu.bus.recycler
  * Created by Bunga on 2018-01-29.
  */
 
-import android.app.Activity
-import android.content.Context
 import android.support.constraint.ConstraintLayout
-import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.ImageView
 import com.inu.bus.R
-import com.inu.bus.activity.RouteActivity
-import com.inu.bus.databinding.ActivityRouteBinding
 import com.inu.bus.databinding.RecyclerRouteItemBinding
 import java.util.*
-import kotlin.coroutines.coroutineContext
+import kotlin.math.roundToInt
 
-class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerAdapterRoute(private val mRvRoute : RecyclerView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class RouteType{
         STOP, LINE, RETURN
@@ -34,9 +29,14 @@ class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<R
     //  양 쪽   위쪽   아래쪽    파란선 invisible
     }
 
+    var location = 0
     private val mDataSet = ArrayList<CustomItem>()
 
     override fun getItemViewType(position: Int) : Int = mDataSet[position].type.ordinal
+
+    fun getItem(position: Int) : CustomItem{
+        return mDataSet[position]
+    }
 
     inner class CustomItem(val stopName: String, val direction: Direction, val type: RouteType) {
         constructor( type : RouteType) : this("", Direction.NONE, type)
@@ -91,18 +91,33 @@ class RecyclerAdapterRoute(val mRvRoute : RecyclerView) : RecyclerView.Adapter<R
         val item = mDataSet[position]
         if (item.type == RouteType.STOP) {
             (holder as StopHolder).bind(item)
+            val icBus = holder.itemView.findViewById<ImageView>(R.id.ic_route_bus)
+
+            if((location != 0) && (position == (location + 1) / 2 - 1)){
+                icBus.visibility = View.VISIBLE
+                val lp = icBus.layoutParams as (ConstraintLayout.LayoutParams)
+                if(location % 2 == 0)
+                    lp.setMargins(px(54F), px(41.3F), 0, 0)
+                else
+                    lp.setMargins(px(54F), 0, 0, 0)
+                icBus.layoutParams = lp
+            }
         }
         else if (item.type == RouteType.LINE) {
             val btnScrollup = (holder as LineHolder).itemView.findViewById<ImageButton>(R.id.btn_route_end)
-            val nestedSV = btnScrollup.rootView.findViewById<NestedScrollView>(R.id.nsv_route)
+
             val llm = mRvRoute.layoutManager
             btnScrollup.setOnClickListener {
-                nestedSV.scrollTo(0,0)
-//                llm.smoothScrollToPosition(mRvRoute,null,0)
+                llm.smoothScrollToPosition(mRvRoute,null,0)
             }
         }
     }
 
     // 아이템 개수 리턴
     override fun getItemCount(): Int = mDataSet.size
+
+    private fun px(dpi : Float):Int{
+        val dp = mRvRoute.resources.displayMetrics.density
+        return (dpi * dp).roundToInt()
+    }
 }
