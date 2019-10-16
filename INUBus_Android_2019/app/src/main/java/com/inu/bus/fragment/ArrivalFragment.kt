@@ -205,16 +205,4 @@ class ArrivalFragment : Fragment(){
 //            Log.d("ViewPager selected", position.toString())
         }
     }
-    // 검색창 Text가 변경되면 호출
-    private val mSearchTextWatcher = object : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {}
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            (vp_fragment_arrival_tabs.adapter as ViewPagerAdapter).fragments.forEach {
-                if(it is ArrivalFragmentTab){
-                    it.filter(s.toString())
-                }
-            }
-        }
-    }
 }

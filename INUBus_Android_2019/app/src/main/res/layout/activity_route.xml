@@ -33,19 +33,18 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="68.5dp"
-            android:layout_marginTop="-3dp"
+            android:layout_height="42dp"
             android:background="@color/colorPrimary"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/btn_activity_route_close"
-                android:layout_width="8.8dp"
-                android:layout_height="20.5dp"
-                android:layout_marginLeft="19.9dp"
-                android:layout_marginTop="16.5dp"
-                android:layout_marginBottom="27dp"
+                android:layout_width="10.9dp"
+                android:layout_height="22.6dp"
+                android:layout_marginLeft="18.8dp"
+                android:layout_marginTop="8.4dp"
+                android:layout_marginBottom="10.9dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:gravity="center"
@@ -64,40 +63,40 @@
                 android:id="@+id/route_busno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30.4dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="19dp"
+                android:layout_marginLeft="29.3dp"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/source_sans_roman_regula"
                 android:gravity="center"
                 android:text="@{no}"
                 android:textColor="@android:color/white"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_activity_route_close"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="6" />
 
             <LinearLayout
-                android:id="@+id/linearLayout3"
+                android:id="@+id/ll_route_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="31dp"
-                android:layout_marginBottom="21dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toStartOf="@+id/ll_route_end"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_route_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/notosans_semibold"
                     android:text="첫차"
                     android:textColor="#ffffff"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/route_start"
@@ -113,26 +112,27 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout4"
+                android:id="@+id/ll_route_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="31dp"
-                android:layout_marginBottom="21dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toStartOf="@id/ll_route_cost"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_route_end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/notosans_semibold"
                     android:text="막차"
                     android:textColor="#ffffff"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/route_end"
@@ -148,12 +148,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout2"
+                android:id="@+id/ll_route_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="21dp"
-                android:layout_marginBottom="21dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +167,7 @@
                     android:fontFamily="@font/notosans_semibold"
                     android:text="요금"
                     android:textColor="#ffffff"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -34,9 +34,7 @@ class ArrivalFragmentTab : Fragment(){
     private lateinit var mContext : Context
     private lateinit var mFabRefreshAnimation : RotateAnimation
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
-    val mAdapter by lazy { RecyclerAdapterArrival(mStrBusStop) }
-
-    private var favList = arrayListOf<String?>()
+    private val mAdapter by lazy { RecyclerAdapterArrival(mStrBusStop) }
     private var firstDBload = false
 
     companion object {
@@ -135,12 +133,6 @@ class ArrivalFragmentTab : Fragment(){
 //                temps = temps + temp + "\n"
 //        }
     }
-
-    fun filter(str : String){
-        mAdapter.filter(str,(activity as MainActivity).favList.size)
-    }
-
-    // TimeTicker 생명주기에 맞춰 활성, 비활성.
 
     // ViewPager에서 현재 페이지가 보이고 있는지 오는 콜백.
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

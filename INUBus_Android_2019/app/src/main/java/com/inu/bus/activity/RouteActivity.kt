@@ -3,11 +3,15 @@ package com.inu.bus.activity
 import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
+import android.provider.SyncStateContract
+import android.support.constraint.ConstraintLayout
+import android.support.constraint.ConstraintSet
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import com.inu.bus.R
 import com.inu.bus.databinding.ActivityRouteBinding
@@ -47,18 +51,28 @@ class RouteActivity : AppCompatActivity() {
         if(routeNo.substring(0,1)=="R")
         {
             routeNo = routeNo.substring(1,3)
-            Log.d("route","intent -> $routeNo")
-            var tempArray = ArrayList<BusRoutenode>()
-            Singleton.SchoolBusRoute.forEach() { (id, list) ->
-                if(id == routeNo) {
-                    tempArray = list
-                }
-            }
-            routeInfo = BusInformation(routeNo,"",1,1,BusInformation.BusType.BLUE,tempArray,"1")
+//            Log.d("route","intent -> $routeNo")
+//            var tempArray = ArrayList<BusRoutenode>()
+//            Singleton.SchoolBusRoute.forEach() { (id, list) ->
+//                if(id == routeNo) {
+//                    tempArray = list
+//                }
+//            }
+//            routeInfo = BusInformation(routeNo,"",1,1,BusInformation.BusType.BLUE,tempArray,"1")
+            tv_route_start.text = "출발"
+            tv_route_end.text = "도착"
+            ll_route_cost.visibility = View.GONE
+
+            val lp = ll_route_end.layoutParams as (ConstraintLayout.LayoutParams)
+            lp.rightMargin = px(23F)
+//            lp.endToStart = ConstraintSet.BASELINE
+            lp.endToEnd = ConstraintSet.PARENT_ID
+            ll_route_end.requestLayout()
+            ll_route_end.layoutParams = lp
 
 
         }
-        else routeInfo = Singleton.busInfo.get()!![routeNo]!!
+        routeInfo = Singleton.busInfo.get()!![routeNo]!!
         Log.d("route","intent routeInfo -> $routeInfo")
 
 

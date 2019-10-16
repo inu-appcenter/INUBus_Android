@@ -29,7 +29,7 @@ class SchoolBusFragment : Fragment(){
 
     private lateinit var mContext : Context
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
-    private val mAdapter by lazy { RecyclerAdapterSchoolBus("school") }
+    private val mAdapter by lazy { RecyclerAdapterSchoolBus() }
 
     companion object {
         fun newInstance(context: Context): SchoolBusFragment {

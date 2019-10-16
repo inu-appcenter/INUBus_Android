@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.inputmethod.EditorInfo
 import android.widget.AutoCompleteTextView
+import android.widget.Switch
 import com.inu.bus.R
 import com.inu.bus.fragment.ArrivalFragment
 import com.inu.bus.fragment.SearchHistoryFragment
@@ -33,7 +35,19 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         mWrSearchView = WeakReference(actionbar_searchView)
-//        mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
+
+        actionbar_searchView.setOnEditorActionListener { textView, actionID, keyEvent ->
+            when(actionID){
+                EditorInfo.IME_ACTION_SEARCH ->{
+                    getResult()
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+
 
         btn_search_back.setOnClickListener {
             if(activity_search_viewpager.currentItem == 1) activity_search_viewpager.currentItem = 0
@@ -41,13 +55,9 @@ class SearchActivity : AppCompatActivity() {
         }
 
         btn_actionbar_search.setOnClickListener {
-            activity_search_viewpager.currentItem = 1
-            (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
-                if(it is SearchResultFragment){
-                    it.mAdapter.filter(actionbar_searchView.text.toString())
-                }
-            }
+            getResult()
         }
+
         getHistory(this)
         setMainViewPager()
     }
@@ -85,7 +95,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-    fun getHistory(context : Context){
+    private fun getHistory(context : Context){
         val mDB = AppDatabase.getInstance(context)!!
         val r = Runnable {
             try {
@@ -111,6 +121,15 @@ class SearchActivity : AppCompatActivity() {
                     it.mAdapter.insertHistory(this,newSHitem)
                     getHistory(this)
                 }
+            }
+        }
+    }
+
+    fun getResult(){
+        activity_search_viewpager.currentItem = 1
+        (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
+            if(it is SearchResultFragment){
+                it.mAdapter.filter(actionbar_searchView.text.toString())
             }
         }
     }

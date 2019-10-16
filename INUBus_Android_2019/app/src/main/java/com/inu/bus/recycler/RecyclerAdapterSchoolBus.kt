@@ -17,17 +17,10 @@ import com.inu.bus.util.ArrivalInfoDiffUtil
  * Updated by ByoungMean on 2019-09-24.
  */
 
-class RecyclerAdapterSchoolBus(val mStrBusStop : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class RecyclerAdapterSchoolBus : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    var isShowing = ObservableBoolean(false)
-
-//    private val mArrivalItems = ArrayList<RecyclerArrivalItem>()
-    private val mArrivalItems = arrayListOf<RecyclerArrivalItem>(
-//        RecyclerArrivalItem(),
-//        RecyclerArrivalItem("통학버스"),
-//        RecyclerArrivalItem(BusArrivalInfo("송도",1,2,3,11,"8:00~9:00",BusInformation.BusType.BLUE,false)),
-//                RecyclerArrivalItem(BusArrivalInfo("송내",12,32,14,11,"3",BusInformation.BusType.BLUE,false))
-    )
+    private var isShowing = ObservableBoolean(false)
+    private val mArrivalItems = arrayListOf<RecyclerArrivalItem>()
 
     // ItemType에 따라 생성할 뷰홀더 객체 선택
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

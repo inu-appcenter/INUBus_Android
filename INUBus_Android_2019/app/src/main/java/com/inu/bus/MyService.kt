@@ -81,11 +81,44 @@ class MyService : Service(){
             override fun onResponse(call: Call<ArrayList<BusInformation>>, response: Response<ArrayList<BusInformation>>) {
                 val newMap = mutableMapOf<String, BusInformation>()
 
-                newMap["송내"] = (BusInformation("송내","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
-                newMap["수원"] = (BusInformation("수원-안산-시흥","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
-                newMap["일산"] = (BusInformation("일산-김포","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
-                newMap["청라"] = (BusInformation("청라","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
-                newMap["광명"] = (BusInformation("광명","",1,1,BusInformation.BusType.TONG,ArrayList<BusRoutenode>(),""))
+                newMap["송내"] = (BusInformation("송내","",640,830,BusInformation.BusType.TONG,
+                        arrayListOf(
+                                BusRoutenode(0,"송내남부역CU"),
+                                BusRoutenode(1,"미추홀캠퍼스"),
+                                BusRoutenode(2,"송도캠퍼스")
+                        ),"앱"))
+                newMap["수원"] = (BusInformation("수원-안산-시흥","",640,830,BusInformation.BusType.TONG,
+                        arrayListOf(
+                                BusRoutenode(1,"수원역 4번출구"),
+                                BusRoutenode(3,"상록수역 1번출구"),
+                                BusRoutenode(5,"안산 중앙역"),
+                                BusRoutenode(7,"안산역 제1승차장"),
+                                BusRoutenode(9,"함현중학교 정문"),
+                                BusRoutenode(11,"미추홀캠퍼스"),
+                                BusRoutenode(13,"송도캠퍼스")
+                        ),"센"))
+                newMap["일산"] = (BusInformation("일산-김포","",640,830,BusInformation.BusType.TONG,
+                        arrayListOf(
+                                BusRoutenode(1,"마두역 5번출구"),
+                                BusRoutenode(3,"대화역 4번출구"),
+                                BusRoutenode(5,"장기동 예가아파트"),
+                                BusRoutenode(7,"김포IC"),
+                                BusRoutenode(9,"미추홀캠퍼스"),
+                                BusRoutenode(11,"송도캠퍼스")
+                        ),"터"))
+                newMap["청라"] = (BusInformation("청라","",640,830,BusInformation.BusType.TONG,
+                        arrayListOf(
+                                BusRoutenode(1,"검암역 1번출구"),
+                                BusRoutenode(3,"가정역 4번출구"),
+                                BusRoutenode(5,"미추홀캠퍼스"),
+                                BusRoutenode(7,"송도캠퍼스")
+                        ),"I"))
+                newMap["광명"] = (BusInformation("광명","",640,830,BusInformation.BusType.TONG,
+                        arrayListOf(
+                                BusRoutenode(1,"석수역 1번출구"),
+                                BusRoutenode(3,"미추홀캠퍼스"),
+                                BusRoutenode(5,"송도캠퍼스")
+                        ),"N"))
 
                 // 버스 번호 Map
                 response.body()!!.forEach {
