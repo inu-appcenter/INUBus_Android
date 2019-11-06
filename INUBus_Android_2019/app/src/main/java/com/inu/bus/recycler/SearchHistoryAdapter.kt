@@ -14,7 +14,6 @@ import com.inu.bus.databinding.SearchHistoryListItemBinding
 import com.inu.bus.model.DBSearchHistoryItem
 import com.inu.bus.recycler.SearchHistoryAdapter.SearchHistoryViewHolder
 import com.inu.bus.util.AppDatabase
-import kotlinx.android.synthetic.main.custom_actionbar.view.*
 
 /**
  * Created by Minjae Son on 2018-08-10.

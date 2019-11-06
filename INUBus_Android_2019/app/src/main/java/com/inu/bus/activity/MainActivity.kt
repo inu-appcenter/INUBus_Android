@@ -15,10 +15,7 @@ import android.text.style.TextAppearanceSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.WindowManager
-import android.widget.AutoCompleteTextView
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.inu.bus.MyService
 import com.inu.bus.R
 import com.inu.bus.custom.FirstPopUp
@@ -57,7 +54,7 @@ class MainActivity : AppCompatActivity(){
         // ArrivalViewPager에서 지정단탭일시 액션바를 바꾸기 위해
         lateinit var mWrMainUpperView : WeakReference<LinearLayout>
         // Drawer 여는 이벤트용
-        lateinit var mWrBtnInfo : WeakReference<ImageButton>
+        lateinit var mWrBtnInfo : WeakReference<FrameLayout>
     }
 
     var mDB : AppDatabase? = null

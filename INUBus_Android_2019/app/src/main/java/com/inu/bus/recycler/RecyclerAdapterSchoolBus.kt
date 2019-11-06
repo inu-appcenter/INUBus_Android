@@ -3,6 +3,7 @@ package com.inu.bus.recycler
 import android.databinding.ObservableBoolean
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.inu.bus.databinding.RecyclerArrivalHeaderBinding
@@ -56,15 +57,33 @@ class RecyclerAdapterSchoolBus : RecyclerView.Adapter<RecyclerView.ViewHolder>()
     fun applyDataSet(items: ArrayList<RecyclerArrivalItem>,favList : ArrayList<String?>) {
         mArrivalItems.clear()
         val newDataSet = ArrayList<RecyclerArrivalItem>()
-        newDataSet.add(RecyclerArrivalItem())
+        var count = 1
+        var favOnOff = false
+        val favsorted = favList.sortedWith(Comparator {o1, o2 ->
+            o1!!.compareTo(o2!!)
+        })
+
+        Log.d("kbm","favsorted : $favsorted")
+
+
+
+        items.forEach {
+            for(i in 0 until favsorted.size){
+                if (it.arrivalInfo!!.no == favsorted[i]) {
+                    if(!favOnOff){
+                        newDataSet.add(0,RecyclerArrivalItem("즐겨찾기"))
+                        favOnOff = true
+                    }
+                    newDataSet.add(count, it)
+                    count++
+                }
+            }
+        }
+
         newDataSet.add(RecyclerArrivalItem("통학버스"))
         newDataSet.addAll(items)
-        // 도착정보가 없으면 리스트 비움
-//        if(items.isEmpty()){
-//            mArrivalItems.clear()
-//            notifyDataSetChanged()
-//            return
-//        }
+        newDataSet.add(0,RecyclerArrivalItem())
+
 
         // 데이터 목록 업데이트
         val diffUtil = ArrivalInfoDiffUtil(mArrivalItems, newDataSet)

@@ -3,7 +3,9 @@ package com.inu.bus.custom
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.res.AssetManager
 import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
@@ -18,16 +20,14 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.FontResourcesParserCompat
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
 import android.text.*
-import android.text.style.CharacterStyle
-import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
-import android.text.style.TextAppearanceSpan
+import android.text.style.*
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.widget.*
 import com.inu.bus.R
+import com.inu.bus.activity.MainActivity
 import com.ms_square.etsyblur.BlurringView
 import kotlinx.android.synthetic.main.custom_popup_container.view.*
 import java.lang.ref.WeakReference
@@ -76,16 +76,18 @@ class FirstPopUp : ConstraintLayout {
     }
 
     // TextView 특정 문자열 폰트 변경
-    fun SpanText(){
+    private fun SpanText(){
         val inubus = "INU BUS"
         val start = mMessage.text.indexOf(inubus)
         val end = start + inubus.length
         val ssb = SpannableString(mMessage.text)
+        val font = Typeface.createFromAsset(context.assets,"jalnan.ttf")
 //        ssb.setSpan(ForegroundColorSpan(Color.parseColor("#00FF00")),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            ssb.setSpan(TextAppearanceSpan(context,R.style.inubus_jalnan),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+//        if (Build.VERSION.SDK_INT >= 21)
+        ssb.setSpan(CustomTypefaceSpan("",font),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ssb.setSpan(ForegroundColorSpan(resources.getColor(R.color.colorPrimary)),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-        mMessage.setText(ssb)
+        mMessage.text = ssb
 
     }
 

@@ -2,6 +2,7 @@ package com.inu.bus.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.databinding.Observable
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -51,29 +52,36 @@ class SchoolBusFragment : Fragment(){
         fragment_node_arrival_swipeRefreshLayout.setOnRefreshListener {
             mBroadcastManager.sendBroadcast(Intent(LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value))
         }
-//        Singleton.SBgps.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
-//            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-//                dataRefresh()
-//            }
-//        })
+        Singleton.SBgps.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                dataRefresh()
+            }
+        })
         refreshLoading()
         dataRefresh()
     }
     // 등교용 정류장 정보를 다시 받아 어댑터에 적용
     private fun dataRefresh(){
-        fragment_arrival_bitzon_swiperefresh?.isRefreshing = false
+        fragment_node_arrival_swipeRefreshLayout?.isRefreshing = false
         Singleton.SBgps.get()?.let{gpsData ->
             val notEmptyDataSet = ArrayList<RecyclerArrivalItem>()
             if(gpsData.isNotEmpty()){
                 gpsData.forEach {
-                    val witch = it.location
-                    Log.d("gps","routeid -> ${it.busTime.routeID}")
-                    notEmptyDataSet.add(RecyclerArrivalItem(BusArrivalInfo(
-                            "${it.busTime.routeID}",-1,witch,-1,9999,"${it.busTime.startTime}",BusInformation.BusType.TONG)
-                    ))
+
+                    val temp = BusArrivalInfo("${it.busTime.routeID}",-1,it.location,-1,9999,
+                            "${it.busTime.startTime}",BusInformation.BusType.TONG)
+
+                    (activity as MainActivity).favList.forEachIndexed { index, favorite ->
+                        if (it.busTime.routeID == favorite)
+                            temp.favorite = true
+                    }
+
+
+                    notEmptyDataSet.add(RecyclerArrivalItem(temp))
                 }
             }
             mAdapter.applyDataSet(notEmptyDataSet,(activity as MainActivity).favList)
+            mAdapter.notifyDataSetChanged()
         }
     }
 

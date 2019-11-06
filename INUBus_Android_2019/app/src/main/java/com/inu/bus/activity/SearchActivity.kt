@@ -7,16 +7,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.AutoCompleteTextView
-import android.widget.Switch
 import com.inu.bus.R
-import com.inu.bus.fragment.ArrivalFragment
 import com.inu.bus.fragment.SearchHistoryFragment
 import com.inu.bus.fragment.SearchResultFragment
 import com.inu.bus.model.DBSearchHistoryItem
-import com.inu.bus.recycler.SearchResultAdapter
 import com.inu.bus.recycler.ViewPagerAdapter
 import com.inu.bus.util.AppDatabase
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.custom_searchbar.*
 import java.lang.ref.WeakReference

@@ -129,7 +129,7 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
         filter("",count)
     }
 
-    fun filter(str : String = mFilteringString,favcount:Int) {
+    private fun filter(str : String = mFilteringString, favcount:Int) {
 
         var filtered :ArrayList<RecyclerArrivalItem>
 
@@ -143,12 +143,6 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
                         mArrivalItems.filter { item ->
                             if (mArrivalItems.indexOf(item)>favcount+1 && item.itemType == RecyclerArrivalItem.ItemType.ArrivalInfo){
                                 item.arrivalInfo!!.no.contains(str)
-//                                    !Singleton.busInfo.get()!![item.arrivalInfo!!.no]
-//                                            ?.nodeList
-//                                            ?.find{
-//                                                Log.d("0598","it -> ${it}")
-//                                                it.contains(str)
-//                                            }.isNullOrEmpty()
                             }
                             else false
                         }

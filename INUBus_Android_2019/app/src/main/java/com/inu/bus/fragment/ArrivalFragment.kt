@@ -70,7 +70,6 @@ class ArrivalFragment : Fragment(){
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.NOTIFY_FRAGMENT_READY.value))
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value))
         mBroadcastManager.registerReceiver(mBroadcastReceiver, IntentFilter(LocalIntent.FAVORITE_CLICK.value))
-//        mBroadcastManager.sendBroadcast(Intent(LocalIntent.FAVORITE_CLICK.value))
 
         // tab setting
         mTabIcons.forEachIndexed { index, it ->

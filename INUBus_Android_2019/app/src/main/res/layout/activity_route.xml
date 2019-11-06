@@ -35,26 +35,32 @@
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:background="@color/colorPrimary"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:gravity="center_vertical">
 
-            <ImageButton
+            <FrameLayout
                 android:id="@+id/btn_activity_route_close"
-                android:layout_width="10.9dp"
-                android:layout_height="22.6dp"
-                android:layout_marginLeft="18.8dp"
-                android:layout_marginTop="8.4dp"
-                android:layout_marginBottom="10.9dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:onClick="@{()->listener.btnCloseClicked()}"
-
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_arrow_left_white_new"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/iv_route_close"
+                    android:layout_width="10.9dp"
+                    android:layout_height="22.6dp"
+                    android:layout_marginLeft="13.8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="false"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_arrow_left_white_new" />
+
+            </FrameLayout>
+
             <!--android:padding="0dp"-->
             <!--android:textColor="@android:color/white"-->
             <!--android:textSize="20sp"-->
@@ -63,7 +69,7 @@
                 android:id="@+id/route_busno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="29.3dp"
+                android:layout_marginLeft="14dp"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/source_sans_roman_regula"
                 android:gravity="center"
@@ -73,6 +79,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_activity_route_close"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="6" />
 
             <LinearLayout

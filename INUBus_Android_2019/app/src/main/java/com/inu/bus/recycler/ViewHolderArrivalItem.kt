@@ -60,9 +60,6 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
     // recycler_arrival_item.xml 바인딩
     fun bind(data : BusArrivalInfo){
 
-        val btnFav = itemView.findViewById<CheckBox>(R.id.btn_favorite)
-        btnFav.touchDelegate = TouchDelegate(Rect(0,0,20,20),btnFav)
-
         mBinding.btnFavorite.isChecked = data.favorite
 
 //        val parent = mBinding.btnFavorite.parent as View
@@ -181,11 +178,13 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
             data.favorite = true
             (context as MainActivity).favList.add(data.no)
             context.insertDB(data.no)
+            Log.d("kbm","insert db")
         }
         else if(!btnFavorite.isChecked){
             data.favorite = false
             (context as MainActivity).favList.remove(data.no)
             context.deleteDB(data.no)
+            Log.d("kbm","delete db")
         }
 
         val mBroadcastManager = LocalBroadcastManager.getInstance(context)

@@ -54,7 +54,7 @@
     <style name="inubus_jalnan">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/jalnan</item>
+        <item name="android:fontFamily">@font/inubus_jalnan</item>
     </style>
 
     <style name="pulbic_data">

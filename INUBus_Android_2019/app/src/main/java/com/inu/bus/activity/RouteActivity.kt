@@ -59,6 +59,7 @@ class RouteActivity : AppCompatActivity() {
 //                }
 //            }
 //            routeInfo = BusInformation(routeNo,"",1,1,BusInformation.BusType.BLUE,tempArray,"1")
+            route_busno.textSize = 20F
             tv_route_start.text = "출발"
             tv_route_end.text = "도착"
             ll_route_cost.visibility = View.GONE
