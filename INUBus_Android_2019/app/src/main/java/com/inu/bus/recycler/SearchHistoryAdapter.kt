@@ -19,6 +19,10 @@ import com.inu.bus.util.AppDatabase
  * Created by Minjae Son on 2018-08-10.
  */
 
+/**
+ * Updated by ByoungMean on 2019-10-21.
+ */
+
 class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
     // 검색결과 데이터베이스
@@ -33,7 +37,7 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
-        holder.bind(mHistoryList[position],position)
+        holder.bind(mHistoryList[position])
     }
 
     override fun getItemCount(): Int {
@@ -43,7 +47,7 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
     inner class SearchHistoryViewHolder(private val mBinding : SearchHistoryListItemBinding,
             private val mContext : Context = mBinding.root.context) : RecyclerView.ViewHolder(mBinding.root) {
 
-        fun bind(data : DBSearchHistoryItem, position : Int){
+        fun bind(data: DBSearchHistoryItem){
             mDB = AppDatabase.getInstance(mContext)!!
             val mBtnfinder = itemView.findViewById<ConstraintLayout>(R.id.btn_history_select)
             val mBtndelete = itemView.findViewById<ImageButton>(R.id.btn_autocomplete_item_delete)
@@ -59,11 +63,9 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
                 }
                 val thread = Thread(r)
                 thread.start()
-
 //                refreshHistory(mContext)
                 mHistoryList.remove(data)
                 notifyDataSetChanged()
-                Log.d("1234","button click")
             }
         }
     }
@@ -79,21 +81,25 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
         }
         val thread = Thread(r)
         thread.start()
+        notifyDataSetChanged()
     }
 
     fun insertHistory(context : Context, data : DBSearchHistoryItem){
-        val mDB = AppDatabase.getInstance(context)!!
-        val r = Runnable {
-            try {
-                mDB.searchhistoryDAO().insert(data)
-            } catch (e:Exception){
-                Log.d("1234","Error - $e")
-            }
+        var overlap = false
+        mHistoryList.forEach {
+            if(it.name == data.name) overlap = true
         }
-        val thread = Thread(r)
-        thread.start()
 
-        mHistoryList.add(data)
-        notifyDataSetChanged()
+        if(!overlap){
+            val mDB = AppDatabase.getInstance(context)!!
+            val r = Runnable {
+                mDB.searchhistoryDAO().insert(data)
+            }
+            val thread = Thread(r)
+            thread.start()
+
+            mHistoryList.add(data)
+            notifyDataSetChanged()
+        }
     }
 }

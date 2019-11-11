@@ -1,6 +1,5 @@
 package com.inu.bus.recycler
 
-import android.content.Context
 import android.content.Intent
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
@@ -13,39 +12,33 @@ import com.inu.bus.databinding.SearchResultListItemBinding
 import com.inu.bus.model.DBSearchHistoryItem
 import com.inu.bus.model.SearchResultNode
 import com.inu.bus.recycler.SearchResultAdapter.SearchResultViewHolder
-import com.inu.bus.util.AppDatabase
 import com.inu.bus.util.Singleton
 
 class SearchResultAdapter() : RecyclerView.Adapter<SearchResultViewHolder>() {
 
-//    var mHistoryList = arrayListOf<BusInformation>(
-//            BusInformation("333333","123",1,1,BusInformation.BusType.RED,ArrayList<BusRoutenode>(),"3"))
-
     var mSearchList = ArrayList(Singleton.busInfo.get()!!.values)
-    var mFilteredList = arrayListOf<SearchResultNode>()
+    private var mFilteredList = arrayListOf<SearchResultNode>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
         val binding = SearchResultListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchResultViewHolder(binding,parent.context)
+        return SearchResultViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
-        holder.bind(mFilteredList[position],position)
+        holder.bind(mFilteredList[position])
     }
 
     override fun getItemCount(): Int {
         return mFilteredList.size
     }
 
-    inner class SearchResultViewHolder(private val mBinding : SearchResultListItemBinding,
-            private val mContext : Context = mBinding.root.context) : RecyclerView.ViewHolder(mBinding.root) {
+    inner class SearchResultViewHolder(private val mBinding: SearchResultListItemBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
-        fun bind(data : SearchResultNode, position : Int){
+        fun bind(data: SearchResultNode){
             mBinding.item = data
 
             val mBtnGoroute = itemView.findViewById<ConstraintLayout>(R.id.btn_search_select)
             val context = mBinding.root.context
-            val mDB = AppDatabase.getInstance(context)
 
             mBtnGoroute.setOnClickListener {
                 var newSHitem = DBSearchHistoryItem()

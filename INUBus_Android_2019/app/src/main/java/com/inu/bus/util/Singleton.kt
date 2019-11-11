@@ -1,10 +1,12 @@
 package com.inu.bus.util
 
 import android.app.Activity
+import android.content.Context
 import android.databinding.ObservableField
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.inu.bus.model.*
+import com.inu.bus.recycler.SearchHistoryAdapter
 import com.inu.bus.server
 import com.inu.bus.util.Singleton.myPackageName
 import retrofit2.Retrofit
@@ -24,7 +26,7 @@ object Singleton{
             .addConverterFactory(GsonConverterFactory.create())
             // 엔드포인트 설정
             .build().create(BusRetrofitService::class.java)
-    val msgRetrofit = Retrofit.Builder().baseUrl(server.serverUrl).addConverterFactory(GsonConverterFactory.create()).build().create(MsgRetrofitService::class.java)
+    val msgRetrofit = Retrofit.Builder().baseUrl(server.serverUrl).addConverterFactory(GsonConverterFactory.create()).build().create(MsgRetrofitService::class.java)!!
 
     // ObservableField를 통해 데이터 값이 변경될 때 View를 자동으로 업데이트
     val busInfo  = ObservableField(mutableMapOf<String, BusInformation>())
@@ -46,6 +48,7 @@ object Singleton{
         }
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
     // 버스 요금 Map
     val busCost = mutableMapOf(
             Pair("6405", 2600),

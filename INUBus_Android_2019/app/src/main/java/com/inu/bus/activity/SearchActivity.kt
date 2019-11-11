@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.AutoCompleteTextView
 import com.inu.bus.R
@@ -24,7 +25,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private val mViewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager, this) }
-    var mHistoryList = arrayListOf<DBSearchHistoryItem>()
+    private var mHistoryList = arrayListOf<DBSearchHistoryItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,28 +74,11 @@ class SearchActivity : AppCompatActivity() {
         activity_search_viewpager.setScrollDurationFactor(4.0)
     }
 
-    private val mSearchTextWatcher = object : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {}
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if(s.isNullOrEmpty())
-                activity_search_viewpager.currentItem = 0
-            else {
-                activity_search_viewpager.currentItem = 1
-                (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
-                    if(it is SearchResultFragment){
-                        it.mAdapter.filter(s.toString())
-                    }
-                }
-            }
-        }
-    }
-
 
     private fun getHistory(context : Context){
         val mDB = AppDatabase.getInstance(context)!!
         val r = Runnable {
-            try {
+                try {
                 mHistoryList = mDB.searchhistoryDAO()?.getAll() as ArrayList
             } catch (e:Exception){
 
@@ -108,20 +92,21 @@ class SearchActivity : AppCompatActivity() {
         var overlap = false
 
         // overlap test
-        mHistoryList.forEach {
-            if(it.name == newSHitem.name) overlap = true
-        }
-        if(!overlap){
+
+//        mHistoryList.forEach {
+//            if(it.name == newSHitem.name) overlap = true
+//        }
+//        if(!overlap){
             (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
                 if(it is SearchHistoryFragment){
                     it.mAdapter.insertHistory(this,newSHitem)
                     getHistory(this)
                 }
             }
-        }
+//        }
     }
 
-    fun getResult(){
+    private fun getResult(){
         activity_search_viewpager.currentItem = 1
         (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
             if(it is SearchResultFragment){

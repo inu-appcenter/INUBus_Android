@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import com.inu.bus.R
-import com.inu.bus.custom.FirstPopUp
 import com.inu.bus.custom.IconPopUp
 import com.inu.bus.databinding.ActivityInquireBinding
 import com.inu.bus.model.InquireModel
@@ -24,6 +23,11 @@ import retrofit2.Response
 /**
  * Created by Minjae Son on 2018-08-11.
  */
+
+/**
+ * Updated by ByoungMean on 2019-11-07.
+ */
+
 class InquireActivity : AppCompatActivity() {
 
     private val data = InquireModel()
@@ -94,20 +98,7 @@ class InquireActivity : AppCompatActivity() {
         })
     }
 
-    fun startpopup(){
-        val popupView = FirstPopUp(this@InquireActivity)
-                .setDimBlur(blurring_view)
-                .setShowDuration(100000)
-                .setOnConfirmButtonClickListener{
-                    it.dismiss()
-                }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            popupView.setWindow(window)
-        }
-        popupView.show()
-    }
-
-    fun changestatusBarColor(){
+    private fun changestatusBarColor(){
         // 롤리팝 버전 이상부터 statusBar를 파란색, 아이콘을 밝은색으로 표시
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
