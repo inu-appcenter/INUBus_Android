@@ -8,11 +8,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v4.widget.CircularProgressDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import com.inu.bus.R
 import com.inu.bus.activity.MainActivity
@@ -32,17 +30,14 @@ class ArrivalFragmentTab : Fragment(){
     private var isShowing = false
     private lateinit var mStrBusStop: String
     private lateinit var mContext : Context
-    private lateinit var mFabRefreshAnimation : RotateAnimation
     private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
-    private val mAdapter by lazy { RecyclerAdapterArrival(mStrBusStop) }
-    private var firstDBload = false
+    private val mAdapter by lazy { RecyclerAdapterArrival() }
 
     companion object {
         fun newInstance(context: Context, stopName: String): ArrivalFragmentTab {
             val fragment = ArrivalFragmentTab()
             fragment.mStrBusStop = stopName
             fragment.mContext = context
-            Log.d("test", "$stopName fragment created")
             return fragment
         }
     }
@@ -53,11 +48,9 @@ class ArrivalFragmentTab : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("test", "$mStrBusStop fragment onViewCreated")
         rv_fragment_node_arrival_recycler.adapter = mAdapter
         // 프래그먼트 준비 알림 Broadcast 시작
         mBroadcastManager.sendBroadcast(Intent(LocalIntent.NOTIFY_FRAGMENT_READY.value))
-//        mBroadcastManager.sendBroadcast(Intent(LocalIntent.FAVORITE_CLICK.value))
         // 프래그먼트를 당기면 데이터 리프레시 Broadcast 시작
 
         fragment_node_arrival_swipeRefreshLayout.setOnRefreshListener {
@@ -73,15 +66,12 @@ class ArrivalFragmentTab : Fragment(){
     }
     // 하교용 정류장 정보를 다시 받아 어댑터에 적용
     fun dataRefresh(){
-        Log.d("0598", "dataRefresh")
         fragment_node_arrival_swipeRefreshLayout?.isRefreshing = false
         Singleton.arrivalFromInfo.get()?.let{
             val checked = it.filter{ subIt->  subIt.name == mStrBusStop }
             if(checked.isEmpty()) return
             val filtered = checked[0].data
 
-
-            Log.d("0598","firstdb ${firstDBload}")
             if(!(activity as MainActivity).firstDBload){
                 (activity as MainActivity).setDB()
             }
@@ -92,15 +82,13 @@ class ArrivalFragmentTab : Fragment(){
                         it.favorite = true
                 }
             }
-
             mAdapter.applyDataSet(filtered,(activity as MainActivity).favList)
             mAdapter.notifyDataSetChanged()
         }
     }
 
     // 당겨서 새로고침 이미지 설정
-    fun refreshLoading(){
-//        Log.d("0598", "refreshLoading")
+    private fun refreshLoading(){
         val mSwipeRefreshLayout = fragment_node_arrival_swipeRefreshLayout
         mSwipeRefreshLayout.setProgressViewOffset(true,0,130)
         mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#0061f4"))
@@ -117,21 +105,6 @@ class ArrivalFragmentTab : Fragment(){
         f3.isAccessible = true
         var img = f3.get(mSwipeRefreshLayout) as ImageView
         img.setBackgroundResource(R.drawable.refresh_loading)
-
-//        val dfields = mSwipeRefreshLayout.javaClass.declaredFields
-//
-//        var temp:String = ""
-//        var temp2:String = ""
-//        var temps:String = ""
-//        for(i in 0 until dfields.size){
-//            //temp = temp + dfields[i].toString() + "\n"
-//            temp = dfields[i].toString()
-//            temp2 = temp.substring(temp.indexOf("widget.SwipeRefreshLayout")+26)
-//            if(temp.contains("final"))
-//                temps = temps + temp2 + "\n"
-//            else
-//                temps = temps + temp + "\n"
-//        }
     }
 
     // ViewPager에서 현재 페이지가 보이고 있는지 오는 콜백.

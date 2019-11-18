@@ -10,9 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.inu.bus.R
-import com.inu.bus.databinding.RecyclerDestinationItemBinding
-import com.inu.bus.recycler.DestinationRecyclerViewHolder
-import com.inu.bus.recycler.RecyclerAdapterDestination
 import com.inu.bus.recycler.SearchHistoryAdapter
 import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
 
@@ -24,7 +21,6 @@ class SearchHistoryFragment : Fragment() {
 
     private lateinit var mFm: FragmentManager
     private lateinit var mContext : Context
-    private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
     lateinit var mAdapter : SearchHistoryAdapter
 
     companion object {

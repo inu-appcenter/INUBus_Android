@@ -22,9 +22,6 @@ import retrofit2.Response
 
 /**
  * Created by Minjae Son on 2018-08-11.
- */
-
-/**
  * Updated by ByoungMean on 2019-11-07.
  */
 
@@ -85,7 +82,7 @@ class InquireActivity : AppCompatActivity() {
                         .setBtnText("확인")
                         .setMessageText("소중한 의견 감사드립니다!.")
                         .setDimBlur(blurring_view)
-                        .setShowDuration(60000)
+                        .setShowDuration(1000)
                         .setDismissListener{
                             closeActivity()
                         }
@@ -93,7 +90,6 @@ class InquireActivity : AppCompatActivity() {
                     popupView.setWindow(window)
                 }
                 popupView.show()
-//                popupView.showAtLocation(mBinding.root, Gravity.CENTER, 0, 0)
             }
         })
     }

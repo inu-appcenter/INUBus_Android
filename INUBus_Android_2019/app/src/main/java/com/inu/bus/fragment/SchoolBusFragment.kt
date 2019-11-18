@@ -8,22 +8,22 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v4.widget.CircularProgressDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.inu.bus.R
 import com.inu.bus.activity.MainActivity
-import com.inu.bus.model.*
+import com.inu.bus.model.BusArrivalInfo
+import com.inu.bus.model.BusInformation
+import com.inu.bus.model.RecyclerArrivalItem
 import com.inu.bus.recycler.RecyclerAdapterSchoolBus
 import com.inu.bus.util.LocalIntent
 import com.inu.bus.util.Singleton
-import kotlinx.android.synthetic.main.fragment_arrival_tab_bitzon.*
 import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
 
 /**
- * Created by Minjae Son on 2018-08-13.
+ * Created by ByoungMean on 2019-10-11.
  */
 
 class SchoolBusFragment : Fragment(){
@@ -52,7 +52,7 @@ class SchoolBusFragment : Fragment(){
         fragment_node_arrival_swipeRefreshLayout.setOnRefreshListener {
             mBroadcastManager.sendBroadcast(Intent(LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value))
         }
-        Singleton.SBgps.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
+        Singleton.schoolbusGPS.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                 dataRefresh()
             }
@@ -63,7 +63,7 @@ class SchoolBusFragment : Fragment(){
     // 등교용 정류장 정보를 다시 받아 어댑터에 적용
     private fun dataRefresh(){
         fragment_node_arrival_swipeRefreshLayout?.isRefreshing = false
-        Singleton.SBgps.get()?.let{gpsData ->
+        Singleton.schoolbusGPS.get()?.let{ gpsData ->
             val notEmptyDataSet = ArrayList<RecyclerArrivalItem>()
             if(gpsData.isNotEmpty()){
                 gpsData.forEach {
@@ -75,8 +75,6 @@ class SchoolBusFragment : Fragment(){
                         if (it.busTime.routeID == favorite)
                             temp.favorite = true
                     }
-
-
                     notEmptyDataSet.add(RecyclerArrivalItem(temp))
                 }
             }
@@ -86,7 +84,6 @@ class SchoolBusFragment : Fragment(){
     }
 
     private fun refreshLoading() {
-//        Log.d("0598", "refreshLoading")
         val mSwipeRefreshLayout = fragment_node_arrival_swipeRefreshLayout
         mSwipeRefreshLayout.setProgressViewOffset(true, 0, 130)
         mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#0061f4"))

@@ -48,7 +48,6 @@ class FirstPopUp : ConstraintLayout {
     private var mShowDuration: Long?
     private var mHandler: Handler
     private var mWindow: Window? = null
-    private val mAnimationDuration = 1000L
     private var mDismissCallback : (()->Unit)? = null
 
 
@@ -63,16 +62,6 @@ class FirstPopUp : ConstraintLayout {
         mShowDuration = null
         mHandler = Handler()
         mInstance = WeakReference(this)
-    }
-
-    // 텍스트뷰에 html 스타일 적용
-    @Suppress("DEPRECATION")
-    private fun makeSpanText(text: String): Spanned {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            Html.fromHtml(text);
-        }
     }
 
     // TextView 특정 문자열 폰트 변경
@@ -138,12 +127,6 @@ class FirstPopUp : ConstraintLayout {
                 dismiss()
             }, it)
         }
-    }
-
-    // 팝업 사라질때 호출
-    fun setDismissListener(callback: () -> Unit): FirstPopUp {
-        mDismissCallback = callback
-        return this
     }
 
     fun dismiss() {
@@ -214,29 +197,6 @@ class FirstPopUp : ConstraintLayout {
         val g = Color.green(to) * ratio + Color.green(from) * inverseRatio
         val b = Color.blue(to) * ratio + Color.blue(from) * inverseRatio
         return Color.rgb(r.toInt(), g.toInt(), b.toInt())
-    }
-    // dp -> px 사이즈 변환
-    private fun dp2px(dp: Float): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
-    }
-    // 이미지를 비트맵 형식으로 처리
-    private fun getBitmapFromDrawable(drawable: Drawable): Bitmap {
-        return if (drawable is BitmapDrawable) {
-            drawable.bitmap
-        } else {
-            val radius: Int =
-                    if (drawable.intrinsicWidth > 0)
-                        drawable.intrinsicWidth
-                    else
-                        (dp2px(mDpIvSize) / 2).toInt()
-
-            val bitmap = Bitmap.createBitmap(radius,
-                    radius, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(bitmap)
-            drawable.setBounds(0, 0, canvas.width, canvas.height)
-            drawable.draw(canvas)
-            bitmap
-        }
     }
 
     private val emptyAnimationListener =

@@ -3,7 +3,6 @@ package com.inu.bus.activity
 import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v4.content.ContextCompat
@@ -16,16 +15,18 @@ import android.view.WindowManager
 import com.inu.bus.R
 import com.inu.bus.databinding.ActivityRouteBinding
 import com.inu.bus.model.BusInformation
-import com.inu.bus.model.BusRoutenode
 import com.inu.bus.recycler.RecyclerAdapterRoute
 import com.inu.bus.recycler.RecyclerAdapterRoute.Direction
 import com.inu.bus.recycler.RecyclerAdapterRoute.RouteType
 import com.inu.bus.util.Singleton
 import kotlinx.android.synthetic.main.activity_route.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.roundToInt
 
 /**
  * Created by Bunga on 2018-02-23.
+ * Updated by ByoungMean on 2019-10-17.
  */
 
 class RouteActivity : AppCompatActivity() {
@@ -45,41 +46,42 @@ class RouteActivity : AppCompatActivity() {
         var routeNo = intent.getStringExtra("routeNo")
         Log.d("route","intent -> $routeNo")
         val routeInfo : BusInformation
-        val lastNo = routeNo
+        var lastNo = routeNo
 
         // 통학버스 일때
         if(routeNo.substring(0,1)=="R")
         {
             routeNo = routeNo.substring(1,3)
-//            Log.d("route","intent -> $routeNo")
-//            var tempArray = ArrayList<BusRoutenode>()
-//            Singleton.SchoolBusRoute.forEach() { (id, list) ->
-//                if(id == routeNo) {
-//                    tempArray = list
-//                }
-//            }
-//            routeInfo = BusInformation(routeNo,"",1,1,BusInformation.BusType.BLUE,tempArray,"1")
+            lastNo = lastNo.substring(1)
             route_busno.textSize = 20F
             tv_route_start.text = "출발"
             tv_route_end.text = "도착"
             ll_route_cost.visibility = View.GONE
 
-            val lp = ll_route_end.layoutParams as (ConstraintLayout.LayoutParams)
-            lp.rightMargin = px(23F)
-//            lp.endToStart = ConstraintSet.BASELINE
-            lp.endToEnd = ConstraintSet.PARENT_ID
+            val noLp = route_busno.layoutParams as (ConstraintLayout.LayoutParams)
+            noLp.topMargin = px(5F)
+            route_busno.requestLayout()
+            route_busno.layoutParams = noLp
+
+            val endLp = ll_route_end.layoutParams as (ConstraintLayout.LayoutParams)
+            endLp.rightMargin = px(23F)
+            endLp.endToEnd = ConstraintSet.PARENT_ID
             ll_route_end.requestLayout()
-            ll_route_end.layoutParams = lp
-
-
+            ll_route_end.layoutParams = endLp
         }
         routeInfo = Singleton.busInfo.get()!![routeNo]!!
         Log.d("route","intent routeInfo -> $routeInfo")
 
 
-        mBinding.no = routeNo
-        mBinding.startTime = String.format("%02d:%02d", routeInfo.start/100, routeInfo.start%100)
-        mBinding.endTime = String.format("%02d:%02d", routeInfo.end/100, routeInfo.end%100)
+        mBinding.no = lastNo
+        if(lastNo == "송내"){
+            mBinding.startTime = "08:00 / 09:00"
+            mBinding.endTime = "08:40 / 09:40"
+        }
+        else{
+            mBinding.startTime = String.format("%02d:%02d", routeInfo.start/100, routeInfo.start%100)
+            mBinding.endTime = String.format("%02d:%02d", routeInfo.end/100, routeInfo.end%100)
+        }
         var fee : Int? = null
 
         changestatusBarColor()
@@ -98,30 +100,14 @@ class RouteActivity : AppCompatActivity() {
         val adapter = RecyclerAdapterRoute(mRvRoute)
         ViewCompat.setNestedScrollingEnabled(rv_route_activity_recycler, false);
 
-        Singleton.SBgps.get()?.let{
+        Singleton.schoolbusGPS.get()?.let{
             it.forEach { gpsData->
                 if(gpsData.busTime.routeID.substring(0,2) == routeNo){
-
                     val location = gpsData.location
-                    if(location != 0){
-                        adapter.location = 1
-//                        adapter.getItem(location).
-//                            ic_route_bus.visibility = View.VISIBLE
-//                            val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-//                                    RelativeLayout.LayoutParams.WRAP_CONTENT)
-//
-//                            lp.setMargins(px(54F),px(20F) + (location-1) * px(30.5F),0,0)
-//                            ic_route_bus.layoutParams = lp
-                    }
+                    if(location != 0) adapter.location = 1
                 }
             }
         }
-
-//        btn_route_refresh.setOnClickListener {
-//            Toast.makeText(this,"~~4567~",Toast.LENGTH_SHORT).show()
-//        }
-
-
 
         // 회차지가 없는경우
         if(turnNode == ""){
@@ -173,7 +159,7 @@ class RouteActivity : AppCompatActivity() {
         return (dpi * dp).roundToInt()
     }
 
-    fun changestatusBarColor(){
+    private fun changestatusBarColor(){
         // 롤리팝 버전 이상부터 statusBar를 파란색, 아이콘을 밝은색으로 표시
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

@@ -6,10 +6,9 @@ package com.inu.bus.model
 
 // Column Header, Section Header, ArrivalItem을 함께 담는 객체
 class RecyclerArrivalItem(
-        val itemType : ItemType = ItemType.ArrivalInfo,
-        val sectionHeader : String? = null,
-        val arrivalInfo: BusArrivalInfo? = null,
-        val needButton: Boolean = false
+        val itemType: ItemType = ItemType.ArrivalInfo,
+        val sectionHeader: String? = null,
+        val arrivalInfo: BusArrivalInfo? = null
 ){
     // 생성자
     constructor() : this(ItemType.Header)
@@ -21,7 +20,7 @@ class RecyclerArrivalItem(
     enum class ItemType{
         Header,SectionHeader, ArrivalInfo;
         companion object {
-            fun findByOrdinal(value: Int): ItemType = ItemType.values().find { it.ordinal == value } ?: Header
+            fun findByOrdinal(value: Int): ItemType = values().find { it.ordinal == value } ?: Header
         }
     }
 

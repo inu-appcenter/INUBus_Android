@@ -15,7 +15,9 @@ import android.text.style.TextAppearanceSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.WindowManager
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.inu.bus.MyService
 import com.inu.bus.R
 import com.inu.bus.custom.FirstPopUp
@@ -30,17 +32,15 @@ import com.inu.bus.util.Singleton
 import com.ms_square.etsyblur.BlurSupport
 import com.ms_square.etsyblur.BlurringView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.activity_main_viewpager
-import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.custom_actionbar.*
 import kotlinx.android.synthetic.main.custom_info_drawer.*
 import kotlinx.android.synthetic.main.custom_info_drawer.view.*
-import kotlinx.android.synthetic.main.custom_searchbar.*
 import java.lang.ref.WeakReference
 
 
 /**
  * Created by Minjae Son on 2018-08-07.
+ * Updated by ByoungMean on 2019-09-27.
  */
 
 class MainActivity : AppCompatActivity(){
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.inu.bus.R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
         // room DB 생성
         mDB = AppDatabase.getInstance(this)
@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity(){
         mWrBlurringView2 = WeakReference(activity_main_popup_blur)
 //        mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
         changestatusBarColor()
-        setActionBar()
         setDrawer()
         setMainViewPager()
         SpanText()
@@ -96,28 +95,12 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    private fun setActionBar(){
-        // 젤리빈 호환
-//        supportActionBar?.hide()
-//        actionbar_searchView.setAdapter(mSearchAdapter)
-//        actionbar_searchView.setOnEditorActionListener( TextView.OnEditorActionListener { v, actionId, _ ->
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                mDB?.searchhistoryDAO()?.insert(DBSearchHistoryItem(name = v.text.toString()))
-//                mSearchAdapter.refreshHistory()
-//                return@OnEditorActionListener true
-//            }
-//            false
-//        })
-    }
-
-
-
     fun setDB() {
         val r = Runnable{
             try {
                 DBfavorite = mDB?.busfavoriteDAO()?.getAll()!!
             } catch (e:Exception){
-                Log.d("kBm0598","Error - $e")
+                Log.d("error","Error - $e")
             }
         }
         val addThread = Thread(r)
@@ -126,7 +109,7 @@ class MainActivity : AppCompatActivity(){
             if(!favList.contains(it.no))
                 favList.add(it.no)
         }
-        if(!favList.isEmpty()){
+        if(favList.isNotEmpty()){
             firstDBload = true
         }
     }
@@ -136,7 +119,7 @@ class MainActivity : AppCompatActivity(){
             try {
                 mDB?.busfavoriteDAO()?.insert(DBBusFavoriteItem(no))
             } catch (e:Exception){
-                Log.d("kBm0598","Error - $e")
+                Log.d("error","Error - $e")
             }
         }
         val addThread = Thread(r)
@@ -148,7 +131,7 @@ class MainActivity : AppCompatActivity(){
             try {
                 mDB?.busfavoriteDAO()?.delete(DBBusFavoriteItem(no))
             } catch (e:Exception){
-                Log.d("kBm0598","Error - $e")
+                Log.d("error","Error - $e")
             }
         }
         val addThread = Thread(r)
@@ -180,15 +163,12 @@ class MainActivity : AppCompatActivity(){
     }
 
     // TextView 특정 문자열 폰트 변경
-    fun SpanText(){
-//        val v = LayoutInflater.from(applicationContext)).inflate()
+    private fun SpanText(){
         val mMessage = findViewById<TextView>(R.id.tv_drawer_note)
         val str = "공공데이터"
         val start = mMessage.text.indexOf(str)
         val end = start + str.length
         val ssb = SpannableString(mMessage.text)
-//        ssb.setSpan(ForegroundColorSpan(Color.parseColor("#00FF00")),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         ssb.setSpan(TextAppearanceSpan(applicationContext,R.style.pulbic_data),start,end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         mMessage.text = ssb
@@ -211,20 +191,6 @@ class MainActivity : AppCompatActivity(){
         tv_start_search.setOnClickListener {
             callSearchBar()
         }
-//        btn_actionbar_search.setOnClickListener {
-//
-//            (activity_main_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
-//                if(it is SearchHistoryFragment){
-//                    var newSHitem = DBSearchHistoryItem()
-//                    newSHitem.name = actionbar_searchView.text.toString()
-//                    it.mAdapter.insertHistory(this,newSHitem)
-//                }
-//            }
-//            activity_main_viewpager.currentItem = 1
-//
-//            Log.d("1234","searchhistory insert")
-//            Singleton.hideKeyboard(this)
-//        }
 
         btn_actionbar_info.setOnClickListener {
             Singleton.hideKeyboard(this)
@@ -233,7 +199,6 @@ class MainActivity : AppCompatActivity(){
 
         drawer_btn_ask.setOnClickListener {
             startActivity(Intent(this, InquireActivity::class.java))
-//            drawer_layout.closeDrawer(Gravity.END)
         }
 
         activity_main_drawer.btn_back.setOnClickListener { drawer_layout.closeDrawer(Gravity.END) }
@@ -243,7 +208,7 @@ class MainActivity : AppCompatActivity(){
         BlurSupport.addTo(drawer_layout)
     }
 
-    fun callSearchBar(){
+    private fun callSearchBar(){
         startActivity(Intent(this, SearchActivity::class.java))
     }
 
@@ -261,16 +226,6 @@ class MainActivity : AppCompatActivity(){
         activity_main_viewpager.currentItem = 1
         activity_main_viewpager.setScrollDurationFactor(4.0)
 
-        // SegmentedButton 토글에 따라 아이템 선택
-//        activity_main_toggle.setOnPositionChangedListener {
-//            activity_main_viewpager.currentItem =
-//                    when(it){
-//                        // 도착정보
-//                        0-> 1
-//                        // 목적지 정보
-//                        else -> 0
-//                    }
-//        }
     }
 
 
@@ -279,7 +234,6 @@ class MainActivity : AppCompatActivity(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = ContextCompat.getColor(applicationContext,R.color.colorActionBar)
-//            window.decorView.systemUiVisibility = 1
         }
     }
     // 재시작되면 서비스 시작
@@ -297,8 +251,6 @@ class MainActivity : AppCompatActivity(){
     // 백버튼 기능
     override fun onBackPressed() {
         when {
-            // 검색창이 비어있지 않으면 비움
-//            actionbar_searchView.text.toString() != "" -> actionbar_searchView.text.clear()
 
             // information 열려있으면 닫음
             drawer_layout.isDrawerOpen(Gravity.END) -> drawer_layout.closeDrawer(Gravity.END)

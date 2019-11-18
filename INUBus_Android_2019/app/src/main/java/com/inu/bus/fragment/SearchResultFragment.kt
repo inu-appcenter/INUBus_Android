@@ -4,17 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.inu.bus.R
-import com.inu.bus.databinding.RecyclerDestinationItemBinding
-import com.inu.bus.model.BusInformation
-import com.inu.bus.recycler.DestinationRecyclerViewHolder
-import com.inu.bus.recycler.RecyclerAdapterDestination
-import com.inu.bus.recycler.SearchHistoryAdapter
 import com.inu.bus.recycler.SearchResultAdapter
 import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
 
@@ -26,7 +20,6 @@ class SearchResultFragment : Fragment() {
 
     private lateinit var mFm: FragmentManager
     private lateinit var mContext : Context
-    private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
     lateinit var mAdapter : SearchResultAdapter
 
     companion object {
@@ -52,34 +45,5 @@ class SearchResultFragment : Fragment() {
         // 리사이클러뷰와 어댑터 연결
         mAdapter = SearchResultAdapter()
         rv_fragment_node_arrival_recycler.adapter = mAdapter
-    }
-
-    fun filter(str : String) {
-
-        var filtered :ArrayList<BusInformation>
-
-        filtered =
-                // 검색 취소
-                if(str == ""){
-                    mAdapter.mSearchList
-                }
-                else {
-                    ArrayList(
-                            mAdapter.mSearchList.filter { item ->
-
-                                item.no.contains(str)
-//                                    !Singleton.busInfo.get()!![item.arrivalInfo!!.no]
-//                                            ?.nodeList
-//                                            ?.find{
-//                                                Log.d("0598","it -> ${it}")
-//                                                it.contains(str)
-//                                            }.isNullOrEmpty()
-                            }
-                    )
-                }
-
-        // 도착 정보를 비교해서 업데이트
-//        mAdapter.mFilteredList = filtered
-        mAdapter.notifyDataSetChanged()
     }
 }

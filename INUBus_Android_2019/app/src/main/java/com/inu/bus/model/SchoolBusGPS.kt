@@ -26,7 +26,7 @@ data class SchoolBusGPS(
 ){
     enum class BusTime(val routeID: String, val startTime : String) {
         @SerializedName("송내")
-        SONGNAE("송내", "8:00~9:00"),
+        SONGNAE("송내","08:00, 09:00"),
 
         @SerializedName("수원")
         SUWON("수원-안산-시흥","06:40"),

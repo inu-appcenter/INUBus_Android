@@ -16,7 +16,7 @@ import com.inu.bus.util.Singleton
 
 class SearchResultAdapter() : RecyclerView.Adapter<SearchResultViewHolder>() {
 
-    var mSearchList = ArrayList(Singleton.busInfo.get()!!.values)
+    private var mSearchList = ArrayList(Singleton.busInfo.get()!!.values)
     private var mFilteredList = arrayListOf<SearchResultNode>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {

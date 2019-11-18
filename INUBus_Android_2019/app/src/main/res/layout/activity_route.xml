@@ -80,7 +80,7 @@
                 app:layout_constraintStart_toEndOf="@+id/btn_activity_route_close"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                tools:text="6" />
+                tools:text="송내" />
 
             <LinearLayout
                 android:id="@+id/ll_route_start"

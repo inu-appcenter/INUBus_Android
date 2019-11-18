@@ -10,11 +10,7 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.LocalBroadcastManager
-import android.support.v4.view.ViewPager
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_arrival_tabs.*
 
 /**
  * Created by Minjae Son on 2018-08-13.
+ * Updated by ByoungMean on 2019-09-24.
  */
 
 class ArrivalFragment : Fragment(){
@@ -79,8 +76,7 @@ class ArrivalFragment : Fragment(){
             fragment_arrival_tablayout.addTab(fragment_arrival_tablayout.newTab())
             fragment_arrival_tablayout.getTabAt(index)!!.customView = v
         }
-        // 검색창 Text가 변경되면 mSearchTextWatcher 호출
-//        MainActivity.mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
+
         // ViewPagerAdapter에 프레그먼트 추가
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "engineer"))
         mViewPagerAdapter.addFragment(ArrivalFragmentTab.newInstance(mContext, "science"))
@@ -92,8 +88,6 @@ class ArrivalFragment : Fragment(){
         vp_fragment_arrival_tabs.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(fragment_arrival_tablayout))
         vp_fragment_arrival_tabs.currentItem = 0
         setTabIcon(fragment_arrival_tablayout.getTabAt(0)!!, true)
-
-        vp_fragment_arrival_tabs.addOnPageChangeListener(mViewPagerPageChangeListener)
         fragment_arrival_tablayout.addOnTabSelectedListener(mTabChangeListener)
 
 
@@ -109,12 +103,7 @@ class ArrivalFragment : Fragment(){
             mBroadcastManager.sendBroadcast(Intent(LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value))
             fabRefreshAnimation(true)
         }
-        //
-        Singleton.arrivalToInfo.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                fabRefreshAnimation(true)
-            }
-        })
+
         (activity as MainActivity).startpopup(false)
     }
 
@@ -139,14 +128,6 @@ class ArrivalFragment : Fragment(){
                     }
                 }
                 LocalIntent.ARRIVAL_DATA_REFRESH_REQUEST.value -> fabRefreshAnimation(true)
-//                LocalIntent.FAVORITE_CLICK.value ->{
-//                    (vp_fragment_arrival_tabs.adapter as ViewPagerAdapter).fragments.forEach {
-//                        if(it is ArrivalFragmentTab){
-//                            it.dataRefresh()
-//                            Log.d("1234","datarefresh!!")
-//                        }
-//                    }
-//                }
             }
         }
     }
@@ -157,7 +138,6 @@ class ArrivalFragment : Fragment(){
         }
         else {
             mFabRefresh?.animation?.repeatCount = 0
-//            mFabRefresh?.animate().rotation(0f).start()
         }
     }
 
@@ -175,33 +155,4 @@ class ArrivalFragment : Fragment(){
         }
     }
 
-    // 지정단탭 actionbar 숨기기 적용
-    private val mViewPagerPageChangeListener = object : ViewPager.OnPageChangeListener{
-        val mUpperView = MainActivity.mWrMainUpperView.get()!!
-        private var mViewX = mUpperView.x
-        private var mPosition = 0
-        private var mState = 0
-
-        private val mDisplayWidth by lazy { resources.let { TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it.configuration.screenWidthDp.toFloat(), it.displayMetrics) }}
-
-
-        override fun onPageScrollStateChanged(state: Int) {
-//            Log.d("ViewPager state", state.toString())
-            mState = state
-        }
-
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-//            when (position) {
-//                2 -> mUpperView.x = mViewX - positionOffsetPixels
-//                3 -> mUpperView.x = mDisplayWidth
-//                else -> mUpperView.x = mViewX
-//            }
-//            Log.d("ViewPager Scrolled", "$position, $positionOffset, $positionOffsetPixels $mViewX ${mUpperView.x}")
-        }
-
-        override fun onPageSelected(position: Int) {
-            mPosition = position
-//            Log.d("ViewPager selected", position.toString())
-        }
-    }
 }

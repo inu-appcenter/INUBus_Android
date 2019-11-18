@@ -17,9 +17,6 @@ import com.inu.bus.util.AppDatabase
 
 /**
  * Created by Minjae Son on 2018-08-10.
- */
-
-/**
  * Updated by ByoungMean on 2019-10-21.
  */
 
@@ -76,7 +73,7 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
             try {
                 mHistoryList = mDB.searchhistoryDAO()?.getAll() as ArrayList
             } catch (e:Exception){
-                Log.d("1234","Error - $e")
+                Log.d("error","Error - $e")
             }
         }
         val thread = Thread(r)

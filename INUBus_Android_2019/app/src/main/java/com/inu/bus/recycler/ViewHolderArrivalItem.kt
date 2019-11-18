@@ -3,14 +3,10 @@ package com.inu.bus.recycler
 import android.content.Intent
 import android.databinding.Observable
 import android.databinding.ObservableBoolean
-import android.graphics.Color
-import android.graphics.Rect
-
 import android.os.Message
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.TouchDelegate
 import android.widget.CheckBox
 import com.inu.bus.R
 import com.inu.bus.activity.MainActivity
@@ -52,27 +48,12 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
             }
         }}
     }
-
     private val mHandler by lazy { HandlerArrivalText(mBinding.recyclerArrival) }
-
-
 
     // recycler_arrival_item.xml 바인딩
     fun bind(data : BusArrivalInfo){
 
         mBinding.btnFavorite.isChecked = data.favorite
-
-//        val parent = mBinding.btnFavorite.parent as View
-//        parent.post {
-//            val rect = Rect()
-//            parent.getHitRect(rect)
-//            rect.top -= 100
-//            rect.bottom += 100
-//            rect.left -= 100
-//            rect.right += 100
-//
-//            parent.touchDelegate = TouchDelegate(rect,mBinding.btnFavorite)
-//        }
 
         if(schoolTab){
             mBinding.recyclerBusno.textSize = 14.0f
@@ -126,7 +107,6 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
             str += "${remain%60}초"
         }
 
-        // arrivalitem textview
         val msg = Message()
         if(schoolTab){
 
@@ -136,13 +116,6 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
                     tempArray = list
                 }
             }
-////            Singleton.SchoolBusRoute.forEach() { (routeID, Routenode) ->
-////                if(data.no == routeID){
-////                    fee = cost
-////                }
-////            }
-////            fee = fee?: Singleton.busCost["else"]
-////            mBinding.fee = "${fee}원"
             var location = "대기 중"
             tempArray.forEach{
                 if(it.nodeNo == data.start)

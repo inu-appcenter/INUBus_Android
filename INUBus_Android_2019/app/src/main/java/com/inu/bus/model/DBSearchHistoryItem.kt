@@ -6,6 +6,7 @@ import android.graphics.Color
 
 /**
  * Created by Minjae Son on 2018-08-10.
+ * Updated by ByoungMean on 2019-10-18.
  */
 
 // 검색 기록을 담을 객체

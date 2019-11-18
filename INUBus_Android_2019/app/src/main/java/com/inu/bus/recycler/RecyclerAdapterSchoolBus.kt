@@ -3,7 +3,6 @@ package com.inu.bus.recycler
 import android.databinding.ObservableBoolean
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.inu.bus.databinding.RecyclerArrivalHeaderBinding
@@ -63,13 +62,9 @@ class RecyclerAdapterSchoolBus : RecyclerView.Adapter<RecyclerView.ViewHolder>()
             o1!!.compareTo(o2!!)
         })
 
-        Log.d("kbm","favsorted : $favsorted")
-
-
-
         items.forEach {
-            for(i in 0 until favsorted.size){
-                if (it.arrivalInfo!!.no == favsorted[i]) {
+            for(element in favsorted){
+                if (it.arrivalInfo!!.no == element) {
                     if(!favOnOff){
                         newDataSet.add(0,RecyclerArrivalItem("즐겨찾기"))
                         favOnOff = true
@@ -88,7 +83,6 @@ class RecyclerAdapterSchoolBus : RecyclerView.Adapter<RecyclerView.ViewHolder>()
         // 데이터 목록 업데이트
         val diffUtil = ArrivalInfoDiffUtil(mArrivalItems, newDataSet)
         val result = DiffUtil.calculateDiff(diffUtil)
-//        mArrivalItems.clear()
         mArrivalItems.addAll(newDataSet)
         result.dispatchUpdatesTo(this)
     }

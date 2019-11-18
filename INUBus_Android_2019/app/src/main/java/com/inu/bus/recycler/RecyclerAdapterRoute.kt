@@ -34,10 +34,6 @@ class RecyclerAdapterRoute(private val mRvRoute : RecyclerView) : RecyclerView.A
 
     override fun getItemViewType(position: Int) : Int = mDataSet[position].type.ordinal
 
-    fun getItem(position: Int) : CustomItem{
-        return mDataSet[position]
-    }
-
     inner class CustomItem(val stopName: String, val direction: Direction, val type: RouteType) {
         constructor( type : RouteType) : this("", Direction.NONE, type)
     }

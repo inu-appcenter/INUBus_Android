@@ -35,9 +35,5 @@ abstract class AppDatabase : RoomDatabase() {
             }
             return INSTANCE
         }
-
-        fun destoryInstance() {
-            INSTANCE = null
-        }
     }
 }

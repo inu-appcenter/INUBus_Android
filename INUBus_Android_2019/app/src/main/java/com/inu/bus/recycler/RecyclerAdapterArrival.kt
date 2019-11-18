@@ -1,7 +1,6 @@
 package com.inu.bus.recycler
 import android.databinding.ObservableBoolean
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.inu.bus.databinding.RecyclerArrivalHeaderBinding
@@ -17,10 +16,10 @@ import com.inu.bus.util.AppDatabase
  * Created by Minjae Son on 2018-08-07.
  */
 
-class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class RecyclerAdapterArrival : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     var isShowing = ObservableBoolean(false)
-    val mArrivalItems = ArrayList<RecyclerArrivalItem>()
+    private val mArrivalItems = ArrayList<RecyclerArrivalItem>()
     private var mFilteredItems = ArrayList<RecyclerArrivalItem>()
     private var mFilteringString = ""
 
@@ -32,7 +31,6 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
         mArrivalItems.add(RecyclerArrivalItem())
     }
 
-
     // ItemType에 따라 생성할 뷰홀더 객체 선택
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val type = RecyclerArrivalItem.ItemType.findByOrdinal(viewType)
@@ -41,11 +39,9 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
         mDB = AppDatabase.getInstance(parent.context)!!
         val r = Runnable {
             try {
-//                Log.d("0598","group Success")
                 dataset = mDB?.busfavoriteDAO()?.getAll()!! as ArrayList
 
             } catch (e:Exception){
-                Log.d("05981","Error - $e")
             }
         }
 
@@ -100,11 +96,6 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
         val favsorted = favList.sortedWith(Comparator {o1, o2 ->
             o1!!.compareTo(o2!!)
         })
-//        if(favList.isNotEmpty()) {
-//            if(count > 1){
-//                mArrivalItems.add(RecyclerArrivalItem("즐겨찾기"))
-//            }
-//        }
 
         grouped.forEach { group ->
             // 현재 필요한 섹션 헤더만 추가
@@ -150,12 +141,6 @@ class RecyclerAdapterArrival(val mStrBusStop : String) : RecyclerView.Adapter<Re
                 }
 
         // 도착 정보를 비교해서 업데이트
-        Log.d("0598","filter on")
-//        val diffUtil = ArrivalInfoDiffUtil(mFilteredItems, filtered)
-//        val result = DiffUtil.calculateDiff(diffUtil)
-//        mFilteredItems.clear()
-//        mFilteredItems.addAll(filtered)
-//        result.dispatchUpdatesTo(this)
         mFilteredItems = filtered
         notifyDataSetChanged()
     }

@@ -28,7 +28,6 @@ data class BusArrivalInfo(
         @SerializedName("type")
         val type : BusInformation.BusType? = null,
 
-//            var busInfo : BusInformations.BusInformation?,
         var favorite : Boolean = false
         // TODO 버스 API 구분
 )

@@ -15,11 +15,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by Minjae Son on 2018-08-07.
+ * Updated by ByoungMean on 2019-10-29.
  */
 
 object Singleton{
 
-    val retrofit = Retrofit.Builder()
+    val retrofit: BusRetrofitService = Retrofit.Builder()
             // 유출되지 않도록 서버 URL을 따로 저장
             .baseUrl(server.serverUrl)
             // JSON파일을 변환해주는 Gson 지정
@@ -31,9 +32,8 @@ object Singleton{
     // ObservableField를 통해 데이터 값이 변경될 때 View를 자동으로 업데이트
     val busInfo  = ObservableField(mutableMapOf<String, BusInformation>())
     var arrivalFromInfo = ObservableField<ArrayList<ArrivalFromNodeInfo>>()
-    var arrivalToInfo = ObservableField<ArrayList<ArrivalToNodeInfo>>()
-    var SBgps = ObservableField<ArrayList<SchoolBusGPS>>()
-    const val myPackageName = "com.bungabear.inubus"
+    val schoolbusGPS = ObservableField<ArrayList<SchoolBusGPS>>()
+    const val myPackageName = "com.sayheybongmany.inubus"
     const val LOG_TAG = "INU Bus"
     const val DB_VERSION = 2
 
@@ -57,7 +57,7 @@ object Singleton{
             Pair("92", 950),
             Pair("else", 1250)
     )
-
+    // 스쿨 버스 노선
     val SchoolBusRoute= mutableMapOf(
             Pair("송내",arrayListOf(
                     BusRoutenode(1,"송내남부역CU"),

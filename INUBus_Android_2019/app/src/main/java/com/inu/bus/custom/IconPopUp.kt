@@ -136,14 +136,6 @@ class IconPopUp : ConstraintLayout {
         return this
     }
 
-    fun setIcon(res: Int, isCircle: Boolean, makeCircleFit: Boolean = false): IconPopUp {
-        val drawable = ContextCompat.getDrawable(context, res)
-        drawable?.let {
-            setIcon(drawable, isCircle, makeCircleFit)
-        }
-        return this
-    }
-
     // 아이콘 배경색 설정
     fun setIconBackgroundColor(color: Int): IconPopUp {
         setIcon( ColorDrawable(color), false, true)
@@ -200,14 +192,6 @@ class IconPopUp : ConstraintLayout {
         val lp = mIvIcon.layoutParams
         lp.width = dp2px(mDpIvSize).toInt()
         lp.height = dp2px(mDpIvSize).toInt()
-        return this
-    }
-
-    // 확인버튼 콜백
-    fun setOnConfirmButtonClickListener(callback: (IconPopUp) -> Unit): IconPopUp {
-        mBtnConfirm.setOnClickListener {
-            callback(this)
-        }
         return this
     }
 

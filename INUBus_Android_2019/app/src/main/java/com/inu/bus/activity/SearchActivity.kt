@@ -3,9 +3,6 @@ package com.inu.bus.activity
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.AutoCompleteTextView
 import com.inu.bus.R
@@ -17,6 +14,10 @@ import com.inu.bus.util.AppDatabase
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.custom_searchbar.*
 import java.lang.ref.WeakReference
+
+/**
+ * Created by ByoungMean on 2019-10-12.
+ */
 
 class SearchActivity : AppCompatActivity() {
 
@@ -60,8 +61,6 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setMainViewPager() {
-//        val arrivalFragment = ArrivalFragment.newInstance(supportFragmentManager, this)
-
 //        // 도착, 목적지 Fragment 추가
         mViewPagerAdapter.addFragment(SearchHistoryFragment.newInstance(supportFragmentManager, this))
         mViewPagerAdapter.addFragment(SearchResultFragment.newInstance(supportFragmentManager, this))
@@ -78,32 +77,19 @@ class SearchActivity : AppCompatActivity() {
     private fun getHistory(context : Context){
         val mDB = AppDatabase.getInstance(context)!!
         val r = Runnable {
-                try {
-                mHistoryList = mDB.searchhistoryDAO()?.getAll() as ArrayList
-            } catch (e:Exception){
-
-            }
+            mHistoryList = mDB.searchhistoryDAO()?.getAll() as ArrayList
         }
         val thread = Thread(r)
         thread.start()
     }
 
     fun insertHistory(newSHitem : DBSearchHistoryItem){
-        var overlap = false
-
-        // overlap test
-
-//        mHistoryList.forEach {
-//            if(it.name == newSHitem.name) overlap = true
-//        }
-//        if(!overlap){
-            (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
-                if(it is SearchHistoryFragment){
-                    it.mAdapter.insertHistory(this,newSHitem)
-                    getHistory(this)
-                }
+        (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
+            if(it is SearchHistoryFragment){
+                it.mAdapter.insertHistory(this,newSHitem)
+                getHistory(this)
             }
-//        }
+        }
     }
 
     private fun getResult(){

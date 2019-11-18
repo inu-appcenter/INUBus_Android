@@ -81,7 +81,7 @@ class MyService : Service(){
             override fun onResponse(call: Call<ArrayList<BusInformation>>, response: Response<ArrayList<BusInformation>>) {
                 val newMap = mutableMapOf<String, BusInformation>()
 
-                newMap["송내"] = (BusInformation("송내","",640,830,BusInformation.BusType.TONG,
+                newMap["송내"] = (BusInformation("송내","",800,840,BusInformation.BusType.TONG,
                         arrayListOf(
                                 BusRoutenode(0,"송내남부역CU"),
                                 BusRoutenode(1,"미추홀캠퍼스"),
@@ -106,14 +106,14 @@ class MyService : Service(){
                                 BusRoutenode(9,"미추홀캠퍼스"),
                                 BusRoutenode(11,"송도캠퍼스")
                         ),"터"))
-                newMap["청라"] = (BusInformation("청라","",640,830,BusInformation.BusType.TONG,
+                newMap["청라"] = (BusInformation("청라","",730,845,BusInformation.BusType.TONG,
                         arrayListOf(
                                 BusRoutenode(1,"검암역 1번출구"),
                                 BusRoutenode(3,"가정역 4번출구"),
                                 BusRoutenode(5,"미추홀캠퍼스"),
                                 BusRoutenode(7,"송도캠퍼스")
                         ),"I"))
-                newMap["광명"] = (BusInformation("광명","",640,830,BusInformation.BusType.TONG,
+                newMap["광명"] = (BusInformation("광명","",740,850,BusInformation.BusType.TONG,
                         arrayListOf(
                                 BusRoutenode(1,"석수역 1번출구"),
                                 BusRoutenode(3,"미추홀캠퍼스"),
@@ -147,20 +147,6 @@ class MyService : Service(){
             }
         })
 
-        Singleton.retrofit.getToArrivalInfo().enqueue(object : Callback<ArrayList<ArrivalToNodeInfo>>{
-            override fun onFailure(call: Call<ArrayList<ArrivalToNodeInfo>>, t: Throwable) {
-                //TODO 에러 표시
-                Log.e(LOG_TAG, "requestArrivalInfo getTo", t)
-//                stopSelf()
-            }
-            // Response가 들어오면 ArrivalToNodeInfo 객체를 파싱
-            override fun onResponse(call: Call<ArrayList<ArrivalToNodeInfo>>, response: Response<ArrayList<ArrivalToNodeInfo>>) {
-                Singleton.arrivalToInfo.set(response.body())
-//                if(callback != null)
-//                    callback()
-            }
-        })
-
         Singleton.retrofit.getSBgps().enqueue(object : Callback<ArrayList<SchoolBusGPS>>{
             override fun onFailure(call: Call<ArrayList<SchoolBusGPS>>, t: Throwable) {
                 //TODO 에러 표시
@@ -169,7 +155,7 @@ class MyService : Service(){
 
             // Response가 들어오면 BusInformation 객체를 파싱
             override fun onResponse(call: Call<ArrayList<SchoolBusGPS>>, response: Response<ArrayList<SchoolBusGPS>>) {
-                Singleton.SBgps.set(response.body())
+                Singleton.schoolbusGPS.set(response.body())
 
                 if(callback != null)
                     callback()

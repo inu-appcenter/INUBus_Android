@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * Created by Minjae Son on 2018-08-07.
+ * Updated by ByoungMean on 2019-09-03.
  */
 
 class SplashActivity : AppCompatActivity(){

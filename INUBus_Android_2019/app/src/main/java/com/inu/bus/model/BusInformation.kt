@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 /**
  * Created by Minjae Son on 2018-08-25.
+ * Updated by ByoungMean on 2019-10-13.
  */
 
 // 버스 노선과 기본 정보를 가지는 객체
@@ -17,7 +18,7 @@ data class BusInformation (
         val routeId : String,
 
         @SerializedName("start")
-        val start : Int,
+        var start : Int,
 
         @SerializedName("end")
         val end : Int,
