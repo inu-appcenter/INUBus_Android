@@ -2,12 +2,12 @@ package com.appcenter.inubus.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.Observable
+import androidx.databinding.Observable
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.LocalBroadcastManager
-import android.support.v4.widget.CircularProgressDrawable
+import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,10 +26,10 @@ import kotlinx.android.synthetic.main.fragment_swipepull_recycler.*
  * Created by ByoungMean on 2019-10-11.
  */
 
-class SchoolBusFragment : Fragment(){
+class SchoolBusFragment : androidx.fragment.app.Fragment(){
 
     private lateinit var mContext : Context
-    private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
+    private val mBroadcastManager by lazy { androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(mContext) }
     private val mAdapter by lazy { RecyclerAdapterSchoolBus() }
 
     companion object {
@@ -93,7 +93,7 @@ class SchoolBusFragment : Fragment(){
         f.setInt(mSwipeRefreshLayout, 130)
         val f2 = mSwipeRefreshLayout.javaClass.getDeclaredField("mProgress")
         f2.isAccessible = true
-        var prog = f2.get(mSwipeRefreshLayout) as CircularProgressDrawable
+        var prog = f2.get(mSwipeRefreshLayout) as androidx.swiperefreshlayout.widget.CircularProgressDrawable
         prog.centerRadius = 30f
         prog.strokeWidth = 9f
         val f3 = mSwipeRefreshLayout.javaClass.getDeclaredField("mCircleView")

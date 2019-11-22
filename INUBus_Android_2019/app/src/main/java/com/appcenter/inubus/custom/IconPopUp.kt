@@ -9,10 +9,10 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Handler
-import android.support.annotation.RequiresApi
-import android.support.constraint.ConstraintLayout
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import android.text.Html
 import android.text.Spanned
 import android.util.AttributeSet

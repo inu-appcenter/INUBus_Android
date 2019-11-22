@@ -1,8 +1,8 @@
 package com.appcenter.inubus.model
 
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.databinding.ObservableBoolean
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.ObservableBoolean
 import android.os.Build
 import com.appcenter.inubus.BR
 import com.appcenter.inubus.util.Singleton

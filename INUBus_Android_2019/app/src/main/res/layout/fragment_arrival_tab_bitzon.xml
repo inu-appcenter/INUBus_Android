@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_arrival_bitzon_actionbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_height"
@@ -38,9 +38,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/fragment_arrival_bitzon_swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -49,13 +49,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_arrival_bitzon_actionbar">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_fragment_arrival_bitzon"
             android:orientation="vertical"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layoutAnimation="@anim/layout_anim_fall_down"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
-</android.support.constraint.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

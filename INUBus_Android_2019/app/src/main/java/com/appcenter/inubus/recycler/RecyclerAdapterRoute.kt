@@ -4,8 +4,8 @@ package com.appcenter.inubus.recycler
  * Created by Bunga on 2018-01-29.
  */
 
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,7 @@ import com.appcenter.inubus.databinding.RecyclerRouteItemBinding
 import java.util.*
 import kotlin.math.roundToInt
 
-class RecyclerAdapterRoute(private val mRvRoute : RecyclerView) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerAdapterRoute(private val mRvRoute : androidx.recyclerview.widget.RecyclerView) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     enum class RouteType{
         STOP, LINE, RETURN
@@ -40,17 +40,17 @@ class RecyclerAdapterRoute(private val mRvRoute : RecyclerView) : RecyclerView.A
     }
 
     // 정류장 표시용 뷰홀더
-    class StopHolder(private val binding : RecyclerRouteItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class StopHolder(private val binding : RecyclerRouteItemBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(item : CustomItem){
             binding.item = item
         }
     }
 
     // 회차지 뷰홀더
-    class ReturnHolder(v: ConstraintLayout) : RecyclerView.ViewHolder(v)
+    class ReturnHolder(v: ConstraintLayout) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v)
 
     // 중간 라인 뷰홀더
-    class LineHolder(v: ConstraintLayout) : RecyclerView.ViewHolder(v)
+    class LineHolder(v: ConstraintLayout) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v)
 
     fun addStop(stopName: String, direction: Direction, type: RouteType) {
         mDataSet.add(CustomItem(stopName, direction, type))
@@ -65,7 +65,7 @@ class RecyclerAdapterRoute(private val mRvRoute : RecyclerView) : RecyclerView.A
     }
 
     // RouteType별 xml 뷰홀더 객체 생성
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val v: ConstraintLayout
         return when(RouteType.values()[viewType]){
             RouteType.STOP-> StopHolder(RecyclerRouteItemBinding.inflate(LayoutInflater.from(parent.context)))
@@ -84,7 +84,7 @@ class RecyclerAdapterRoute(private val mRvRoute : RecyclerView) : RecyclerView.A
     
     // STOP은 recycler_arrival_item / TextView 데이터베인딩
     // LINE은 recycler_arrival_end  / ImageButton 클릭리스너 추가
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         val item = mDataSet[position]
         if (item.type == RouteType.STOP) {
             (holder as StopHolder).bind(item)
@@ -106,7 +106,7 @@ class RecyclerAdapterRoute(private val mRvRoute : RecyclerView) : RecyclerView.A
             val llm = mRvRoute.layoutManager
             btnScrollup.setOnClickListener {
                 Log.d("route","first click")
-                llm.smoothScrollToPosition(mRvRoute,null,0)
+                llm!!.smoothScrollToPosition(mRvRoute,null,0)
             }
         }
     }

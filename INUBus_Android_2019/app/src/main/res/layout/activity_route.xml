@@ -31,7 +31,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:background="@color/colorPrimary"
@@ -185,20 +185,20 @@
 
             </LinearLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_route_activity_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/recycler_route_item">
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
         </RelativeLayout>
     </LinearLayout>

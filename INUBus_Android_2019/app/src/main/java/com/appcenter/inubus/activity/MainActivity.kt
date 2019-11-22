@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.LocalBroadcastManager
-import android.support.v7.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(){
 
     // 지연 초기화
     private val mViewPagerAdapter by lazy { ViewPagerAdapter(supportFragmentManager, this) }
-    private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(this) }
+    private val mBroadcastManager by lazy { androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

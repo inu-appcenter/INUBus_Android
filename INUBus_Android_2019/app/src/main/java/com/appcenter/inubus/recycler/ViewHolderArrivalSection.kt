@@ -1,12 +1,12 @@
 package com.appcenter.inubus.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import com.appcenter.inubus.databinding.RecyclerArrivalSeparatorBinding
 
 /**
  * Created by Minjae Son on 2018-08-25.
  */
-class ViewHolderArrivalSection(private val mBinding : RecyclerArrivalSeparatorBinding) : RecyclerView.ViewHolder(mBinding.root) {
+class ViewHolderArrivalSection(private val mBinding : RecyclerArrivalSeparatorBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(mBinding.root) {
 
     // recycler_arrival_separator.xml 바인딩
     fun bind(sectionText: String){

@@ -3,7 +3,7 @@ package com.appcenter.inubus.activity
 import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import com.appcenter.inubus.MyService

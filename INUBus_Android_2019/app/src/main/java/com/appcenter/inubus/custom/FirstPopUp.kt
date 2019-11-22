@@ -7,9 +7,9 @@ import android.graphics.*
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Handler
-import android.support.annotation.RequiresApi
-import android.support.constraint.ConstraintLayout
-import android.support.v4.content.ContextCompat
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import android.text.*
 import android.text.style.*
 import android.util.AttributeSet

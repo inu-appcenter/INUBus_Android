@@ -1,7 +1,7 @@
 package com.appcenter.inubus.util
 
-import android.databinding.BindingAdapter
-import android.databinding.BindingConversion
+import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingConversion
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import java.text.SimpleDateFormat

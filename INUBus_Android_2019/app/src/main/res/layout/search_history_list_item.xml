@@ -9,7 +9,7 @@
             type="com.appcenter.inubus.model.DBSearchHistoryItem"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_history_select"
         android:layout_width="match_parent"
         android:layout_height="77dp"
@@ -78,5 +78,5 @@
             android:background="#cbcbcb"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

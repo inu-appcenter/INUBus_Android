@@ -1,8 +1,8 @@
 package com.appcenter.inubus.recycler
 
-import android.databinding.ObservableBoolean
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.ObservableBoolean
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.appcenter.inubus.databinding.RecyclerArrivalHeaderBinding
@@ -17,13 +17,13 @@ import com.appcenter.inubus.util.ArrivalInfoDiffUtil
  * Updated by ByoungMean on 2019-09-24.
  */
 
-class RecyclerAdapterSchoolBus : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class RecyclerAdapterSchoolBus : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>(){
 
     private var isShowing = ObservableBoolean(false)
     private val mArrivalItems = arrayListOf<RecyclerArrivalItem>()
 
     // ItemType에 따라 생성할 뷰홀더 객체 선택
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val type = RecyclerArrivalItem.ItemType.findByOrdinal(viewType)
         val layoutInflater = LayoutInflater.from(parent.context)
         return when(type){
@@ -36,7 +36,7 @@ class RecyclerAdapterSchoolBus : RecyclerView.Adapter<RecyclerView.ViewHolder>()
         }
     }
     // ItemType에 따라 각 뷰 홀더에 데이터 연결
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         when(mArrivalItems[position].itemType){
             RecyclerArrivalItem.ItemType.Header->{ }
             RecyclerArrivalItem.ItemType.SectionHeader->{
@@ -88,7 +88,7 @@ class RecyclerAdapterSchoolBus : RecyclerView.Adapter<RecyclerView.ViewHolder>()
     }
 
     // 아이템이 화면에 보일때만 Ticker가 작동하도록 설정
-    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+    override fun onViewAttachedToWindow(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
         if(holder is ViewHolderArrivalItem){
             if(isShowing.get()){
@@ -97,7 +97,7 @@ class RecyclerAdapterSchoolBus : RecyclerView.Adapter<RecyclerView.ViewHolder>()
         }
     }
 
-    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+    override fun onViewDetachedFromWindow(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {
         super.onViewDetachedFromWindow(holder)
         if(holder is ViewHolderArrivalItem){
             holder.stopTick()

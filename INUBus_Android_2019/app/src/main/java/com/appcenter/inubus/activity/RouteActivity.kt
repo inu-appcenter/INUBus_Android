@@ -1,16 +1,15 @@
 package com.appcenter.inubus.activity
 
-import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
-import android.support.constraint.ConstraintSet
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.databinding.DataBindingUtil
 import com.appcenter.inubus.R
 import com.appcenter.inubus.databinding.ActivityRouteBinding
 import com.appcenter.inubus.model.BusInformation
@@ -30,7 +29,7 @@ class RouteActivity : AppCompatActivity() {
 
         // Binding과 Recyclerview 객체 생성
     private lateinit var mBinding : ActivityRouteBinding
-    private lateinit var mRvRoute : RecyclerView
+    private lateinit var mRvRoute : androidx.recyclerview.widget.RecyclerView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

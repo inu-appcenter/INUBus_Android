@@ -11,7 +11,7 @@
             type="com.appcenter.inubus.activity.InquireActivity"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_inquire_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,7 +23,7 @@
             >
 
             <!-- Actionbar -->
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/actionbar_height"
                 android:background="@color/colorPrimary"
@@ -71,7 +71,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -238,5 +238,5 @@
             app:overlayColor="#50000000"
             app:radius="4"></com.ms_square.etsyblur.BlurringView>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

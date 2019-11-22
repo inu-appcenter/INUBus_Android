@@ -17,7 +17,7 @@
     <!--var direction: Int = 0-->
     <!--var stopName = ""-->
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="61dp"
         android:gravity="center_vertical"
@@ -114,5 +114,5 @@
             app:layout_constraintTop_toTopOf="parent"></ImageView>
 
 
-   </android.support.constraint.ConstraintLayout>
+   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

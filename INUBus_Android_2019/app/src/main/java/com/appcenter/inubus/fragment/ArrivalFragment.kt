@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.LocalBroadcastManager
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,16 +32,16 @@ import kotlinx.android.synthetic.main.fragment_arrival_tabs.*
  * Updated by ByoungMean on 2019-09-24.
  */
 
-class ArrivalFragment : Fragment(){
+class ArrivalFragment : androidx.fragment.app.Fragment(){
 
-    private lateinit var mFm: FragmentManager
+    private lateinit var mFm: androidx.fragment.app.FragmentManager
     private lateinit var mContext : Context
     private lateinit var mTabLayoutWrapper : LinearLayout
     private lateinit var mFabRefresh : ImageButton
     private lateinit var mFabRefreshAnimation : RotateAnimation
 
     companion object {
-        fun newInstance(fm : FragmentManager, context : Context) : ArrivalFragment{
+        fun newInstance(fm : androidx.fragment.app.FragmentManager, context : Context) : ArrivalFragment{
             val fragment = ArrivalFragment()
             fragment.mFm = fm
             fragment.mContext = context
@@ -49,7 +49,7 @@ class ArrivalFragment : Fragment(){
         }
     }
 
-    private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(mContext) }
+    private val mBroadcastManager by lazy { androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(mContext) }
     private var mFragmentReadyCount = 0
     private val mTabIcons = listOf(R.drawable.tabicon_select, R.drawable.tabicon_select, R.drawable.tabicon_select, R.drawable.tabicon_select)
     private val mTabText = listOf("공대", "자연대", "정문","통학")

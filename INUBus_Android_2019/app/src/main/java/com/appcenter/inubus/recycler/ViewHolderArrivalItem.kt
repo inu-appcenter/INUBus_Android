@@ -1,12 +1,10 @@
 package com.appcenter.inubus.recycler
 
 import android.content.Intent
-import android.databinding.Observable
-import android.databinding.ObservableBoolean
 import android.os.Message
-import android.support.v4.content.LocalBroadcastManager
-import android.support.v7.widget.RecyclerView
 import android.widget.CheckBox
+import androidx.databinding.Observable
+import androidx.databinding.ObservableBoolean
 import com.appcenter.inubus.R
 import com.appcenter.inubus.activity.MainActivity
 import com.appcenter.inubus.activity.RouteActivity
@@ -24,7 +22,7 @@ import java.util.*
 
 class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
                             private val isShowing : ObservableBoolean,
-                            private val schoolTab : Boolean) : RecyclerView.ViewHolder(mBinding.root) {
+                            private val schoolTab : Boolean) : androidx.recyclerview.widget.RecyclerView.ViewHolder(mBinding.root) {
 
     // Ticker 필요여부
     private var needTick = false
@@ -156,7 +154,7 @@ class ViewHolderArrivalItem(private val mBinding : RecyclerArrivalItemBinding,
             context.deleteDB(data.no)
         }
 
-        val mBroadcastManager = LocalBroadcastManager.getInstance(context)
+        val mBroadcastManager = androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(context)
         mBroadcastManager.sendBroadcast(Intent(LocalIntent.FAVORITE_CLICK.value))
 
 //        mAdapter.applyDataSet(tempList,(context as MainActivity).favList)

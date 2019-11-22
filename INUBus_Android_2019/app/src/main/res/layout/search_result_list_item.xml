@@ -10,7 +10,7 @@
             type="com.appcenter.inubus.model.SearchResultNode"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
 
         android:id="@+id/btn_search_select"
         android:background="#fafafa"
@@ -65,5 +65,5 @@
             android:background="#cbcbcb"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

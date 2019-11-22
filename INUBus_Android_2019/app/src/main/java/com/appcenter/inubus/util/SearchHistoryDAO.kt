@@ -1,7 +1,7 @@
 package com.appcenter.inubus.util
 
-import android.arch.persistence.room.*
-import android.arch.persistence.room.OnConflictStrategy.REPLACE
+import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.appcenter.inubus.model.DBSearchHistoryItem
 
 

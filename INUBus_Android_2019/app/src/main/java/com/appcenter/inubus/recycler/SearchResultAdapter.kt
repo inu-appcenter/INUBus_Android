@@ -1,8 +1,8 @@
 package com.appcenter.inubus.recycler
 
 import android.content.Intent
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.appcenter.inubus.R
@@ -14,7 +14,7 @@ import com.appcenter.inubus.model.SearchResultNode
 import com.appcenter.inubus.recycler.SearchResultAdapter.SearchResultViewHolder
 import com.appcenter.inubus.util.Singleton
 
-class SearchResultAdapter() : RecyclerView.Adapter<SearchResultViewHolder>() {
+class SearchResultAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<SearchResultViewHolder>() {
 
     private var mSearchList = ArrayList(Singleton.busInfo.get()!!.values)
     private var mFilteredList = arrayListOf<SearchResultNode>()
@@ -32,7 +32,7 @@ class SearchResultAdapter() : RecyclerView.Adapter<SearchResultViewHolder>() {
         return mFilteredList.size
     }
 
-    inner class SearchResultViewHolder(private val mBinding: SearchResultListItemBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    inner class SearchResultViewHolder(private val mBinding: SearchResultListItemBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(mBinding.root) {
 
         fun bind(data: SearchResultNode){
             mBinding.item = data

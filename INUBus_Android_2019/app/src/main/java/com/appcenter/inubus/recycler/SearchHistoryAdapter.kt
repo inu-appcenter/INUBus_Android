@@ -1,8 +1,8 @@
 package com.appcenter.inubus.recycler
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,7 +22,7 @@ import com.appcenter.inubus.util.AppDatabase
  * Updated by ByoungMean on 2019-10-21.
  */
 
-class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
+class SearchHistoryAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
     // 검색결과 데이터베이스
 
@@ -44,7 +44,7 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
     }
 
     inner class SearchHistoryViewHolder(private val mBinding : SearchHistoryListItemBinding,
-            private val mContext : Context = mBinding.root.context) : RecyclerView.ViewHolder(mBinding.root) {
+            private val mContext : Context = mBinding.root.context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(mBinding.root) {
 
         fun bind(data: DBSearchHistoryItem){
             mDB = AppDatabase.getInstance(mContext)!!

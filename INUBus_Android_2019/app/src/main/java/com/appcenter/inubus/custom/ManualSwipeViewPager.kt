@@ -1,7 +1,7 @@
 package com.appcenter.inubus.custom
 
 import android.content.Context
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.animation.Interpolator
@@ -11,7 +11,7 @@ import android.view.animation.Interpolator
  * Created by Minjae Son on 2018-08-13.
  */
 
-class ManualSwipeViewPager : ViewPager {
+class ManualSwipeViewPager : androidx.viewpager.widget.ViewPager {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
@@ -42,7 +42,7 @@ class ManualSwipeViewPager : ViewPager {
     // ViewPager 초기화
     private fun postInitViewPager() {
         try {
-            val viewpager = ViewPager::class.java
+            val viewpager = androidx.viewpager.widget.ViewPager::class.java
             // Field 타입으로 선언
             val scroller = viewpager.getDeclaredField("mScroller")
             scroller.isAccessible = true

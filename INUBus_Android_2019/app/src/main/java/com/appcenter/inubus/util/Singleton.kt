@@ -1,7 +1,7 @@
 package com.appcenter.inubus.util
 
 import android.app.Activity
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.appcenter.inubus.model.*

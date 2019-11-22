@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
-import android.support.v4.content.LocalBroadcastManager
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.util.Log
 import com.appcenter.inubus.model.*
 import com.appcenter.inubus.util.LocalIntent
@@ -24,7 +24,7 @@ import java.util.*
 
 class MyService : Service(){
 
-    private val mBroadcastManager by lazy { LocalBroadcastManager.getInstance(applicationContext) }
+    private val mBroadcastManager by lazy { androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(applicationContext) }
     private var mTimer : Timer? = null
     private var currentTimerTask : TimerTask? = null
 
