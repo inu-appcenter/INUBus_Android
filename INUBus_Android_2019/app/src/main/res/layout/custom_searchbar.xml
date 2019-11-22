@@ -27,6 +27,7 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_searchbar"
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:layout_marginTop="7dp"

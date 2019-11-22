@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
 import com.appcenter.inubus.R
 import com.appcenter.inubus.fragment.SearchHistoryFragment
@@ -48,16 +49,28 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
+        ll_searchbar.setOnClickListener {
+            actionbar_searchView.requestFocus()
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+        }
 
         btn_search_back.setOnClickListener {
             if(activity_search_viewpager.currentItem == 1) activity_search_viewpager.currentItem = 0
-            else finish()
+            else{
+                Singleton.hideKeyboard(this)
+                finish()
+            }
         }
 
         btn_actionbar_search.setOnClickListener {
             getResult()
             Singleton.hideKeyboard(this)
         }
+
+        actionbar_searchView.requestFocus()
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
         getHistory(this)
         setMainViewPager()
