@@ -5,10 +5,10 @@
     <data>
         <variable
             name="data"
-            type="com.inu.bus.model.InquireModel"/>
+            type="com.appcenter.inubus.model.InquireModel"/>
         <variable
             name="listener"
-            type="com.inu.bus.activity.InquireActivity"/>
+            type="com.appcenter.inubus.activity.InquireActivity"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

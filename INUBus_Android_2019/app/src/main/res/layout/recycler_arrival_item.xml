@@ -6,10 +6,10 @@
     <data>
         <variable
             name="data"
-            type="com.inu.bus.model.BusArrivalInfo"/>
+            type="com.appcenter.inubus.model.BusArrivalInfo"/>
         <variable
             name="listener"
-            type="com.inu.bus.recycler.ViewHolderArrivalItem"/>
+            type="com.appcenter.inubus.recycler.ViewHolderArrivalItem"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -100,19 +100,18 @@
 
         <TextView
             android:id="@+id/recycler_interval"
-            android:layout_width="wrap_content"
+            android:layout_width="78dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18.8dp"
-            android:layout_marginLeft="130dp"
-            android:layout_marginBottom="17.4dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="0dp"
             android:fontFamily="@font/notosans_regular"
             android:text="@{data.intervalString}"
             android:textColor="#707070"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@id/view2"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="10~18분" />
+            tools:text="08:00\n09:00" />
 
         <ImageView
             android:id="@+id/imageView"

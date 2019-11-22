@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="android.view.View"/>
-        <import type="com.inu.bus.recycler.RecyclerAdapterRoute.Direction"/>
+        <import type="com.appcenter.inubus.recycler.RecyclerAdapterRoute.Direction"/>
         <variable
             name="item"
-            type="com.inu.bus.recycler.RecyclerAdapterRoute.CustomItem"/>
+            type="com.appcenter.inubus.recycler.RecyclerAdapterRoute.CustomItem"/>
     </data>
     <!--// 가운데 선을 위한 값. 1이 시작점이라 아래선, 2이 끝점이라 윗선, 3은 중간점들로 전체 4는 회차점 표시-->
     <!--var state: Int = 0-->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.inu.bus">
+    package="com.appcenter.inubus">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,12 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
-
-        <service android:name=".MyService" />
+        <service android:name="com.appcenter.inubus.MyService" />
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.appcenter.inubus.activity.SplashActivity"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,16 +24,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.appcenter.inubus.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.RouteActivity"
+            android:name="com.appcenter.inubus.activity.RouteActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.SearchActivity"
+            android:name="com.appcenter.inubus.activity.SearchActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.InquireActivity"
+            android:name="com.appcenter.inubus.activity.InquireActivity"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

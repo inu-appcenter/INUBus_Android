@@ -12,7 +12,8 @@
         android:id="@+id/v_fragment_arrival_actionbar_placeholder"
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_height"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        tools:ignore="MissingConstraints" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/fragment_node_arrival_swipeRefreshLayout"

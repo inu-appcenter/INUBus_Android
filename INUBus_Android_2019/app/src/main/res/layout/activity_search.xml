@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.SearchActivity">
 
-    <!--<com.inu.bus.custom.ManualSwipeViewPager-->
+    <!--<appcentercenter.inubus.custom.ManualSwipeViewPager-->
         <!--android:id="@+id/activity_main_viewpager"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
@@ -14,7 +14,7 @@
         <!--app:layout_constraintEnd_toEndOf="parent"-->
         <!--app:layout_constraintStart_toStartOf="parent"-->
         <!--app:layout_constraintTop_toTopOf="parent">-->
-    <!--</com.inu.bus.custom.ManualSwipeViewPager>-->
+    <!--</appcentercenter.inubus.custom.ManualSwipeViewPager>-->
 
 
     <!--<ImageView-->
@@ -87,7 +87,7 @@
 
         <!--</LinearLayout>-->
 
-    <com.inu.bus.custom.ManualSwipeViewPager
+    <com.appcenter.inubus.custom.ManualSwipeViewPager
         android:id="@+id/activity_search_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -96,7 +96,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </com.inu.bus.custom.ManualSwipeViewPager>
+    </com.appcenter.inubus.custom.ManualSwipeViewPager>
 
     <LinearLayout
         android:layout_width="match_parent"
