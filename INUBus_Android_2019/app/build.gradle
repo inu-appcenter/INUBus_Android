@@ -24,7 +24,7 @@ android {
         }
 
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,7 +33,7 @@ android {
     }
     android {
         defaultConfig {
-            renderscriptTargetApi 27
+            renderscriptTargetApi 28
             renderscriptSupportModeEnabled true
         }
     }
@@ -41,7 +41,7 @@ android {
 
 dependencies {
     def retrofitVersion = "2.4.0"
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.recyclerview:recyclerview:1.0.0"
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
