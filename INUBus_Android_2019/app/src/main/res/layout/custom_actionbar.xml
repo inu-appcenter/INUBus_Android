@@ -24,14 +24,14 @@
             android:layout_marginTop="13dp"
             android:layout_marginBottom="14dp"
             android:clickable="false"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/actionbar_title" />
-
     </FrameLayout>
 
 
     <LinearLayout
         android:id="@+id/ll_start_search"
-        android:layout_width="205dp"
+        android:layout_width="match_parent"
         android:layout_height="28dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="55dp"
@@ -45,8 +45,9 @@
 
         <TextView
             android:id="@+id/tv_start_search"
-            android:layout_width="145dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginLeft="15.5dp"
             android:layout_marginTop="6.4dp"
             android:layout_marginBottom="6.6dp"
@@ -64,14 +65,14 @@
             />
 
         <LinearLayout
-            android:layout_width="16.7dp"
+            android:layout_width="wrap_content"
             android:layout_height="17.3dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="13.2dp"
             android:gravity="center"
-            android:background="@drawable/ic_search_bar"
-            >
+            android:background="@drawable/ic_search_bar">
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="16.7dp"
                 android:layout_height="match_parent"
                 android:background="?android:attr/selectableItemBackground"/>
 
@@ -79,27 +80,27 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/btn_actionbar_info"
-        android:layout_width="50dp"
-        android:layout_height="51dp"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
         android:layout_marginRight="5dp"
+        android:gravity="right"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageButton
-            android:layout_width="25dp"
-            android:layout_height="27dp"
-            android:layout_marginLeft="9dp"
+        <ImageView
+            android:layout_width="29dp"
+            android:layout_height="29dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="15dp"
-            android:background="@android:color/transparent"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="11dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="false"
             android:scaleType="fitCenter"
             android:src="@drawable/actionbar_information" />
-    </FrameLayout>
+    </LinearLayout>
 
 
     <ImageView

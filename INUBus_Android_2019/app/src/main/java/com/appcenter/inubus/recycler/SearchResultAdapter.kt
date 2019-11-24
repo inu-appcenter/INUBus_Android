@@ -14,7 +14,7 @@ import com.appcenter.inubus.model.SearchResultNode
 import com.appcenter.inubus.recycler.SearchResultAdapter.SearchResultViewHolder
 import com.appcenter.inubus.util.Singleton
 
-class SearchResultAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<SearchResultViewHolder>() {
+class SearchResultAdapter() : RecyclerView.Adapter<SearchResultViewHolder>() {
 
     private var mSearchList = ArrayList(Singleton.busInfo.get()!!.values)
     private var mFilteredList = arrayListOf<SearchResultNode>()
@@ -32,7 +32,7 @@ class SearchResultAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<
         return mFilteredList.size
     }
 
-    inner class SearchResultViewHolder(private val mBinding: SearchResultListItemBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(mBinding.root) {
+    inner class SearchResultViewHolder(private val mBinding: SearchResultListItemBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
         fun bind(data: SearchResultNode){
             mBinding.item = data
@@ -45,7 +45,7 @@ class SearchResultAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<
                 newSHitem.name = data.title
                 newSHitem.typenumber = data.typenumber
                 newSHitem.color = data.color
-                (context as SearchActivity).insertHistory(newSHitem)
+                (context as SearchActivity).adapterInsert(newSHitem)
 
                 val context = mBinding.root.context
                 val intent = Intent(context, RouteActivity::class.java)

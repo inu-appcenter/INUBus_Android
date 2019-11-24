@@ -61,11 +61,12 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2018.08.10" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btn_autocomplete_item_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_search_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_search_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

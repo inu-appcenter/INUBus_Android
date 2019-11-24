@@ -59,8 +59,6 @@ class FirstPopUp : ConstraintLayout {
         val end = start + inubus.length
         val ssb = SpannableString(mMessage.text)
         val font = Typeface.createFromAsset(context.assets,"jalnan.ttf")
-//        ssb.setSpan(ForegroundColorSpan(Color.parseColor("#00FF00")),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-//        if (Build.VERSION.SDK_INT >= 21)
         ssb.setSpan(CustomTypefaceSpan("",font),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         ssb.setSpan(ForegroundColorSpan(resources.getColor(R.color.colorPrimary)),start,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 

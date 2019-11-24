@@ -36,6 +36,16 @@ class SearchActivity : AppCompatActivity() {
 
         mWrSearchView = WeakReference(actionbar_searchView)
 
+        actionbar_searchView.requestFocus()
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+
+//        getHistory(this)
+        setMainViewPager()
+        setDrawer()
+    }
+
+    private fun setDrawer(){
         actionbar_searchView.setOnEditorActionListener { textView, actionID, keyEvent ->
             when(actionID){
                 EditorInfo.IME_ACTION_SEARCH ->{
@@ -67,20 +77,12 @@ class SearchActivity : AppCompatActivity() {
             getResult()
             Singleton.hideKeyboard(this)
         }
-
-        actionbar_searchView.requestFocus()
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-
-        getHistory(this)
-        setMainViewPager()
     }
 
     private fun setMainViewPager() {
 //        // 도착, 목적지 Fragment 추가
         mViewPagerAdapter.addFragment(SearchHistoryFragment.newInstance(supportFragmentManager, this))
         mViewPagerAdapter.addFragment(SearchResultFragment.newInstance(supportFragmentManager, this))
-//        mViewPagerAdapter.addFragment(arrivalFragment)
 
         // ViewPager 설정
         activity_search_viewpager.adapter = mViewPagerAdapter
@@ -99,7 +101,7 @@ class SearchActivity : AppCompatActivity() {
         thread.start()
     }
 
-    fun insertHistory(newSHitem : DBSearchHistoryItem){
+    fun adapterInsert(newSHitem : DBSearchHistoryItem){
         (activity_search_viewpager.adapter as ViewPagerAdapter).fragments.forEach {
             if(it is SearchHistoryFragment){
                 it.mAdapter.insertHistory(this,newSHitem)

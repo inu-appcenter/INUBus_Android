@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(){
         // ArrivalViewPager에서 지정단탭일시 액션바를 바꾸기 위해
         lateinit var mWrMainUpperView : WeakReference<LinearLayout>
         // Drawer 여는 이벤트용
-        lateinit var mWrBtnInfo : WeakReference<FrameLayout>
+        lateinit var mWrBtnInfo : WeakReference<LinearLayout>
     }
 
     var mDB : AppDatabase? = null
@@ -75,24 +75,11 @@ class MainActivity : AppCompatActivity(){
 
         // 메모리 누수를 방지하기 위해 WeakReference 사용
         mWrMainUpperView = WeakReference(ll_main_upper_view_wrapper)
-//        mWrSearchView = WeakReference(actionbar_searchView)
         mWrBlurringView2 = WeakReference(activity_main_popup_blur)
-//        mWrSearchView.get()?.addTextChangedListener(mSearchTextWatcher)
         changestatusBarColor()
         setDrawer()
         setMainViewPager()
         SpanText()
-    }
-
-    private val mSearchTextWatcher = object : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {}
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if(s.isNullOrEmpty())
-                activity_main_viewpager.currentItem = 1
-            else
-                activity_main_viewpager.currentItem = 0
-        }
     }
 
     fun setDB() {
@@ -229,7 +216,7 @@ class MainActivity : AppCompatActivity(){
     }
 
 
-    fun changestatusBarColor(){
+    private fun changestatusBarColor(){
         // 롤리팝 버전 이상부터 statusBar를 하얀색, 아이콘을 검은색으로 표시
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_inubus"
+        android:icon="@drawable/app_logoicon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_inubus_round"
         android:supportsRtl="true"

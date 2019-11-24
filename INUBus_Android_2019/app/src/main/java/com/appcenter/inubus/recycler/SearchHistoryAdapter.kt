@@ -1,14 +1,12 @@
 package com.appcenter.inubus.recycler
 
 import android.content.Context
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.appcenter.inubus.R
 import com.appcenter.inubus.activity.MainActivity
 import com.appcenter.inubus.activity.SearchActivity
@@ -22,7 +20,7 @@ import com.appcenter.inubus.util.AppDatabase
  * Updated by ByoungMean on 2019-10-21.
  */
 
-class SearchHistoryAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<SearchHistoryViewHolder>() {
+class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
     // 검색결과 데이터베이스
 
@@ -44,12 +42,12 @@ class SearchHistoryAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<S
     }
 
     inner class SearchHistoryViewHolder(private val mBinding : SearchHistoryListItemBinding,
-            private val mContext : Context = mBinding.root.context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(mBinding.root) {
+            private val mContext : Context = mBinding.root.context) : RecyclerView.ViewHolder(mBinding.root) {
 
         fun bind(data: DBSearchHistoryItem){
             mDB = AppDatabase.getInstance(mContext)!!
             val mBtnfinder = itemView.findViewById<ConstraintLayout>(R.id.btn_history_select)
-            val mBtndelete = itemView.findViewById<ImageButton>(R.id.btn_autocomplete_item_delete)
+            val mBtndelete = itemView.findViewById<ImageView>(R.id.btn_autocomplete_item_delete)
 
             mBinding.item =  data
             mBtnfinder.setOnClickListener {
@@ -65,7 +63,6 @@ class SearchHistoryAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<S
                 thread.start()
                 mHistoryList.remove(data)
                 notifyDataSetChanged()
-                Log.d("fastfastfast","delete click")
             }
         }
     }
@@ -94,6 +91,7 @@ class SearchHistoryAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<S
             val mDB = AppDatabase.getInstance(context)!!
             val r = Runnable {
                 mDB.searchhistoryDAO().insert(data)
+                mHistoryList = mDB!!.searchhistoryDAO().getAll() as ArrayList
             }
             val thread = Thread(r)
             thread.start()
